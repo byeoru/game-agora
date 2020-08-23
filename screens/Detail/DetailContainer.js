@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import DetailPresenter from "./DetailPresenter";
-import { rawgApi } from "../../api";
 
 export default ({ navigation, route: { params } }) => {
   useLayoutEffect(() => {

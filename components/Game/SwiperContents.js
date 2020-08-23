@@ -6,6 +6,7 @@ import { TouchableOpacity } from "react-native";
 import useDetail from "../useDetail";
 import { getScreenShot } from "../../api";
 import imageSize from "../obj/imageSizeObj";
+import { unixTimeToDate } from "../../utils";
 
 const Container = styled.View`
   width: 100%;
@@ -15,7 +16,6 @@ const Container = styled.View`
 const BG = styled.Image`
   width: 100%;
   height: 100%;
-  background-color: black;
   position: absolute;
 `;
 const DataContainer = styled.View`
@@ -68,19 +68,27 @@ const Platform = styled.Text`
 `;
 
 const SwiperContents = ({
-  id,
   title,
   rating,
+  criticRating,
+  totalRating,
   released,
   platforms,
   backgroundImage,
 }) => {
-  const goToDetail = useDetail({ id, title, backgroundImage });
+  const goToDetail = useDetail({
+    title,
+    rating,
+    criticRating,
+    totalRating,
+    released,
+    platforms,
+    backgroundImage,
+  });
   return (
     <TouchableOpacity onPress={() => goToDetail()}>
       <Container>
         <BG
-          resizeMode="cover"
           resizeMethod="resize"
           source={{
             uri: getScreenShot(backgroundImage, imageSize._720p1280x720),
@@ -91,7 +99,7 @@ const SwiperContents = ({
             <Title>{title}</Title>
             <BottomData>
               <Rating rating={rating} styles={{ color: "white" }} />
-              <Released>{released} 출시</Released>
+              <Released>{unixTimeToDate(released)} 출시</Released>
             </BottomData>
           </Data>
           <PlatformContainer>
@@ -108,7 +116,6 @@ const SwiperContents = ({
 };
 
 SwiperContents.propTypes = {
-  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   backgroundImage: PropTypes.string.isRequired,

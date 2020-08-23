@@ -4,12 +4,36 @@ import { igdbApi } from "../../api";
 import { getDayAgoNowSec } from "../../utils";
 
 export default () => {
-  const [home, setHome] = useState({ loading: true, highRating: [] });
+  const [home, setHome] = useState({
+    loading: true,
+    highRating: [],
+    popularPc: [],
+    popularAndroid: [],
+    popularIos: [],
+  });
   const getData = async () => {
     const [highRating, highRatingError] = await igdbApi.highRating(
       getDayAgoNowSec(90)
     );
-    setHome({ loading: false, highRating });
+    const [popularPc, popularPcError] = await igdbApi.popular(
+      getDayAgoNowSec(90),
+      "PC"
+    );
+    const [popularAndroid, popularAndroidError] = await igdbApi.popular(
+      getDayAgoNowSec(90),
+      "Android"
+    );
+    const [popularIos, popularIosError] = await igdbApi.popular(
+      getDayAgoNowSec(90),
+      "iOS"
+    );
+    setHome({
+      loading: false,
+      highRating,
+      popularPc,
+      popularAndroid,
+      popularIos,
+    });
   };
 
   useEffect(() => {

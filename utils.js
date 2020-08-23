@@ -1,15 +1,3 @@
-export const getThisMonth = () => {
-  const nowDate = new Date();
-  const nowYear = nowDate.getFullYear();
-  const nowMonth = nowDate.getMonth() + 1;
-  const nowDay = nowDate.getDate();
-
-  const formatMonth = nowMonth < 10 ? `0${nowMonth}` : nowMonth;
-  const formatDay = nowDay < 10 ? `0${nowDay}` : nowDay;
-
-  return `${nowYear}-${formatMonth}-01,${nowYear}-${formatMonth}-${formatDay}`;
-};
-
 export const getNowSec = () => {
   let now = new Date();
   now /= 1000;
@@ -28,6 +16,28 @@ export const getDayAgoNowSec = (minusDay) => {
 
   const calculatedSec = today - previousSec;
   return calculatedSec;
+};
+
+export const unixTimeToDate = (unixTime) => {
+  const Milliseconds = unixTime * 1000;
+  const date = new Date(Milliseconds);
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+
+  return `${year}년 ${month}월 ${day}일`;
+};
+
+export const getThisMonth = () => {
+  const nowDate = new Date();
+  const nowYear = nowDate.getFullYear();
+  const nowMonth = nowDate.getMonth() + 1;
+  const nowDay = nowDate.getDate();
+
+  const formatMonth = nowMonth < 10 ? `0${nowMonth}` : nowMonth;
+  const formatDay = nowDay < 10 ? `0${nowDay}` : nowDay;
+
+  return `${nowYear}-${formatMonth}-01,${nowYear}-${formatMonth}-${formatDay}`;
 };
 
 export const getMonthAgoNow = (minusMonth) => {

@@ -5,8 +5,19 @@ import styled from "styled-components/native";
 import BottomSheet from "reanimated-bottom-sheet";
 import { getScreenShot } from "../../api";
 import imageSize from "../../components/obj/imageSizeObj";
+import { unixTimeToDate } from "../../utils";
+import ProgressRingChart from "../../components/Detail/ProgressRingChart";
 
-export default ({ navigation, backgroundImage }) => {
+export default ({
+  navigation,
+  title,
+  rating,
+  CriticRating,
+  totalRating,
+  released,
+  platforms,
+  backgroundImage,
+}) => {
   const { height: HEIGHT } = Dimensions.get("window");
   const Container = styled.View`
     width: 100%;
@@ -22,13 +33,51 @@ export default ({ navigation, backgroundImage }) => {
   const SheetContainer = styled.View`
     width: 100%;
     height: 100%;
-    background-color: wheat;
+    background-color: white;
   `;
+  const HeaderContainer = styled.View`
+    width: 100%;
+    position: absolute;
+  `;
+  const DataContainer = styled.View`
+    margin-top: 50px;
+    padding-left: 25px;
+    padding-right: 25px;
+  `;
+  const HeaderTitle = styled.Text`
+    padding: 13px;
+    font-size: 17px;
+    text-align: center;
+    font-weight: bold;
+  `;
+  const DataTitle = styled.Text`
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 5px;
+  `;
+  const DataBox = styled.View``;
+  const Text = styled.Text``;
 
   const sheetRef = useRef(null);
   const renderContent = () => (
     <SheetContainer style={{ justifyContent: "flex-start" }}>
-      <OriginNotation />
+      <HeaderContainer>
+        <HeaderTitle>{title}</HeaderTitle>
+      </HeaderContainer>
+      <DataContainer>
+        <DataTitle>최초 출시일</DataTitle>
+        <DataBox>
+          <Text>{unixTimeToDate(released)}</Text>
+        </DataBox>
+        <DataTitle>평가: Good 비율</DataTitle>
+        <ProgressRingChart
+          rating={rating}
+          CriticRating={CriticRating}
+          totalRating={totalRating}
+        />
+        <OriginNotation />
+      </DataContainer>
     </SheetContainer>
   );
   const onCloseEnd = () => {
@@ -37,14 +86,15 @@ export default ({ navigation, backgroundImage }) => {
   return (
     <Container>
       <BG
+        resizeMethod="resize"
         source={{
           uri: getScreenShot(backgroundImage, imageSize._720p1280x720),
         }}
       />
       <BottomSheet
         ref={sheetRef}
-        snapPoints={[350, 770, 0]}
-        borderRadius={15}
+        snapPoints={["43%", "100%", 0]}
+        borderRadius={20}
         renderContent={renderContent}
         onCloseEnd={onCloseEnd}
       />

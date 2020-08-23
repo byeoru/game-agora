@@ -24,7 +24,13 @@ const TagContainer = styled.View`
   margin-top: 80px;
 `;
 
-export default ({ loading, highRating }) => (
+export default ({
+  loading,
+  highRating,
+  popularPc,
+  popularAndroid,
+  popularIos,
+}) => (
   <ScrollContainer loading={loading}>
     <SwiperContainer>
       <Swiper controlsEnabled={false} loop timeout={3}>
@@ -32,9 +38,10 @@ export default ({ loading, highRating }) => (
           return (
             <SwiperContents
               key={game.id}
-              id={game.id}
               title={game.name}
               rating={game.rating}
+              criticRating={game.aggregated_rating}
+              totalRating={game.total_rating}
               released={game.first_release_date}
               platforms={game.platforms}
               backgroundImage={game.cover.image_id}
@@ -55,19 +62,23 @@ export default ({ loading, highRating }) => (
           />
         ))}
       </TagContainer>
-    </ContentBox>
+    </ContentBox> */}
     <ContentBox>
       <TopHeader title="인기작" />
-      <ContentsDescription text="최근 3개월간 출시된 게임" />
+      <ContentsDescription text="최근 90일 사이 출시된 게임" />
       <ContentsHeader title="PC" styles={{ marginTop: 80 }} />
       <HorizontalContainer>
         <HorizotalSlider>
-          {poNowToThrMonAgo.pc.map((game) => (
+          {popularPc.map((game) => (
             <Vertical
               key={game.id}
-              id={game.id}
               title={game.name}
-              backgroundImage={game.background_image}
+              rating={game.rating}
+              criticRating={game.aggregated_rating}
+              totalRating={game.total_rating}
+              released={game.first_release_date}
+              platforms={game.platforms}
+              backgroundImage={game.cover.image_id}
             />
           ))}
         </HorizotalSlider>
@@ -75,12 +86,16 @@ export default ({ loading, highRating }) => (
       <ContentsHeader title="IOS" />
       <HorizontalContainer>
         <HorizotalSlider>
-          {poNowToThrMonAgo.ios.map((game) => (
+          {popularIos.map((game) => (
             <Vertical
               key={game.id}
-              id={game.id}
               title={game.name}
-              backgroundImage={game.background_image}
+              rating={game.rating}
+              criticRating={game.aggregated_rating}
+              totalRating={game.total_rating}
+              released={game.first_release_date}
+              platforms={game.platforms}
+              backgroundImage={game.cover.image_id}
             />
           ))}
         </HorizotalSlider>
@@ -88,17 +103,21 @@ export default ({ loading, highRating }) => (
       <ContentsHeader title="안드로이드" />
       <HorizontalContainer>
         <HorizotalSlider>
-          {poNowToThrMonAgo.android.map((game) => (
+          {popularAndroid.map((game) => (
             <Vertical
               key={game.id}
-              id={game.id}
               title={game.name}
-              backgroundImage={game.background_image}
+              rating={game.rating}
+              criticRating={game.aggregated_rating}
+              totalRating={game.total_rating}
+              released={game.first_release_date}
+              platforms={game.platforms}
+              backgroundImage={game.cover.image_id}
             />
           ))}
         </HorizotalSlider>
       </HorizontalContainer>
-    </ContentBox> */}
+    </ContentBox>
     <OriginNotation />
   </ScrollContainer>
 );
