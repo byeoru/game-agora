@@ -12,7 +12,7 @@ export default ({
   navigation,
   title,
   rating,
-  CriticRating,
+  criticRating,
   totalRating,
   released,
   platforms,
@@ -73,7 +73,7 @@ export default ({
         <DataTitle>평가: Good 비율</DataTitle>
         <ProgressRingChart
           rating={rating}
-          CriticRating={CriticRating}
+          criticRating={criticRating}
           totalRating={totalRating}
         />
         <OriginNotation />
