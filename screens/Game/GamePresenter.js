@@ -12,7 +12,6 @@ import TopHeader from "../../components/TopHeader";
 import ContentsDescription from "../../components/ContentsDescription";
 import HorizontalContainer from "../../components/HorizontalContainer";
 import OriginNotation from "../../components/OriginNotation";
-import TagButton from "../../components/Game/TagButton";
 
 const { height: HEIGHT } = Dimensions.get("window");
 const SwiperContainer = styled.View`
@@ -42,9 +41,11 @@ export default ({
               rating={game.rating}
               criticRating={game.aggregated_rating}
               totalRating={game.total_rating}
-              released={game.first_release_date}
+              firstReleaseD={game.first_release_date}
               platforms={game.platforms}
               backgroundImage={game.cover.image_id}
+              involvedCompanies={game.involved_companies}
+              genres={game.genres}
             />
           );
         })}
@@ -76,9 +77,11 @@ export default ({
               rating={game.rating}
               criticRating={game.aggregated_rating}
               totalRating={game.total_rating}
-              released={game.first_release_date}
+              firstReleaseD={game.first_release_date}
               platforms={game.platforms}
               backgroundImage={game.cover.image_id}
+              involvedCompanies={game.involved_companies}
+              genres={game.genres}
             />
           ))}
         </HorizotalSlider>
@@ -93,9 +96,11 @@ export default ({
               rating={game.rating}
               criticRating={game.aggregated_rating}
               totalRating={game.total_rating}
-              released={game.first_release_date}
+              firstReleaseD={game.first_release_date}
               platforms={game.platforms}
               backgroundImage={game.cover.image_id}
+              involvedCompanies={game.involved_companies}
+              genres={game.genres}
             />
           ))}
         </HorizotalSlider>
@@ -110,9 +115,11 @@ export default ({
               rating={game.rating}
               criticRating={game.aggregated_rating}
               totalRating={game.total_rating}
-              released={game.first_release_date}
+              firstReleaseD={game.first_release_date}
               platforms={game.platforms}
               backgroundImage={game.cover.image_id}
+              involvedCompanies={game.involved_companies}
+              genres={game.genres}
             />
           ))}
         </HorizotalSlider>

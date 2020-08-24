@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart,
-} from "react-native-chart-kit";
+import { ProgressChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 
@@ -30,14 +23,14 @@ export default ({ rating, criticRating, totalRating }) => {
           data: [ratingConv, criticRatingConv, totalRatingConv],
         }}
         width={Dimensions.get("window").width / 1.04} // from react-native
-        height={200}
+        height={180}
         strokeWidth={5}
         radius={38}
         chartConfig={{
           backgroundGradientFrom: "#005C97",
           backgroundGradientTo: "#363795",
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, 1)`,
+          color: (opacity = 1) => `rgba(200, 200, 200, ${opacity})`,
+          labelColor: () => `rgba(255, 255, 255, 1)`,
         }}
         style={{
           borderRadius: 15,

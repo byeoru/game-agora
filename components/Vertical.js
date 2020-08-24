@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "react-native";
 import useDetail from "./useDetail";
-import { getScreenShot } from "../api";
+import { getImage } from "../api";
 import imageSizeObj from "./obj/imageSizeObj";
 
 const Container = styled.View`
@@ -15,12 +15,17 @@ const BG = styled.Image`
   height: 180px;
   border-radius: 15px;
 `;
-const DataContainer = styled.View`
-  width: 120px;
-  justify-content: space-between;
+const TitleBox = styled.View`
+  width: 100%;
+  height: 30%;
+  position: absolute;
+  bottom: 0;
+  padding: 2px;
+  background-color: rgba(255, 255, 255, 0.9);
 `;
 const Title = styled.Text`
   text-align: center;
+  font-weight: 700;
 `;
 
 export default ({
@@ -28,9 +33,11 @@ export default ({
   rating,
   criticRating,
   totalRating,
-  released,
+  firstReleaseD,
   platforms,
   backgroundImage,
+  involvedCompanies,
+  genres,
   styles,
 }) => {
   const goToDetail = useDetail({
@@ -38,9 +45,11 @@ export default ({
     rating,
     criticRating,
     totalRating,
-    released,
+    firstReleaseD,
     platforms,
     backgroundImage,
+    involvedCompanies,
+    genres,
   });
   return (
     <TouchableOpacity onPress={() => goToDetail()}>
@@ -48,15 +57,12 @@ export default ({
         <BG
           resizeMethod="resize"
           source={{
-            uri: getScreenShot(
-              backgroundImage,
-              imageSizeObj.screenshotMed569x320
-            ),
+            uri: getImage(backgroundImage, imageSizeObj.screenshotMed569x320),
           }}
         />
-        <DataContainer>
+        <TitleBox>
           <Title>{title}</Title>
-        </DataContainer>
+        </TitleBox>
       </Container>
     </TouchableOpacity>
   );
