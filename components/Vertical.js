@@ -38,21 +38,33 @@ export default ({
   backgroundImage,
   involvedCompanies,
   genres,
+  summary,
+  storyline,
+  screenshots,
+  artworks,
   styles,
 }) => {
-  const goToDetail = useDetail({
-    title,
-    rating,
-    criticRating,
-    totalRating,
-    firstReleaseD,
-    platforms,
-    backgroundImage,
-    involvedCompanies,
-    genres,
-  });
+  const goToDetail = useDetail();
   return (
-    <TouchableOpacity onPress={() => goToDetail()}>
+    <TouchableOpacity
+      onPress={() =>
+        goToDetail({
+          title,
+          rating,
+          criticRating,
+          totalRating,
+          firstReleaseD,
+          platforms,
+          backgroundImage,
+          involvedCompanies,
+          genres,
+          summary,
+          storyline,
+          screenshots,
+          artworks,
+        })
+      }
+    >
       <Container style={{ ...styles }}>
         <BG
           resizeMethod="resize"

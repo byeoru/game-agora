@@ -6,6 +6,7 @@ import {
 import BottomNav from "./BottomNav";
 import Detail from "../screens/Detail/index";
 import More from "../screens/More/index";
+import TotalImage from "../screens/TotalImage/index";
 
 const StackNav = createStackNavigator();
 
@@ -35,6 +36,13 @@ export default () => {
         component={Detail}
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
+      <StackNav.Screen
+        name="TotalImage"
+        component={TotalImage}
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
         }}
       />
     </StackNav.Navigator>

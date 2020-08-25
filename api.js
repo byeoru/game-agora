@@ -27,7 +27,7 @@ export const igdbApi = {
   highRating: (previousDate) =>
     getAnythingIgdb(
       "/games",
-      `fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks,bundles,category,checksum,
+      `fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks.image_id,bundles,category,checksum,
       collection,cover.image_id,created_at,dlcs,expansions,external_games,first_release_date,follows,franchise,franchises,game_engines,
       game_modes,genres.name,hypes,involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,
       keywords,multiplayer_modes,name,parent_game,platforms.abbreviation,platforms.name,player_perspectives,popularity,
@@ -38,7 +38,7 @@ export const igdbApi = {
   popular: (previousDate, platform) =>
     getAnythingIgdb(
       "/games",
-      `fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks,bundles,category,checksum,
+      `fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks.image_id,bundles,category,checksum,
       collection,cover.image_id,created_at,dlcs,expansions,external_games,first_release_date,follows,franchise,franchises,game_engines,
       game_modes,genres.name,hypes,involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,
       keywords,multiplayer_modes,name,parent_game,platforms.abbreviation,platforms.name,player_perspectives,popularity,

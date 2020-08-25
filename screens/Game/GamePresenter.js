@@ -46,6 +46,10 @@ export default ({
               backgroundImage={game.cover.image_id}
               involvedCompanies={game.involved_companies}
               genres={game.genres}
+              summary={game.summary}
+              storyline={game.storyline}
+              screenshots={game.screenshots}
+              artworks={game.artworks}
             />
           );
         })}
@@ -82,6 +86,10 @@ export default ({
               backgroundImage={game.cover.image_id}
               involvedCompanies={game.involved_companies}
               genres={game.genres}
+              summary={game.summary}
+              storyline={game.storyline}
+              screenshots={game.screenshots}
+              artworks={game.artworks}
             />
           ))}
         </HorizotalSlider>
@@ -101,6 +109,10 @@ export default ({
               backgroundImage={game.cover.image_id}
               involvedCompanies={game.involved_companies}
               genres={game.genres}
+              summary={game.summary}
+              storyline={game.storyline}
+              screenshots={game.screenshots}
+              artworks={game.artworks}
             />
           ))}
         </HorizotalSlider>
@@ -120,6 +132,10 @@ export default ({
               backgroundImage={game.cover.image_id}
               involvedCompanies={game.involved_companies}
               genres={game.genres}
+              summary={game.summary}
+              storyline={game.storyline}
+              screenshots={game.screenshots}
+              artworks={game.artworks}
             />
           ))}
         </HorizotalSlider>

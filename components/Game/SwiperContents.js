@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import Rating from "../Rating";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, ActivityIndicator } from "react-native";
 import useDetail from "../useDetail";
 import { getImage } from "../../api";
 import imageSize from "../obj/imageSizeObj";
@@ -77,20 +77,32 @@ const SwiperContents = ({
   backgroundImage,
   involvedCompanies,
   genres,
+  summary,
+  storyline,
+  screenshots,
+  artworks,
 }) => {
-  const goToDetail = useDetail({
-    title,
-    rating,
-    criticRating,
-    totalRating,
-    firstReleaseD,
-    platforms,
-    backgroundImage,
-    involvedCompanies,
-    genres,
-  });
+  const goToDetail = useDetail();
   return (
-    <TouchableOpacity onPress={() => goToDetail()}>
+    <TouchableOpacity
+      onPress={() =>
+        goToDetail({
+          title,
+          rating,
+          criticRating,
+          totalRating,
+          firstReleaseD,
+          platforms,
+          backgroundImage,
+          involvedCompanies,
+          genres,
+          summary,
+          storyline,
+          screenshots,
+          artworks,
+        })
+      }
+    >
       <Container>
         <BG
           resizeMethod="resize"
@@ -102,7 +114,7 @@ const SwiperContents = ({
           <Data>
             <Title>{title}</Title>
             <BottomData>
-              <Rating rating={rating} styles={{ color: "white" }} />
+              <Rating rating={totalRating} styles={{ color: "white" }} />
               <Released>{unixTimeToDate(firstReleaseD)} 출시</Released>
             </BottomData>
           </Data>

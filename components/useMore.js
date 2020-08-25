@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 
-export default (params = {}) => {
+export default () => {
   const navigation = useNavigation();
-  const goToMore = () => navigation.navigate("More", { ...params });
+  const goToMore = (params = {}) => navigation.navigate("More", { ...params });
   return goToMore;
 };

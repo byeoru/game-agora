@@ -1,14 +1,17 @@
 import React, { useRef, useEffect } from "react";
-import OriginNotation from "../../components/OriginNotation";
-import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import BottomSheet from "reanimated-bottom-sheet";
-import { getImage } from "../../api";
-import imageSize from "../../components/obj/imageSizeObj";
-import { unixTimeToDate } from "../../utils";
+import { Dimensions, TouchableOpacity } from "react-native";
 import ProgressRingChart from "../../components/Detail/ProgressRingChart";
+import { getImage } from "../../api";
+import { unixTimeToDate } from "../../utils";
+import { AntDesign } from "@expo/vector-icons";
+import imageSize from "../../components/obj/imageSizeObj";
 import CompanyVertical from "../../components/Detail/CompanyVertical";
 import BorderText from "../../components/BoderText";
+import Screenshot from "../../components/Detail/Screenshot";
+import OriginNotation from "../../components/OriginNotation";
+import useTotalImage from "../../components/useTotalImage";
 
 export default ({
   navigation,
@@ -21,6 +24,10 @@ export default ({
   backgroundImage,
   involvedCompanies,
   genres,
+  summary,
+  storyline,
+  screenshots,
+  artworks,
 }) => {
   const { height: HEIGHT } = Dimensions.get("window");
   const Container = styled.View`
@@ -69,6 +76,7 @@ export default ({
   `;
 
   const sheetRef = useRef(null);
+  const goToTotalImage = useTotalImage();
   const renderContent = () => (
     <SheetContainer style={{ justifyContent: "flex-start" }}>
       <HeaderContainer>
@@ -105,6 +113,72 @@ export default ({
               : null}
           </RowBox>
         </DataBox>
+        <DataBox>
+          <DataTitle>IGDB 평가: Good 비율</DataTitle>
+          <ProgressRingChart
+            rating={rating}
+            criticRating={criticRating}
+            totalRating={totalRating}
+          />
+        </DataBox>
+        {summary ? (
+          <DataBox>
+            <DataTitle>개요</DataTitle>
+            <Text>{summary}</Text>
+          </DataBox>
+        ) : null}
+        {storyline ? (
+          <DataBox>
+            <DataTitle>스토리 요약</DataTitle>
+            <Text>{storyline}</Text>
+          </DataBox>
+        ) : null}
+        {screenshots ? (
+          <DataBox>
+            <RowBox style={{ justifyContent: "space-between" }}>
+              <DataTitle>스크린샷</DataTitle>
+              <TouchableOpacity
+                onPress={() =>
+                  goToTotalImage({ title: "스크린샷", images: screenshots })
+                }
+              >
+                <AntDesign name="right" size={17} color="black" />
+              </TouchableOpacity>
+            </RowBox>
+            <RowBox
+              style={{ flexWrap: "wrap", justifyContent: "space-between" }}
+            >
+              {screenshots.map((screenshot, index) => {
+                if (index >= 2) return;
+                return (
+                  <Screenshot key={screenshot.id} url={screenshot.image_id} />
+                );
+              })}
+            </RowBox>
+          </DataBox>
+        ) : null}
+        {artworks ? (
+          <DataBox>
+            <RowBox style={{ justifyContent: "space-between" }}>
+              <DataTitle>아트워크</DataTitle>
+              <TouchableOpacity
+                onPress={() =>
+                  goToTotalImage({ title: "아트워크", images: artworks })
+                }
+              >
+                <AntDesign name="right" size={17} color="black" />
+              </TouchableOpacity>
+            </RowBox>
+            <RowBox
+              style={{ flexWrap: "wrap", justifyContent: "space-between" }}
+            >
+              {artworks.map((artwork, index) => {
+                if (index >= 2) return;
+                return <Screenshot key={artwork.id} url={artwork.image_id} />;
+              })}
+            </RowBox>
+          </DataBox>
+        ) : null}
         {involvedCompanies ? (
           <DataBox>
             <DataTitle>게임 회사</DataTitle>
@@ -130,14 +204,6 @@ export default ({
             </RowBox>
           </DataBox>
         ) : null}
-        <DataBox>
-          <DataTitle>IGDB 평가: Good 비율</DataTitle>
-          <ProgressRingChart
-            rating={rating}
-            criticRating={criticRating}
-            totalRating={totalRating}
-          />
-        </DataBox>
         <OriginNotation />
       </DataContainer>
     </SheetContainer>
@@ -158,7 +224,7 @@ export default ({
       />
       <BottomSheet
         ref={sheetRef}
-        snapPoints={[0, "43%", "100%"]}
+        snapPoints={["0%", "43%", "100%"]}
         borderRadius={20}
         renderContent={renderContent}
         onCloseEnd={onCloseEnd}
