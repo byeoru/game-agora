@@ -4,10 +4,11 @@ import { getImage } from "../../api";
 import imageSizeObj from "../obj/imageSizeObj";
 
 const Container = styled.View`
-  width: 400px;
-  height: 240px;
+  width: 175px;
+  height: 110px;
   border-radius: 15px;
-  margin: 5px 0px;
+  margin-top: 10px;
+  background-color: black;
 `;
 const BG = styled.Image`
   width: 100%;
@@ -15,11 +16,12 @@ const BG = styled.Image`
   border-radius: 15px;
 `;
 
-export default ({ url }) => (
+export default ({ imageId }) => (
   <Container>
     <BG
+      resizeMode="cover"
       resizeMethod="resize"
-      source={{ uri: getImage(url, imageSizeObj._720p1280x720) }}
+      source={{ uri: getImage(imageId, imageSizeObj.logoMed284x160) }}
     />
   </Container>
 );

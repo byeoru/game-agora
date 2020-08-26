@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GamePresenter from "./GamePresenter";
+import HomePresenter from "./HomePresenter";
 import { igdbApi } from "../../api";
 import { getDayAgoNowSec } from "../../utils";
 
@@ -39,5 +39,5 @@ export default () => {
   useEffect(() => {
     getData();
   }, []);
-  return <GamePresenter {...home} />;
+  return <HomePresenter {...home} />;
 };

@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Game from "../screens/Game/index";
+import Home from "../screens/Home/index";
 import Genre from "../screens/Genre/index";
 import Platform from "../screens/Platform/index";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -8,7 +8,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const BottomNav = createBottomTabNavigator();
 
 const getHeaderName = (route) => {
-  return route?.state?.routeNames[route.state.index] || "게임";
+  return route?.state?.routeNames[route.state.index] || "홈";
 };
 
 export default ({ navigation, route }) => {
@@ -31,7 +31,7 @@ export default ({ navigation, route }) => {
         tabBarIcon: ({ focused }) => {
           let iconName;
           switch (route.name) {
-            case "게임":
+            case "홈":
               iconName = "gamepad-variant";
               break;
             case "장르":
@@ -51,7 +51,7 @@ export default ({ navigation, route }) => {
         },
       })}
     >
-      <BottomNav.Screen name="게임" component={Game} />
+      <BottomNav.Screen name="홈" component={Home} />
       <BottomNav.Screen name="장르" component={Genre} />
       <BottomNav.Screen name="플랫폼" component={Platform} />
     </BottomNav.Navigator>

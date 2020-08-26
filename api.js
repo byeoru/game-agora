@@ -32,7 +32,7 @@ export const igdbApi = {
       game_modes,genres.name,hypes,involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,
       keywords,multiplayer_modes,name,parent_game,platforms.abbreviation,platforms.name,player_perspectives,popularity,
       pulse_count,rating,rating_count,screenshots.*,similar_games,slug,standalone_expansions,status,storyline,
-      summary,tags,themes,time_to_beat,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos,websites; 
+      summary,tags,themes,time_to_beat,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos.video_id,websites; 
       where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & rating > 70; sort rating desc; limit 10;`
     ),
   popular: (previousDate, platform) =>
@@ -43,7 +43,7 @@ export const igdbApi = {
       game_modes,genres.name,hypes,involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,
       keywords,multiplayer_modes,name,parent_game,platforms.abbreviation,platforms.name,player_perspectives,popularity,
       pulse_count,rating,rating_count,screenshots.*,similar_games,slug,standalone_expansions,status,storyline,
-      summary,tags,themes,time_to_beat,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos,websites; 
+      summary,tags,themes,time_to_beat,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos.video_id,websites; 
       where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & platforms.abbreviation = "${platform}"; 
       sort popularity desc; limit 10;`
     ),

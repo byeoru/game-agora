@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components/native";
-import { getImage } from "../../api";
-import imageSizeObj from "../obj/imageSizeObj";
+import { getImage } from "../../../api";
+import imageSizeObj from "../../obj/imageSizeObj";
 
 const Container = styled.View`
-  width: 175px;
-  height: 110px;
+  width: 400px;
+  height: 240px;
   border-radius: 15px;
-  margin-top: 10px;
-  background-color: black;
+  margin: 5px 0px;
 `;
 const BG = styled.Image`
   width: 100%;
@@ -16,12 +15,11 @@ const BG = styled.Image`
   border-radius: 15px;
 `;
 
-export default ({ url }) => (
+export default ({ imageId }) => (
   <Container>
     <BG
-      resizeMode="cover"
       resizeMethod="resize"
-      source={{ uri: getImage(url, imageSizeObj.logoMed284x160) }}
+      source={{ uri: getImage(imageId, imageSizeObj._720p1280x720) }}
     />
   </Container>
 );

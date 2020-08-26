@@ -1,9 +1,9 @@
 import React, { useLayoutEffect } from "react";
-import DetailPresenter from "./DetailPresenter";
+import GameDetailPresenter from "./GameDetailPresenter";
 
 export default ({ navigation, route: { params } }) => {
   useLayoutEffect(() => {
     navigation.setOptions({ title: params.title });
   });
-  return <DetailPresenter {...params} navigation={navigation} />;
+  return <GameDetailPresenter {...params} navigation={navigation} />;
 };

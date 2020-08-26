@@ -4,9 +4,9 @@ import {
   CardStyleInterpolators,
 } from "@react-navigation/stack";
 import BottomNav from "./BottomNav";
-import Detail from "../screens/Detail/index";
+import GameDetail from "../screens/GameDetail/index";
 import More from "../screens/More/index";
-import TotalImage from "../screens/TotalImage/index";
+import SubPage from "../screens/GameDetail/SubPage/index";
 
 const StackNav = createStackNavigator();
 
@@ -32,15 +32,15 @@ export default () => {
         }}
       />
       <StackNav.Screen
-        name="Detail"
-        component={Detail}
+        name="GameDetail"
+        component={GameDetail}
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />
       <StackNav.Screen
-        name="TotalImage"
-        component={TotalImage}
+        name="SubPage"
+        component={SubPage}
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
         }}

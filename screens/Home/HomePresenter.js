@@ -2,7 +2,7 @@ import React from "react";
 import ScrollContainer from "../../components/ScrollContainer";
 import { Dimensions } from "react-native";
 import Swiper from "react-native-web-swiper";
-import SwiperContents from "../../components/Game/SwiperContents";
+import SwiperContents from "../../components/Home/SwiperContents";
 import ContentBox from "../../components/ContentsBox";
 import ContentsHeader from "../../components/ContentsHeader";
 import Vertical from "../../components/Vertical";
@@ -50,6 +50,7 @@ export default ({
               storyline={game.storyline}
               screenshots={game.screenshots}
               artworks={game.artworks}
+              videos={game.videos}
             />
           );
         })}
@@ -90,6 +91,7 @@ export default ({
               storyline={game.storyline}
               screenshots={game.screenshots}
               artworks={game.artworks}
+              videos={game.videos}
             />
           ))}
         </HorizotalSlider>
@@ -113,6 +115,7 @@ export default ({
               storyline={game.storyline}
               screenshots={game.screenshots}
               artworks={game.artworks}
+              videos={game.videos}
             />
           ))}
         </HorizotalSlider>
@@ -136,6 +139,7 @@ export default ({
               storyline={game.storyline}
               screenshots={game.screenshots}
               artworks={game.artworks}
+              videos={game.videos}
             />
           ))}
         </HorizotalSlider>

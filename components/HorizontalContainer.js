@@ -6,9 +6,7 @@ const Container = styled.View`
   width: 100%;
   padding: 20px 0px 20px 10px;
   background-color: white;
-  border-top-width: 2px;
-  border-left-width: 2px;
-  border-bottom-width: 2px;
+  border-left-width: 3px;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
 `;

@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import Rating from "../Rating";
-import { TouchableOpacity, ActivityIndicator } from "react-native";
-import useDetail from "../useDetail";
+import { TouchableOpacity } from "react-native";
+import useGameDetail from "../useGameDetail";
 import { getImage } from "../../api";
 import imageSize from "../obj/imageSizeObj";
 import { unixTimeToDate } from "../../utils";
@@ -81,8 +81,9 @@ const SwiperContents = ({
   storyline,
   screenshots,
   artworks,
+  videos,
 }) => {
-  const goToDetail = useDetail();
+  const goToDetail = useGameDetail();
   return (
     <TouchableOpacity
       onPress={() =>
@@ -100,6 +101,7 @@ const SwiperContents = ({
           storyline,
           screenshots,
           artworks,
+          videos,
         })
       }
     >

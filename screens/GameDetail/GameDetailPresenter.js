@@ -1,17 +1,18 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components/native";
 import BottomSheet from "reanimated-bottom-sheet";
-import { Dimensions, TouchableOpacity } from "react-native";
-import ProgressRingChart from "../../components/Detail/ProgressRingChart";
+import { Dimensions, TouchableOpacity, Clipboard } from "react-native";
+import ProgressRingChart from "../../components/GameDetail/ProgressRingChart";
 import { getImage } from "../../api";
 import { unixTimeToDate } from "../../utils";
 import { AntDesign } from "@expo/vector-icons";
 import imageSize from "../../components/obj/imageSizeObj";
-import CompanyVertical from "../../components/Detail/CompanyVertical";
+import CompanyVertical from "../../components/GameDetail/CompanyVertical";
 import BorderText from "../../components/BoderText";
-import Screenshot from "../../components/Detail/Screenshot";
+import Screenshot from "../../components/GameDetail/Screenshot";
 import OriginNotation from "../../components/OriginNotation";
-import useTotalImage from "../../components/useTotalImage";
+import useSubPage from "../../components/useSubPage";
+import VideoHorizontal from "../../components/GameDetail/SubPage/VideoHorizontal";
 
 export default ({
   navigation,
@@ -28,6 +29,7 @@ export default ({
   storyline,
   screenshots,
   artworks,
+  videos,
 }) => {
   const { height: HEIGHT } = Dimensions.get("window");
   const Container = styled.View`
@@ -76,7 +78,7 @@ export default ({
   `;
 
   const sheetRef = useRef(null);
-  const goToTotalImage = useTotalImage();
+  const goToSubPage = useSubPage();
   const renderContent = () => (
     <SheetContainer style={{ justifyContent: "flex-start" }}>
       <HeaderContainer>
@@ -123,14 +125,61 @@ export default ({
         </DataBox>
         {summary ? (
           <DataBox>
-            <DataTitle>개요</DataTitle>
+            <RowBox style={{ justifyContent: "space-between" }}>
+              <DataTitle>개요</DataTitle>
+              <TouchableOpacity
+                onPress={() => {
+                  Clipboard.setString(summary);
+                  goToSubPage({
+                    title: "번역",
+                    Classification: "P", // Sub page initial
+                    contents: screenshots,
+                  });
+                }}
+              >
+                <AntDesign name="right" size={17} color="black" />
+              </TouchableOpacity>
+            </RowBox>
             <Text>{summary}</Text>
           </DataBox>
         ) : null}
         {storyline ? (
           <DataBox>
-            <DataTitle>스토리 요약</DataTitle>
+            <RowBox style={{ justifyContent: "space-between" }}>
+              <DataTitle>스토리 요약</DataTitle>
+              <TouchableOpacity
+                onPress={() => {
+                  Clipboard.setString(storyline);
+                  goToSubPage({
+                    title: "번역",
+                    Classification: "P", // Sub page initial
+                    contents: screenshots,
+                  });
+                }}
+              >
+                <AntDesign name="right" size={17} color="black" />
+              </TouchableOpacity>
+            </RowBox>
             <Text>{storyline}</Text>
+          </DataBox>
+        ) : null}
+        {videos ? (
+          <DataBox>
+            <RowBox style={{ justifyContent: "space-between" }}>
+              <DataTitle>동영상</DataTitle>
+              <TouchableOpacity
+                onPress={() =>
+                  goToSubPage({
+                    title: "동영상",
+                    Classification: "V", // Sub page initial
+                    contents: videos,
+                  })
+                }
+              >
+                <AntDesign name="right" size={17} color="black" />
+              </TouchableOpacity>
+            </RowBox>
+            <VideoHorizontal videoId={videos[0].video_id} height={200} />
           </DataBox>
         ) : null}
         {screenshots ? (
@@ -139,7 +188,11 @@ export default ({
               <DataTitle>스크린샷</DataTitle>
               <TouchableOpacity
                 onPress={() =>
-                  goToTotalImage({ title: "스크린샷", images: screenshots })
+                  goToSubPage({
+                    title: "스크린샷",
+                    Classification: "I", // Sub page initial
+                    contents: screenshots,
+                  })
                 }
               >
                 <AntDesign name="right" size={17} color="black" />
@@ -151,7 +204,10 @@ export default ({
               {screenshots.map((screenshot, index) => {
                 if (index >= 2) return;
                 return (
-                  <Screenshot key={screenshot.id} url={screenshot.image_id} />
+                  <Screenshot
+                    key={screenshot.id}
+                    imageId={screenshot.image_id}
+                  />
                 );
               })}
             </RowBox>
@@ -163,7 +219,11 @@ export default ({
               <DataTitle>아트워크</DataTitle>
               <TouchableOpacity
                 onPress={() =>
-                  goToTotalImage({ title: "아트워크", images: artworks })
+                  goToSubPage({
+                    title: "아트워크",
+                    Classification: "I", // Sub page initial
+                    contents: artworks,
+                  })
                 }
               >
                 <AntDesign name="right" size={17} color="black" />
@@ -174,7 +234,9 @@ export default ({
             >
               {artworks.map((artwork, index) => {
                 if (index >= 2) return;
-                return <Screenshot key={artwork.id} url={artwork.image_id} />;
+                return (
+                  <Screenshot key={artwork.id} imageId={artwork.image_id} />
+                );
               })}
             </RowBox>
           </DataBox>

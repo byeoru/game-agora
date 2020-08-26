@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "react-native";
-import useDetail from "./useDetail";
+import useGameDetail from "./useGameDetail";
 import { getImage } from "../api";
 import imageSizeObj from "./obj/imageSizeObj";
 
@@ -42,9 +42,10 @@ export default ({
   storyline,
   screenshots,
   artworks,
+  videos,
   styles,
 }) => {
-  const goToDetail = useDetail();
+  const goToDetail = useGameDetail();
   return (
     <TouchableOpacity
       onPress={() =>
@@ -62,6 +63,7 @@ export default ({
           storyline,
           screenshots,
           artworks,
+          videos,
         })
       }
     >
