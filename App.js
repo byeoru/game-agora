@@ -4,6 +4,7 @@ import { SafeAreaView, StyleSheet, Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNav from "./navigation/StackNav";
 import Constants from "expo-constants";
+import Toast from "react-native-toast-message";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
           <StackNav />
         </NavigationContainer>
       </SafeAreaView>
+      <Toast ref={(ref) => Toast.setRef(ref)} />
       <StatusBar style="auto" />
     </>
   );

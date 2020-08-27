@@ -4,13 +4,17 @@ import SubPagePresenter from "./SubPagePresenter";
 export default ({
   navigation,
   route: {
-    params: { title, Classification, contents },
+    params: { title, classification, contents, textToInsert },
   },
 }) => {
   useLayoutEffect(() => {
     navigation.setOptions({ title });
   }, []);
   return (
-    <SubPagePresenter Classification={Classification} contents={contents} />
+    <SubPagePresenter
+      classification={classification}
+      contents={contents}
+      textToInsert={textToInsert}
+    />
   );
 };

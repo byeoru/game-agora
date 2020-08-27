@@ -4,17 +4,17 @@ import ImageHorizontal from "../../../components/GameDetail/SubPage/ImageHorizon
 import VideoHorizontal from "../../../components/GameDetail/SubPage/VideoHorizontal";
 import Papago from "../../../components/GameDetail/SubPage/Papago";
 
-export default ({ Classification, contents }) => {
-  let CategorizedContents;
-  switch (Classification) {
+export default ({ classification, contents, textToInsert }) => {
+  let categorizedContents;
+  switch (classification) {
     case "I":
-      CategorizedContents = () =>
+      categorizedContents = () =>
         contents.map((image) => (
           <ImageHorizontal key={image.id} imageId={image.image_id} />
         ));
       break;
     case "V":
-      CategorizedContents = () =>
+      categorizedContents = () =>
         contents.map((video) => (
           <VideoHorizontal
             key={video.id}
@@ -24,8 +24,12 @@ export default ({ Classification, contents }) => {
         ));
       break;
     case "P":
-      CategorizedContents = () => <Papago />;
+      categorizedContents = () => <Papago textToInsert={textToInsert} />;
       break;
   }
-  return <ScrollContainer>{CategorizedContents()}</ScrollContainer>;
+  return classification === "P" ? (
+    categorizedContents()
+  ) : (
+    <ScrollContainer>{categorizedContents()}</ScrollContainer>
+  );
 };

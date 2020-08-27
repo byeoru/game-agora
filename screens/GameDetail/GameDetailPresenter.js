@@ -13,6 +13,7 @@ import Screenshot from "../../components/GameDetail/Screenshot";
 import OriginNotation from "../../components/OriginNotation";
 import useSubPage from "../../components/useSubPage";
 import VideoHorizontal from "../../components/GameDetail/SubPage/VideoHorizontal";
+import Toast from "react-native-toast-message";
 
 export default ({
   navigation,
@@ -130,14 +131,27 @@ export default ({
               <TouchableOpacity
                 onPress={() => {
                   Clipboard.setString(summary);
+                  Toast.show({
+                    position: "bottom",
+                    text1: "텍스트를 복사했습니다",
+                    text2: "그대로 붙여넣기를 하세요",
+                  });
                   goToSubPage({
                     title: "번역",
-                    Classification: "P", // Sub page initial
+                    classification: "P", // Sub page initial
                     contents: screenshots,
                   });
                 }}
               >
-                <AntDesign name="right" size={17} color="black" />
+                <RowBox style={{ alignItems: "center" }}>
+                  <Text>번역</Text>
+                  <AntDesign
+                    name="right"
+                    size={17}
+                    color="black"
+                    style={{ paddingLeft: 10 }}
+                  />
+                </RowBox>
               </TouchableOpacity>
             </RowBox>
             <Text>{summary}</Text>
@@ -150,14 +164,27 @@ export default ({
               <TouchableOpacity
                 onPress={() => {
                   Clipboard.setString(storyline);
+                  Toast.show({
+                    position: "bottom",
+                    text1: "텍스트를 복사했습니다",
+                    text2: "그대로 붙여넣기를 하세요",
+                  });
                   goToSubPage({
                     title: "번역",
-                    Classification: "P", // Sub page initial
+                    classification: "P", // Sub page initial
                     contents: screenshots,
                   });
                 }}
               >
-                <AntDesign name="right" size={17} color="black" />
+                <RowBox style={{ alignItems: "center" }}>
+                  <Text>번역</Text>
+                  <AntDesign
+                    name="right"
+                    size={17}
+                    color="black"
+                    style={{ paddingLeft: 10 }}
+                  />
+                </RowBox>
               </TouchableOpacity>
             </RowBox>
             <Text>{storyline}</Text>
@@ -171,12 +198,17 @@ export default ({
                 onPress={() =>
                   goToSubPage({
                     title: "동영상",
-                    Classification: "V", // Sub page initial
+                    classification: "V", // Sub page initial
                     contents: videos,
                   })
                 }
               >
-                <AntDesign name="right" size={17} color="black" />
+                <AntDesign
+                  name="right"
+                  size={17}
+                  color="black"
+                  style={{ paddingLeft: 10 }}
+                />
               </TouchableOpacity>
             </RowBox>
             <VideoHorizontal videoId={videos[0].video_id} height={200} />
@@ -190,12 +222,17 @@ export default ({
                 onPress={() =>
                   goToSubPage({
                     title: "스크린샷",
-                    Classification: "I", // Sub page initial
+                    classification: "I", // Sub page initial
                     contents: screenshots,
                   })
                 }
               >
-                <AntDesign name="right" size={17} color="black" />
+                <AntDesign
+                  name="right"
+                  size={17}
+                  color="black"
+                  style={{ paddingLeft: 10 }}
+                />
               </TouchableOpacity>
             </RowBox>
             <RowBox
@@ -221,12 +258,17 @@ export default ({
                 onPress={() =>
                   goToSubPage({
                     title: "아트워크",
-                    Classification: "I", // Sub page initial
+                    classification: "I", // Sub page initial
                     contents: artworks,
                   })
                 }
               >
-                <AntDesign name="right" size={17} color="black" />
+                <AntDesign
+                  name="right"
+                  size={17}
+                  color="black"
+                  style={{ paddingLeft: 10 }}
+                />
               </TouchableOpacity>
             </RowBox>
             <RowBox
