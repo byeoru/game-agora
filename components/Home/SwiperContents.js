@@ -82,6 +82,8 @@ const SwiperContents = ({
   screenshots,
   artworks,
   videos,
+  websites,
+  popularity,
 }) => {
   const goToDetail = useGameDetail();
   return (
@@ -102,6 +104,8 @@ const SwiperContents = ({
           screenshots,
           artworks,
           videos,
+          websites,
+          popularity,
         })
       }
     >

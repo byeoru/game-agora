@@ -4,7 +4,7 @@ import BottomSheet from "reanimated-bottom-sheet";
 import { Dimensions, TouchableOpacity, Clipboard } from "react-native";
 import ProgressRingChart from "../../components/GameDetail/ProgressRingChart";
 import { getImage } from "../../api";
-import { unixTimeToDate } from "../../utils";
+import { unixTimeToDate, LoweringFThiDecPlace } from "../../utils";
 import { AntDesign } from "@expo/vector-icons";
 import imageSize from "../../components/obj/imageSizeObj";
 import CompanyVertical from "../../components/GameDetail/CompanyVertical";
@@ -14,6 +14,7 @@ import OriginNotation from "../../components/OriginNotation";
 import useSubPage from "../../components/useSubPage";
 import VideoHorizontal from "../../components/GameDetail/SubPage/VideoHorizontal";
 import Toast from "react-native-toast-message";
+import WebsiteButton from "../../components/GameDetail/WebsiteButton";
 
 export default ({
   navigation,
@@ -31,6 +32,8 @@ export default ({
   screenshots,
   artworks,
   videos,
+  websites,
+  popularity,
 }) => {
   const { height: HEIGHT } = Dimensions.get("window");
   const Container = styled.View`
@@ -124,6 +127,12 @@ export default ({
             totalRating={totalRating}
           />
         </DataBox>
+        {popularity ? (
+          <DataBox>
+            <DataTitle>인기도</DataTitle>
+            <Text>{LoweringFThiDecPlace(popularity)}</Text>
+          </DataBox>
+        ) : null}
         {summary ? (
           <DataBox>
             <RowBox style={{ justifyContent: "space-between" }}>
@@ -140,11 +149,12 @@ export default ({
                     title: "번역",
                     classification: "P", // Sub page initial
                     contents: screenshots,
+                    textToInsert: summary,
                   });
                 }}
               >
                 <RowBox style={{ alignItems: "center" }}>
-                  <Text>번역</Text>
+                  <Text>파파고</Text>
                   <AntDesign
                     name="right"
                     size={17}
@@ -173,11 +183,12 @@ export default ({
                     title: "번역",
                     classification: "P", // Sub page initial
                     contents: screenshots,
+                    textToInsert: storyline,
                   });
                 }}
               >
                 <RowBox style={{ alignItems: "center" }}>
-                  <Text>번역</Text>
+                  <Text>파파고</Text>
                   <AntDesign
                     name="right"
                     size={17}
@@ -308,7 +319,21 @@ export default ({
             </RowBox>
           </DataBox>
         ) : null}
-        <OriginNotation />
+        {websites ? (
+          <DataBox>
+            <DataTitle>사이트</DataTitle>
+            <RowBox style={{ flexWrap: "wrap" }}>
+              {websites.map((website) => (
+                <WebsiteButton
+                  key={website.id}
+                  url={website.url}
+                  category={website.category}
+                />
+              ))}
+            </RowBox>
+          </DataBox>
+        ) : null}
+        <OriginNotation styles={{ paddingBottom: 20 }} />
       </DataContainer>
     </SheetContainer>
   );

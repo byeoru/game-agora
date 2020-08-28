@@ -51,6 +51,8 @@ export default ({
               screenshots={game.screenshots}
               artworks={game.artworks}
               videos={game.videos}
+              websites={game.websites}
+              popularity={game.popularity}
             />
           );
         })}
@@ -92,6 +94,8 @@ export default ({
               screenshots={game.screenshots}
               artworks={game.artworks}
               videos={game.videos}
+              websites={game.websites}
+              popularity={game.popularity}
             />
           ))}
         </HorizotalSlider>
@@ -116,6 +120,8 @@ export default ({
               screenshots={game.screenshots}
               artworks={game.artworks}
               videos={game.videos}
+              websites={game.websites}
+              popularity={game.popularity}
             />
           ))}
         </HorizotalSlider>
@@ -140,6 +146,8 @@ export default ({
               screenshots={game.screenshots}
               artworks={game.artworks}
               videos={game.videos}
+              websites={game.websites}
+              popularity={game.popularity}
             />
           ))}
         </HorizotalSlider>

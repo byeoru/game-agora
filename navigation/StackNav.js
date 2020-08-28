@@ -42,7 +42,8 @@ export default () => {
         name="SubPage"
         component={SubPage}
         options={{
-          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+          cardStyleInterpolator:
+            CardStyleInterpolators.forRevealFromBottomAndroid,
         }}
       />
     </StackNav.Navigator>

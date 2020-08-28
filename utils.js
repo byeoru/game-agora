@@ -1,3 +1,10 @@
+export const LoweringFThiDecPlace = (num) => {
+  let double = num * 100;
+  double = Math.floor(double);
+  double /= 100;
+  return double;
+};
+
 export const getNowSec = () => {
   let now = new Date();
   now /= 1000;

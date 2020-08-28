@@ -43,6 +43,8 @@ export default ({
   screenshots,
   artworks,
   videos,
+  websites,
+  popularity,
   styles,
 }) => {
   const goToDetail = useGameDetail();
@@ -64,6 +66,8 @@ export default ({
           screenshots,
           artworks,
           videos,
+          websites,
+          popularity,
         })
       }
     >
