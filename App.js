@@ -5,14 +5,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import StackNav from "./navigation/StackNav";
 import Constants from "expo-constants";
 import Toast from "react-native-toast-message";
+import { ThemeProvider } from "react-native-elements";
 
 export default function App() {
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <NavigationContainer>
-          <StackNav />
-        </NavigationContainer>
+        <ThemeProvider>
+          <NavigationContainer>
+            <StackNav />
+          </NavigationContainer>
+        </ThemeProvider>
       </SafeAreaView>
       <Toast ref={(ref) => Toast.setRef(ref)} />
       <StatusBar style="auto" />

@@ -5,34 +5,26 @@ import { getDayAgoNowSec } from "../../utils";
 
 export default () => {
   const [home, setHome] = useState({
+    firstLoading: true,
     loading: true,
     highRating: [],
     popularPc: [],
     popularAndroid: [],
     popularIos: [],
+    themes: [],
   });
   const getData = async () => {
-    const [highRating, highRatingError] = await igdbApi.highRating(
+    const [homeQuery, homeQueryError] = await igdbApi.homeMultiQuery(
       getDayAgoNowSec(90)
     );
-    const [popularPc, popularPcError] = await igdbApi.popular(
-      getDayAgoNowSec(90),
-      "PC"
-    );
-    const [popularAndroid, popularAndroidError] = await igdbApi.popular(
-      getDayAgoNowSec(90),
-      "Android"
-    );
-    const [popularIos, popularIosError] = await igdbApi.popular(
-      getDayAgoNowSec(90),
-      "iOS"
-    );
     setHome({
+      firstLoading: false,
       loading: false,
-      highRating,
-      popularPc,
-      popularAndroid,
-      popularIos,
+      highRating: homeQuery[0].result,
+      popularPc: homeQuery[1].result,
+      popularIos: homeQuery[2].result,
+      popularAndroid: homeQuery[3].result,
+      themes: homeQuery[4].result,
     });
   };
 

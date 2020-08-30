@@ -68,7 +68,7 @@ const Platform = styled.Text`
 `;
 
 const SwiperContents = ({
-  title,
+  name,
   rating,
   criticRating,
   totalRating,
@@ -90,7 +90,7 @@ const SwiperContents = ({
     <TouchableOpacity
       onPress={() =>
         goToDetail({
-          title,
+          title: name,
           rating,
           criticRating,
           totalRating,
@@ -118,7 +118,7 @@ const SwiperContents = ({
         />
         <DataContainer>
           <Data>
-            <Title>{title}</Title>
+            <Title>{name}</Title>
             <BottomData>
               <Rating rating={totalRating} styles={{ color: "white" }} />
               <Released>{unixTimeToDate(firstReleaseD)} 출시</Released>
@@ -138,7 +138,7 @@ const SwiperContents = ({
 };
 
 SwiperContents.propTypes = {
-  title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   backgroundImage: PropTypes.string.isRequired,
 };

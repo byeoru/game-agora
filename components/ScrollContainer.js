@@ -1,7 +1,9 @@
 import React from "react";
 import { ScrollView, ActivityIndicator } from "react-native";
+import { Overlay } from "react-native-elements";
+import SplashScreen from "../screens/SplashScreen";
 
-export default ({ loading, children, contentContainerStyle }) => (
+export default ({ firstLoading, loading, children, contentContainerStyle }) => (
   <ScrollView
     showsVerticalScrollIndicator={false}
     contentContainerStyle={{
@@ -13,6 +15,14 @@ export default ({ loading, children, contentContainerStyle }) => (
       ...contentContainerStyle,
     }}
   >
-    {loading ? <ActivityIndicator color="blue" size="small" /> : children}
+    {firstLoading ? (
+      <Overlay isVisible={firstLoading ? true : false} fullScreen={true}>
+        <SplashScreen />
+      </Overlay>
+    ) : loading ? (
+      <ActivityIndicator color="blue" size="small" />
+    ) : (
+      children
+    )}
   </ScrollView>
 );

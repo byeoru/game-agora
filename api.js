@@ -24,39 +24,43 @@ const getAnythingIgdb = async (path, query) => {
 };
 
 export const igdbApi = {
-  multiQuery: () =>
+  homeMultiQuery: (previousDate) =>
     getAnythingIgdb(
       "/multiquery",
-      `query platforms/count "Count of Platforms" {
-        // here we can have additional filters
+      `query games "highRating" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category; 
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & rating > 70; sort rating desc; limit 10;
       };
-      query games "Playstation Games" {
-        fields name,platforms.name;
-        where platforms !=n & platforms = {48};
-        limit 1;`
-    ),
-  highRating: (previousDate) =>
-    getAnythingIgdb(
-      "/games",
-      `fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks.image_id,bundles,category,checksum,
-      cover.image_id,created_at,dlcs,expansions,first_release_date,follows,franchise,franchises,game_engines,collection,
-      game_modes,genres.name,hypes,involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,
-      keywords,multiplayer_modes,name,parent_game,platforms.abbreviation,platforms.name,player_perspectives,popularity,
-      pulse_count,rating,rating_count,screenshots.image_id,similar_games,slug,standalone_expansions,status,storyline,
-      summary,tags,themes,time_to_beat,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos.video_id,websites.url,websites.category; 
-      where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & rating > 70; sort rating desc; limit 10;`
-    ),
-  popular: (previousDate, platform) =>
-    getAnythingIgdb(
-      "/games",
-      `fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks.image_id,bundles,category,checksum,
-      cover.image_id,created_at,dlcs,expansions,first_release_date,follows,franchise,franchises,game_engines,collection,
-      game_modes,genres.name,hypes,involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,
-      keywords,multiplayer_modes,name,parent_game,platforms.abbreviation,platforms.name,player_perspectives,popularity,
-      pulse_count,rating,rating_count,screenshots.image_id,similar_games,slug,standalone_expansions,status,storyline,
-      summary,tags,themes,time_to_beat,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos.video_id,websites.url,websites.category; 
-      where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & platforms.abbreviation = "${platform}"; 
-      sort popularity desc; limit 10;`
+      query games "popular PC" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & platforms.abbreviation = "PC"; 
+        sort popularity desc; limit 10;
+      };
+      query games "popular iOS" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & platforms.abbreviation = "iOS"; 
+        sort popularity desc; limit 10;
+      };
+      query games "popular Android" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & platforms.abbreviation = "Android"; 
+        sort popularity desc; limit 10;
+      };
+      query themes "themes" {
+        fields checksum,created_at,name,slug,updated_at,url;
+      };`
     ),
 };
 

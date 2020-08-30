@@ -15,6 +15,7 @@ import useSubPage from "../../components/useSubPage";
 import VideoHorizontal from "../../components/GameDetail/SubPage/VideoHorizontal";
 import Toast from "react-native-toast-message";
 import WebsiteButton from "../../components/GameDetail/WebsiteButton";
+import RowBox from "../../components/RowBox";
 
 export default ({
   navigation,
@@ -76,10 +77,6 @@ export default ({
   `;
   const View = styled.View``;
   const Text = styled.Text``;
-  const RowBox = styled.View`
-    width: 100%;
-    flex-direction: row;
-  `;
 
   const sheetRef = useRef(null);
   const goToSubPage = useSubPage();
@@ -90,14 +87,14 @@ export default ({
       </HeaderContainer>
       <DataContainer>
         <RowBox>
-          <DataBox style={{ flex: 1 }}>
+          <DataBox styles={{ flex: 1 }}>
             <DataTitle>최초 출시일</DataTitle>
             <Text>{unixTimeToDate(firstReleaseD)}</Text>
           </DataBox>
           <DataBox style={{ flex: 2, marginLeft: 10 }}>
             <DataTitle>장르</DataTitle>
             <RowBox
-              style={{
+              styles={{
                 flexWrap: "wrap",
               }}
             >
@@ -111,7 +108,7 @@ export default ({
         </RowBox>
         <DataBox>
           <DataTitle>플랫폼</DataTitle>
-          <RowBox style={{ flexWrap: "wrap" }}>
+          <RowBox styles={{ flexWrap: "wrap" }}>
             {platforms
               ? platforms.map((platform) => (
                   <BorderText key={platform.id} text={platform.name} />
@@ -135,7 +132,7 @@ export default ({
         ) : null}
         {summary ? (
           <DataBox>
-            <RowBox style={{ justifyContent: "space-between" }}>
+            <RowBox styles={{ justifyContent: "space-between" }}>
               <DataTitle>개요</DataTitle>
               <TouchableOpacity
                 onPress={() => {
@@ -153,7 +150,7 @@ export default ({
                   });
                 }}
               >
-                <RowBox style={{ alignItems: "center" }}>
+                <RowBox styles={{ alignItems: "center" }}>
                   <Text>파파고</Text>
                   <AntDesign
                     name="right"
@@ -169,7 +166,7 @@ export default ({
         ) : null}
         {storyline ? (
           <DataBox>
-            <RowBox style={{ justifyContent: "space-between" }}>
+            <RowBox styles={{ justifyContent: "space-between" }}>
               <DataTitle>스토리 요약</DataTitle>
               <TouchableOpacity
                 onPress={() => {
@@ -187,7 +184,7 @@ export default ({
                   });
                 }}
               >
-                <RowBox style={{ alignItems: "center" }}>
+                <RowBox styles={{ alignItems: "center" }}>
                   <Text>파파고</Text>
                   <AntDesign
                     name="right"
@@ -203,7 +200,7 @@ export default ({
         ) : null}
         {videos ? (
           <DataBox>
-            <RowBox style={{ justifyContent: "space-between" }}>
+            <RowBox styles={{ justifyContent: "space-between" }}>
               <DataTitle>동영상</DataTitle>
               <TouchableOpacity
                 onPress={() =>
@@ -227,7 +224,7 @@ export default ({
         ) : null}
         {screenshots ? (
           <DataBox>
-            <RowBox style={{ justifyContent: "space-between" }}>
+            <RowBox styles={{ justifyContent: "space-between" }}>
               <DataTitle>스크린샷</DataTitle>
               <TouchableOpacity
                 onPress={() =>
@@ -247,7 +244,7 @@ export default ({
               </TouchableOpacity>
             </RowBox>
             <RowBox
-              style={{ flexWrap: "wrap", justifyContent: "space-between" }}
+              styles={{ flexWrap: "wrap", justifyContent: "space-between" }}
             >
               {screenshots.map((screenshot, index) => {
                 if (index >= 2) return;
@@ -263,7 +260,7 @@ export default ({
         ) : null}
         {artworks ? (
           <DataBox>
-            <RowBox style={{ justifyContent: "space-between" }}>
+            <RowBox styles={{ justifyContent: "space-between" }}>
               <DataTitle>아트워크</DataTitle>
               <TouchableOpacity
                 onPress={() =>
@@ -283,7 +280,7 @@ export default ({
               </TouchableOpacity>
             </RowBox>
             <RowBox
-              style={{ flexWrap: "wrap", justifyContent: "space-between" }}
+              styles={{ flexWrap: "wrap", justifyContent: "space-between" }}
             >
               {artworks.map((artwork, index) => {
                 if (index >= 2) return;
@@ -298,7 +295,7 @@ export default ({
           <DataBox>
             <DataTitle>게임 회사</DataTitle>
             <RowBox
-              style={{
+              styles={{
                 flexWrap: "wrap",
                 justifyContent: "space-between",
               }}
@@ -322,7 +319,7 @@ export default ({
         {websites ? (
           <DataBox>
             <DataTitle>사이트</DataTitle>
-            <RowBox style={{ flexWrap: "wrap" }}>
+            <RowBox styles={{ flexWrap: "wrap" }}>
               {websites.map((website) => (
                 <WebsiteButton
                   key={website.id}
