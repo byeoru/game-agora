@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import * as WebBrowser from "expo-web-browser";
 import { TouchableOpacity } from "react-native";
-import websiteCategory from "../obj/websiteCategory";
+import websiteCategory from "../../obj/websiteCategory";
 
 const Container = styled.View`
   padding: 2px 10px;

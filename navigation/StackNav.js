@@ -4,9 +4,9 @@ import {
   CardStyleInterpolators,
 } from "@react-navigation/stack";
 import BottomNav from "./BottomNav";
-import GameDetail from "../screens/GameDetail/index";
-import More from "../screens/More/index";
-import SubPage from "../screens/GameDetail/SubPage/index";
+import GameDetail from "../screens/GameDetail";
+import More from "../screens/More";
+import SubPage from "../screens/GameDetail/SubPage";
 
 const StackNav = createStackNavigator();
 

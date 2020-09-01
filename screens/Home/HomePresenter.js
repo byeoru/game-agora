@@ -3,7 +3,7 @@ import ScrollContainer from "../../components/ScrollContainer";
 import { Dimensions } from "react-native";
 import Swiper from "react-native-swiper";
 import SwiperContents from "../../components/Home/SwiperContents";
-import ContentBox from "../../components/ContentsBox";
+import ContentsBox from "../../components/ContentsBox";
 import ContentsHeader from "../../components/ContentsHeader";
 import Vertical from "../../components/Vertical";
 import styled from "styled-components/native";
@@ -12,17 +12,11 @@ import TopHeader from "../../components/TopHeader";
 import ContentsDescription from "../../components/ContentsDescription";
 import HorizontalContainer from "../../components/HorizontalContainer";
 import OriginNotation from "../../components/OriginNotation";
-import BorderText from "../../components/BoderText";
-import RowBox from "../../components/RowBox";
 
 const { height: HEIGHT } = Dimensions.get("window");
 const SwiperContainer = styled.View`
   width: 100%;
   height: ${HEIGHT / 2.2}px;
-`;
-const TagContainer = styled.View`
-  width: 100%;
-  margin-top: 80px;
 `;
 
 export default ({
@@ -32,7 +26,6 @@ export default ({
   popularPc,
   popularIos,
   popularAndroid,
-  themes,
 }) => (
   <ScrollContainer loading={loading} firstLoading={firstLoading}>
     <SwiperContainer>
@@ -46,7 +39,7 @@ export default ({
             totalRating={game.total_rating}
             firstReleaseD={game.first_release_date}
             platforms={game.platforms}
-            backgroundImage={game.cover.image_id}
+            backgroundImage={game.cover?.image_id}
             involvedCompanies={game.involved_companies}
             genres={game.genres}
             summary={game.summary}
@@ -60,9 +53,9 @@ export default ({
         ))}
       </Swiper>
     </SwiperContainer>
-    <ContentBox>
+    <ContentsBox>
       <TopHeader title="인기작" />
-      <ContentsDescription text="최근 90일 사이 출시된 게임" />
+      <ContentsDescription text="최근 200일 사이 출시된 게임" />
       <ContentsHeader title="PC" styles={{ marginTop: 80 }} />
       <HorizontalContainer>
         <HorizotalSlider>
@@ -75,7 +68,7 @@ export default ({
               totalRating={game.total_rating}
               firstReleaseD={game.first_release_date}
               platforms={game.platforms}
-              backgroundImage={game.cover.image_id}
+              backgroundImage={game.cover?.image_id}
               involvedCompanies={game.involved_companies}
               genres={game.genres}
               summary={game.summary}
@@ -101,7 +94,7 @@ export default ({
               totalRating={game.total_rating}
               firstReleaseD={game.first_release_date}
               platforms={game.platforms}
-              backgroundImage={game.cover.image_id}
+              backgroundImage={game.cover?.image_id}
               involvedCompanies={game.involved_companies}
               genres={game.genres}
               summary={game.summary}
@@ -127,7 +120,7 @@ export default ({
               totalRating={game.total_rating}
               firstReleaseD={game.first_release_date}
               platforms={game.platforms}
-              backgroundImage={game.cover.image_id}
+              backgroundImage={game.cover?.image_id}
               involvedCompanies={game.involved_companies}
               genres={game.genres}
               summary={game.summary}
@@ -141,18 +134,7 @@ export default ({
           ))}
         </HorizotalSlider>
       </HorizontalContainer>
-    </ContentBox>
-    <ContentBox>
-      <TopHeader title="테마" />
-      <ContentsDescription text="게임 테마" />
-      <RowBox
-        styles={{ flexWrap: "wrap", justifyContent: "center", marginTop: 80 }}
-      >
-        {themes.map((theme) => (
-          <BorderText key={theme.id} text={theme.name} />
-        ))}
-      </RowBox>
-    </ContentBox>
+    </ContentsBox>
     <OriginNotation />
   </ScrollContainer>
 );

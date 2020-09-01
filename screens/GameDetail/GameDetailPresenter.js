@@ -6,7 +6,7 @@ import ProgressRingChart from "../../components/GameDetail/ProgressRingChart";
 import { getImage } from "../../api";
 import { unixTimeToDate, LoweringFThiDecPlace } from "../../utils";
 import { AntDesign } from "@expo/vector-icons";
-import imageSize from "../../components/obj/imageSizeObj";
+import imageSize from "../../obj/imageSizeObj";
 import CompanyVertical from "../../components/GameDetail/CompanyVertical";
 import BorderText from "../../components/BoderText";
 import Screenshot from "../../components/GameDetail/Screenshot";

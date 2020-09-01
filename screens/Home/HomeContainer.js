@@ -11,11 +11,10 @@ export default () => {
     popularPc: [],
     popularAndroid: [],
     popularIos: [],
-    themes: [],
   });
   const getData = async () => {
     const [homeQuery, homeQueryError] = await igdbApi.homeMultiQuery(
-      getDayAgoNowSec(90)
+      getDayAgoNowSec(200)
     );
     setHome({
       firstLoading: false,
@@ -24,7 +23,6 @@ export default () => {
       popularPc: homeQuery[1].result,
       popularIos: homeQuery[2].result,
       popularAndroid: homeQuery[3].result,
-      themes: homeQuery[4].result,
     });
   };
 

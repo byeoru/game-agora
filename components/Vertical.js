@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import { TouchableOpacity } from "react-native";
 import useGameDetail from "./useGameDetail";
 import { getImage } from "../api";
-import imageSizeObj from "./obj/imageSizeObj";
+import imageSizeObj from "../obj/imageSizeObj";
 
 const Container = styled.View`
   margin-right: 20px;
@@ -72,12 +72,14 @@ export default ({
       }
     >
       <Container style={{ ...styles }}>
-        <BG
-          resizeMethod="resize"
-          source={{
-            uri: getImage(backgroundImage, imageSizeObj.screenshotMed569x320),
-          }}
-        />
+        {backgroundImage ? (
+          <BG
+            resizeMethod="resize"
+            source={{
+              uri: getImage(backgroundImage, imageSizeObj.screenshotMed569x320),
+            }}
+          />
+        ) : null}
         <TitleBox>
           <Title>{title}</Title>
         </TitleBox>

@@ -11,15 +11,15 @@ const Container = styled.View`
 `;
 const ContentsContainer = styled.View``;
 
-const ContentBox = ({ styles, children }) => (
+const ContentsBox = ({ styles, children }) => (
   <Container style={{ ...styles }}>
     <ContentsContainer>{children}</ContentsContainer>
   </Container>
 );
 
-ContentBox.propTypes = {
+ContentsBox.propTypes = {
   styles: PropTypes.object,
   children: PropTypes.node.isRequired,
 };
 
-export default ContentBox;
+export default ContentsBox;

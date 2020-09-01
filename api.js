@@ -1,6 +1,7 @@
 import axios from "axios";
 import getEnvVars from "./env";
 import { getNowSec } from "./utils";
+import gameGenreObj from "./obj/gameGenreObj";
 const { API_KEY } = getEnvVars();
 
 const makeRequestIgdb = (path, query) =>
@@ -32,7 +33,7 @@ export const igdbApi = {
         involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
         platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
         total_rating_count,videos.video_id,websites.url,websites.category; 
-        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & rating > 70; sort rating desc; limit 10;
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & rating > 60; sort rating desc; limit 15;
       };
       query games "popular PC" {
         fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
@@ -40,7 +41,7 @@ export const igdbApi = {
         platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
         total_rating_count,videos.video_id,websites.url,websites.category;  
         where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & platforms.abbreviation = "PC"; 
-        sort popularity desc; limit 10;
+        sort popularity desc; limit 15;
       };
       query games "popular iOS" {
         fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
@@ -48,7 +49,7 @@ export const igdbApi = {
         platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
         total_rating_count,videos.video_id,websites.url,websites.category;  
         where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & platforms.abbreviation = "iOS"; 
-        sort popularity desc; limit 10;
+        sort popularity desc; limit 15;
       };
       query games "popular Android" {
         fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
@@ -56,10 +57,319 @@ export const igdbApi = {
         platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
         total_rating_count,videos.video_id,websites.url,websites.category;  
         where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & platforms.abbreviation = "Android"; 
+        sort popularity desc; limit 15;
+      };`
+    ),
+  genreRatingMultiQuery: (previousDate) =>
+    getAnythingIgdb(
+      "/multiquery",
+      `query games "point and click" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.PointAndClick
+      }" & rating > 60; 
+        sort rating desc; limit 10;
+      };
+      query games "fighting" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.PointAndClick
+      }" & rating > 60; 
+        sort rating desc; limit 10;      
+      };
+      query games "shooter" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Shooter
+      }" & rating > 60; 
+        sort rating desc; limit 10;      
+      };
+      query games "music" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Music
+      }" & rating > 60; 
+        sort rating desc; limit 10;      
+      };
+      query games "platform" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Platform
+      }" & rating > 60; 
+        sort rating desc; limit 10;      
+      };
+      query games "puzzle" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Puzzle
+      }" & rating > 60; 
+        sort rating desc; limit 10;      
+      };
+      query games "racing" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Racing
+      }" & rating > 60; 
+        sort rating desc; limit 10;      
+      };
+      query games "RTS" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.RTS
+      }" & rating > 60; 
+        sort rating desc; limit 10;      
+      };
+      query games "RPG" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.RPG
+      }" & rating > 60; 
+        sort rating desc; limit 10;      
+      };
+      query games "simulator" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Simulator
+      }" & rating > 60; 
+        sort rating desc; limit 10;      
+      };`
+    ),
+  genrePopularityMultiQuery: (previousDate) =>
+    getAnythingIgdb(
+      "/multiquery",
+      `query games "point and click" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.PointAndClick
+      }"; 
         sort popularity desc; limit 10;
       };
-      query themes "themes" {
-        fields checksum,created_at,name,slug,updated_at,url;
+      query games "fighting" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.PointAndClick
+      }"; 
+        sort popularity desc; limit 10;      
+      };
+      query games "shooter" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Shooter
+      }"; 
+        sort popularity desc; limit 10;      
+      };
+      query games "music" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Music
+      }"; 
+        sort popularity desc; limit 10;      
+      };
+      query games "platform" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Platform
+      }"; 
+        sort popularity desc; limit 10;      
+      };
+      query games "puzzle" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Puzzle
+      }"; 
+        sort popularity desc; limit 10;      
+      };
+      query games "racing" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Racing
+      }"; 
+        sort popularity desc; limit 10;      
+      };
+      query games "RTS" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.RTS
+      }"; 
+        sort popularity desc; limit 10;      
+      };
+      query games "RPG" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.RPG
+      }"; 
+        sort popularity desc; limit 10;      
+      };
+      query games "simulator" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Simulator
+      }"; 
+        sort popularity desc; limit 10;      
+      };`
+    ),
+  genreDateMultiQuery: (previousDate) =>
+    getAnythingIgdb(
+      "/multiquery",
+      `query games "point and click" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.PointAndClick
+      }"; 
+        sort first_release_date desc; limit 10;
+      };
+      query games "fighting" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.PointAndClick
+      }"; 
+        sort first_release_date desc; limit 10;      
+      };
+      query games "shooter" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Shooter
+      }"; 
+        sort first_release_date desc; limit 10;      
+      };
+      query games "music" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Music
+      }"; 
+        sort first_release_date desc; limit 10;      
+      };
+      query games "platform" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Platform
+      }"; 
+        sort first_release_date desc; limit 10;      
+      };
+      query games "puzzle" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Puzzle
+      }"; 
+        sort first_release_date desc; limit 10;      
+      };
+      query games "racing" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Racing
+      }"; 
+        sort first_release_date desc; limit 10;      
+      };
+      query games "RTS" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.RTS
+      }"; 
+        sort first_release_date desc; limit 10;      
+      };
+      query games "RPG" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.RPG
+      }"; 
+        sort first_release_date desc; limit 10;      
+      };
+      query games "simulator" {
+        fields aggregated_rating,aggregated_rating_count,artworks.image_id,cover.image_id,created_at,dlcs,first_release_date,genres.name,
+        involved_companies.*,involved_companies.company.name,involved_companies.company.logo.image_id,name,platforms.abbreviation,
+        platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
+        total_rating_count,videos.video_id,websites.url,websites.category;  
+        where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
+        gameGenreObj.Simulator
+      }"; 
+        sort first_release_date desc; limit 10;      
       };`
     ),
 };

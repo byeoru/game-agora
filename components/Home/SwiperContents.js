@@ -5,7 +5,7 @@ import Rating from "../Rating";
 import { TouchableOpacity } from "react-native";
 import useGameDetail from "../useGameDetail";
 import { getImage } from "../../api";
-import imageSize from "../obj/imageSizeObj";
+import imageSize from "../../obj/imageSizeObj";
 import { unixTimeToDate } from "../../utils";
 
 const Container = styled.View`
@@ -53,18 +53,19 @@ const PlatformContainer = styled.View`
   border-radius: 15px;
 `;
 const PlatformBox = styled.View`
-  width: 29%;
+  width: 30%;
   height: 25%;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
   justify-content: center;
   align-items: center;
-  margin: 3px;
+  margin: 2.5px;
 `;
 const Platform = styled.Text`
   padding: 3px;
-  font-size: 13px;
+  font-size: 10px;
   font-weight: bold;
+  text-align: center;
 `;
 
 const SwiperContents = ({
@@ -110,12 +111,14 @@ const SwiperContents = ({
       }
     >
       <Container>
-        <BG
-          resizeMethod="resize"
-          source={{
-            uri: getImage(backgroundImage, imageSize._720p1280x720),
-          }}
-        />
+        {backgroundImage ? (
+          <BG
+            resizeMethod="resize"
+            source={{
+              uri: getImage(backgroundImage, imageSize._720p1280x720),
+            }}
+          />
+        ) : null}
         <DataContainer>
           <Data>
             <Title>{name}</Title>
@@ -140,7 +143,7 @@ const SwiperContents = ({
 SwiperContents.propTypes = {
   name: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
-  backgroundImage: PropTypes.string.isRequired,
+  backgroundImage: PropTypes.string,
 };
 
 export default SwiperContents;

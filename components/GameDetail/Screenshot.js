@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { getImage } from "../../api";
-import imageSizeObj from "../obj/imageSizeObj";
+import imageSizeObj from "../../obj/imageSizeObj";
 
 const Container = styled.View`
   width: 175px;

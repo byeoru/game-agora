@@ -1,8 +1,8 @@
 import React, { useLayoutEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../screens/Home/index";
-import Genre from "../screens/Genre/index";
-import Platform from "../screens/Platform/index";
+import Home from "../screens/Home";
+import Genre from "../screens/Genre";
+import Platform from "../screens/Platform";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const BottomNav = createBottomTabNavigator();
@@ -14,7 +14,7 @@ const getHeaderName = (route) => {
 export default ({ navigation, route }) => {
   useLayoutEffect(() => {
     const title = getHeaderName(route);
-    navigation.setOptions({ title, headerShown: title !== "장르" });
+    navigation.setOptions({ title });
   }, [route]);
   return (
     <BottomNav.Navigator
