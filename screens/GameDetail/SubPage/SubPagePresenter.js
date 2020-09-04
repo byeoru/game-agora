@@ -10,7 +10,7 @@ export default ({ classification, contents, textToInsert }) => {
     case "I":
       categorizedContents = () =>
         contents.map((image) => (
-          <ImageHorizontal key={image.id} imageId={image.image_id} />
+          <ImageHorizontal key={image.id} imageId={image.image} />
         ));
       break;
     case "V":

@@ -79,7 +79,7 @@ export const igdbApi = {
         platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
         total_rating_count,videos.video_id,websites.url,websites.category;  
         where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
-        gameGenreObj.PointAndClick
+        gameGenreObj.Fighting
       }" & rating > 60; 
         sort rating desc; limit 10;      
       };
@@ -183,7 +183,7 @@ export const igdbApi = {
         platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
         total_rating_count,videos.video_id,websites.url,websites.category;  
         where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
-        gameGenreObj.PointAndClick
+        gameGenreObj.Fighting
       }"; 
         sort popularity desc; limit 10;      
       };
@@ -287,7 +287,7 @@ export const igdbApi = {
         platforms.name,popularity,rating,rating_count,screenshots.image_id,storyline,summary,time_to_beat,total_rating,
         total_rating_count,videos.video_id,websites.url,websites.category;  
         where first_release_date >= ${previousDate} & first_release_date < ${getNowSec()} & genres.name = "${
-        gameGenreObj.PointAndClick
+        gameGenreObj.Fighting
       }"; 
         sort first_release_date desc; limit 10;      
       };
@@ -372,6 +372,12 @@ export const igdbApi = {
         sort first_release_date desc; limit 10;      
       };`
     ),
+  genre: () => getAnythingIgdb("/genres", `fields name; limit 30;`),
+  platform: () =>
+    getAnythingIgdb(
+      "/platforms",
+      `fields name,abbreviation,alternative_name; limit 30;`
+    ),
 };
 
 const makeRequestRawg = (path, params) =>
@@ -393,31 +399,28 @@ const getAnythingRawg = async (path, params = {}) => {
 };
 
 export const rawgApi = {
-  highRating6M: (dates) =>
+  highRating: (dates) =>
     getAnythingRawg("/games", {
       dates,
-      page_size: 10,
+      page_size: 15,
       ordering: "-rating",
-    }),
-  poThisMonth: (dates, parentPlatform) =>
-    getAnythingRawg("/games", {
-      dates,
-      page_size: 10,
-      ordering: "-added",
-      parent_platforms: `${parentPlatform}`,
     }),
   poNowToThrMonAgo: (dates, parentPlatform) =>
     getAnythingRawg("/games", {
       dates,
-      page_size: 10,
+      page_size: 15,
       ordering: "-added",
       parent_platforms: `${parentPlatform}`,
     }),
+  screenshots: (id) => getAnythingRawg(`/games/${id}/screenshots`),
   platforms: () => getAnythingRawg("/platforms"),
   platformsParent: () => getAnythingRawg("/platforms/lists/parents"),
   listOfTags: () => getAnythingRawg("/tags"),
   detailsOfTheGame: (id) => getAnythingRawg(`/games/${id}`),
 };
 
-export const getImage = (imageId, size) =>
+export const getIgdbImg = (imageId, size) =>
   `https://images.igdb.com/igdb/image/upload/t_${size}/${imageId}.jpg`;
+
+export const getRawgImg = (imgUrl, size) =>
+  `https://media.rawg.io/media/resize/${size}/-${imgUrl.split("media")[2]}`;

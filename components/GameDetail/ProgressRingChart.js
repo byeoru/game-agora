@@ -7,20 +7,18 @@ const Container = styled.View`
   align-items: center;
 `;
 
-export default ({ rating, criticRating, totalRating }) => {
-  const ratingConv = rating ? Math.floor(rating) / 100 : 0;
-  const criticRatingConv = criticRating ? Math.floor(criticRating) / 100 : 0;
-  const totalRatingConv = totalRating ? Math.floor(totalRating) / 100 : 0;
+export default ({ rating, ratingTop }) => {
+  const ratingConv = rating ? rating * 0.2 : 0;
+  const ratingTopConv = ratingTop ? ratingTop * 0.2 : 0;
   return (
     <Container>
       <ProgressChart
         data={{
           labels: [
-            rating ? "유저" : "유저 N/A",
-            criticRating ? "비평가" : "비평가 N/A",
-            totalRating ? "종합" : "종합 N/A",
+            rating ? `평점: ${rating} / 5` : "평점 N/A",
+            ratingTopConv ? `최고점: ${ratingTop} / 5` : "최고점 N/A",
           ], // optional
-          data: [ratingConv, criticRatingConv, totalRatingConv],
+          data: [ratingConv, ratingTopConv],
         }}
         width={Dimensions.get("window").width / 1.04} // from react-native
         height={180}
@@ -35,7 +33,7 @@ export default ({ rating, criticRating, totalRating }) => {
         style={{
           borderRadius: 15,
         }}
-        hideLegend={false}
+        hideLegend={true}
       />
     </Container>
   );

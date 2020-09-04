@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "react-native";
 import useGameDetail from "./useGameDetail";
-import { getImage } from "../api";
-import imageSizeObj from "../obj/imageSizeObj";
+import { getRawgImg } from "../api";
+import rawgImgSizeObj from "../obj/rawgImgSizeObj";
 
 const Container = styled.View`
   margin-right: 20px;
@@ -28,55 +28,18 @@ const Title = styled.Text`
   font-weight: 700;
 `;
 
-export default ({
-  title,
-  rating,
-  criticRating,
-  totalRating,
-  firstReleaseD,
-  platforms,
-  backgroundImage,
-  involvedCompanies,
-  genres,
-  summary,
-  storyline,
-  screenshots,
-  artworks,
-  videos,
-  websites,
-  popularity,
-  styles,
-}) => {
+export default ({ id, title, backgroundImage, styles }) => {
   const goToDetail = useGameDetail();
   return (
     <TouchableOpacity
-      onPress={() =>
-        goToDetail({
-          title,
-          rating,
-          criticRating,
-          totalRating,
-          firstReleaseD,
-          platforms,
-          backgroundImage,
-          involvedCompanies,
-          genres,
-          summary,
-          storyline,
-          screenshots,
-          artworks,
-          videos,
-          websites,
-          popularity,
-        })
-      }
+      onPress={() => goToDetail({ id, title, backgroundImage })}
     >
       <Container style={{ ...styles }}>
         {backgroundImage ? (
           <BG
             resizeMethod="resize"
             source={{
-              uri: getImage(backgroundImage, imageSizeObj.screenshotMed569x320),
+              uri: getRawgImg(backgroundImage, rawgImgSizeObj.w640),
             }}
           />
         ) : null}

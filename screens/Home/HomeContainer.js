@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import HomePresenter from "./HomePresenter";
-import { igdbApi } from "../../api";
-import { getDayAgoNowSec } from "../../utils";
+import { rawgApi } from "../../api";
+import { getMonthAgoNow } from "../../utils";
+import pPlatformsNumObj from "../../obj/pPlatformsNumObj";
 
 export default () => {
   const [home, setHome] = useState({
@@ -9,20 +10,28 @@ export default () => {
     loading: true,
     highRating: [],
     popularPc: [],
-    popularAndroid: [],
     popularIos: [],
+    popularAndroid: [],
   });
   const getData = async () => {
-    const [homeQuery, homeQueryError] = await igdbApi.homeMultiQuery(
-      getDayAgoNowSec(200)
-    );
+    const [
+      [highRating, highRatingError],
+      [popularPc, popularPcError],
+      [popularIos, popularIosError],
+      [popularAndroid, popularAndroidError],
+    ] = await Promise.all([
+      rawgApi.highRating(getMonthAgoNow(3)),
+      rawgApi.poNowToThrMonAgo(getMonthAgoNow(3), pPlatformsNumObj.PC),
+      rawgApi.poNowToThrMonAgo(getMonthAgoNow(3), pPlatformsNumObj.iOS),
+      rawgApi.poNowToThrMonAgo(getMonthAgoNow(3), pPlatformsNumObj.Android),
+    ]);
     setHome({
       firstLoading: false,
       loading: false,
-      highRating: homeQuery[0].result,
-      popularPc: homeQuery[1].result,
-      popularIos: homeQuery[2].result,
-      popularAndroid: homeQuery[3].result,
+      highRating,
+      popularPc,
+      popularIos,
+      popularAndroid,
     });
   };
 

@@ -3,10 +3,9 @@ import styled from "styled-components/native";
 import BottomSheet from "reanimated-bottom-sheet";
 import { Dimensions, TouchableOpacity, Clipboard } from "react-native";
 import ProgressRingChart from "../../components/GameDetail/ProgressRingChart";
-import { getImage } from "../../api";
+import { getImage, getRawgImg } from "../../api";
 import { unixTimeToDate, LoweringFThiDecPlace } from "../../utils";
 import { AntDesign } from "@expo/vector-icons";
-import imageSize from "../../obj/imageSizeObj";
 import CompanyVertical from "../../components/GameDetail/CompanyVertical";
 import BorderText from "../../components/BoderText";
 import Screenshot from "../../components/GameDetail/Screenshot";
@@ -16,25 +15,24 @@ import VideoHorizontal from "../../components/GameDetail/SubPage/VideoHorizontal
 import Toast from "react-native-toast-message";
 import WebsiteButton from "../../components/GameDetail/WebsiteButton";
 import RowBox from "../../components/RowBox";
+import rawgImgSizeObj from "../../obj/rawgImgSizeObj";
+import Rating from "../../components/Rating";
 
 export default ({
   navigation,
+  loading,
   title,
-  rating,
-  criticRating,
-  totalRating,
-  firstReleaseD,
-  platforms,
   backgroundImage,
-  involvedCompanies,
+  rating,
+  ratingTop,
+  released,
   genres,
-  summary,
-  storyline,
+  platforms,
+  description,
+  video,
   screenshots,
-  artworks,
-  videos,
-  websites,
-  popularity,
+  developers,
+  publishers,
 }) => {
   const { height: HEIGHT } = Dimensions.get("window");
   const Container = styled.View`
@@ -87,9 +85,9 @@ export default ({
       </HeaderContainer>
       <DataContainer>
         <RowBox>
-          <DataBox styles={{ flex: 1 }}>
-            <DataTitle>최초 출시일</DataTitle>
-            <Text>{unixTimeToDate(firstReleaseD)}</Text>
+          <DataBox style={{ flex: 1 }}>
+            <DataTitle>출시일</DataTitle>
+            <Text>{released}</Text>
           </DataBox>
           <DataBox style={{ flex: 2, marginLeft: 10 }}>
             <DataTitle>장르</DataTitle>
@@ -98,7 +96,7 @@ export default ({
                 flexWrap: "wrap",
               }}
             >
-              {genres
+              {genres?.length > 0
                 ? genres.map((genre) => (
                     <BorderText key={genre.id} text={genre.name} />
                   ))
@@ -109,44 +107,42 @@ export default ({
         <DataBox>
           <DataTitle>플랫폼</DataTitle>
           <RowBox styles={{ flexWrap: "wrap" }}>
-            {platforms
+            {platforms?.length > 0
               ? platforms.map((platform) => (
-                  <BorderText key={platform.id} text={platform.name} />
+                  <BorderText
+                    key={platform.platform.id}
+                    text={platform.platform.name}
+                  />
                 ))
               : null}
           </RowBox>
         </DataBox>
-        <DataBox>
-          <DataTitle>IGDB 평가: Good 비율</DataTitle>
-          <ProgressRingChart
-            rating={rating}
-            criticRating={criticRating}
-            totalRating={totalRating}
-          />
-        </DataBox>
-        {popularity ? (
-          <DataBox>
-            <DataTitle>인기도</DataTitle>
-            <Text>{LoweringFThiDecPlace(popularity)}</Text>
+        <RowBox>
+          <DataBox style={{ flex: 1 }}>
+            <DataTitle>평점</DataTitle>
+            <Rating rating={rating} />
           </DataBox>
-        ) : null}
-        {summary ? (
+          <DataBox style={{ flex: 2, marginLeft: 10 }}>
+            <DataTitle>최고점</DataTitle>
+            <Rating rating={ratingTop} />
+          </DataBox>
+        </RowBox>
+        {description ? (
           <DataBox>
             <RowBox styles={{ justifyContent: "space-between" }}>
-              <DataTitle>개요</DataTitle>
+              <DataTitle>설명</DataTitle>
               <TouchableOpacity
                 onPress={() => {
-                  Clipboard.setString(summary);
+                  Clipboard.setString(description);
                   Toast.show({
                     position: "bottom",
                     text1: "텍스트를 복사했습니다",
-                    text2: "그대로 붙여넣기를 하세요",
+                    text2: "그대로 붙여넣기 하세요",
                   });
                   goToSubPage({
                     title: "번역",
                     classification: "P", // Sub page initial
-                    contents: screenshots,
-                    textToInsert: summary,
+                    textToInsert: description,
                   });
                 }}
               >
@@ -161,68 +157,16 @@ export default ({
                 </RowBox>
               </TouchableOpacity>
             </RowBox>
-            <Text>{summary}</Text>
+            <Text>{description}</Text>
           </DataBox>
         ) : null}
-        {storyline ? (
+        {video ? (
           <DataBox>
-            <RowBox styles={{ justifyContent: "space-between" }}>
-              <DataTitle>스토리 요약</DataTitle>
-              <TouchableOpacity
-                onPress={() => {
-                  Clipboard.setString(storyline);
-                  Toast.show({
-                    position: "bottom",
-                    text1: "텍스트를 복사했습니다",
-                    text2: "그대로 붙여넣기를 하세요",
-                  });
-                  goToSubPage({
-                    title: "번역",
-                    classification: "P", // Sub page initial
-                    contents: screenshots,
-                    textToInsert: storyline,
-                  });
-                }}
-              >
-                <RowBox styles={{ alignItems: "center" }}>
-                  <Text>파파고</Text>
-                  <AntDesign
-                    name="right"
-                    size={17}
-                    color="black"
-                    style={{ paddingLeft: 10 }}
-                  />
-                </RowBox>
-              </TouchableOpacity>
-            </RowBox>
-            <Text>{storyline}</Text>
+            <DataTitle>동영상</DataTitle>
+            <VideoHorizontal videoId={video} height={200} />
           </DataBox>
         ) : null}
-        {videos ? (
-          <DataBox>
-            <RowBox styles={{ justifyContent: "space-between" }}>
-              <DataTitle>동영상</DataTitle>
-              <TouchableOpacity
-                onPress={() =>
-                  goToSubPage({
-                    title: "동영상",
-                    classification: "V", // Sub page initial
-                    contents: videos,
-                  })
-                }
-              >
-                <AntDesign
-                  name="right"
-                  size={17}
-                  color="black"
-                  style={{ paddingLeft: 10 }}
-                />
-              </TouchableOpacity>
-            </RowBox>
-            <VideoHorizontal videoId={videos[0].video_id} height={200} />
-          </DataBox>
-        ) : null}
-        {screenshots ? (
+        {screenshots?.length > 0 ? (
           <DataBox>
             <RowBox styles={{ justifyContent: "space-between" }}>
               <DataTitle>스크린샷</DataTitle>
@@ -249,74 +193,55 @@ export default ({
               {screenshots.map((screenshot, index) => {
                 if (index >= 2) return;
                 return (
-                  <Screenshot
-                    key={screenshot.id}
-                    imageId={screenshot.image_id}
-                  />
+                  <Screenshot key={screenshot.id} imageId={screenshot.image} />
                 );
               })}
             </RowBox>
           </DataBox>
         ) : null}
-        {artworks ? (
+        {developers?.length > 0 ? (
           <DataBox>
-            <RowBox styles={{ justifyContent: "space-between" }}>
-              <DataTitle>아트워크</DataTitle>
-              <TouchableOpacity
-                onPress={() =>
-                  goToSubPage({
-                    title: "아트워크",
-                    classification: "I", // Sub page initial
-                    contents: artworks,
-                  })
-                }
-              >
-                <AntDesign
-                  name="right"
-                  size={17}
-                  color="black"
-                  style={{ paddingLeft: 10 }}
-                />
-              </TouchableOpacity>
-            </RowBox>
-            <RowBox
-              styles={{ flexWrap: "wrap", justifyContent: "space-between" }}
-            >
-              {artworks.map((artwork, index) => {
-                if (index >= 2) return;
-                return (
-                  <Screenshot key={artwork.id} imageId={artwork.image_id} />
-                );
-              })}
-            </RowBox>
-          </DataBox>
-        ) : null}
-        {involvedCompanies ? (
-          <DataBox>
-            <DataTitle>게임 회사</DataTitle>
+            <DataTitle>개발</DataTitle>
             <RowBox
               styles={{
                 flexWrap: "wrap",
                 justifyContent: "space-between",
               }}
             >
-              {involvedCompanies.map((company) => (
+              {developers.map((company) => (
                 <CompanyVertical
                   key={company.id}
-                  name={company.company.name}
-                  developer={company.developer}
-                  publisher={company.publisher}
-                  porting={company.porting}
-                  supporting={company.supporting}
+                  name={company.name}
                   backgroundImage={
-                    company.company.logo ? company.company.logo.image_id : null
+                    company.image_background ? company.image_background : null
                   }
                 />
               ))}
             </RowBox>
           </DataBox>
         ) : null}
-        {websites ? (
+        {publishers?.length > 0 ? (
+          <DataBox>
+            <DataTitle>퍼블리셔</DataTitle>
+            <RowBox
+              styles={{
+                flexWrap: "wrap",
+                justifyContent: "space-between",
+              }}
+            >
+              {publishers.map((company) => (
+                <CompanyVertical
+                  key={company.id}
+                  name={company.name}
+                  backgroundImage={
+                    company.image_background ? company.image_background : null
+                  }
+                />
+              ))}
+            </RowBox>
+          </DataBox>
+        ) : null}
+        {/* {websites ? (
           <DataBox>
             <DataTitle>사이트</DataTitle>
             <RowBox styles={{ flexWrap: "wrap" }}>
@@ -329,7 +254,7 @@ export default ({
               ))}
             </RowBox>
           </DataBox>
-        ) : null}
+        ) : null} */}
         <OriginNotation styles={{ paddingBottom: 20 }} />
       </DataContainer>
     </SheetContainer>
@@ -338,14 +263,16 @@ export default ({
     navigation.goBack();
   };
   useEffect(() => {
-    sheetRef.current.snapTo(1);
-  }, []);
+    if (!loading) {
+      sheetRef.current.snapTo(1);
+    }
+  }, [loading]);
   return (
     <Container>
       <BG
         resizeMethod="resize"
         source={{
-          uri: getImage(backgroundImage, imageSize._720p1280x720),
+          uri: getRawgImg(backgroundImage, rawgImgSizeObj.w640),
         }}
       />
       <BottomSheet

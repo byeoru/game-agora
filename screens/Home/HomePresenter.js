@@ -33,22 +33,12 @@ export default ({
         {highRating.map((game) => (
           <SwiperContents
             key={game.id}
+            id={game.id}
             name={game.name} // prop 이름을 title 로 하면 error 일으킴
             rating={game.rating}
-            criticRating={game.aggregated_rating}
-            totalRating={game.total_rating}
-            firstReleaseD={game.first_release_date}
-            platforms={game.platforms}
-            backgroundImage={game.cover?.image_id}
-            involvedCompanies={game.involved_companies}
-            genres={game.genres}
-            summary={game.summary}
-            storyline={game.storyline}
-            screenshots={game.screenshots}
-            artworks={game.artworks}
-            videos={game.videos}
-            websites={game.websites}
-            popularity={game.popularity}
+            released={game.released}
+            parentPlatforms={game.parent_platforms}
+            backgroundImage={game.background_image}
           />
         ))}
       </Swiper>
@@ -62,22 +52,9 @@ export default ({
           {popularPc.map((game) => (
             <Vertical
               key={game.id}
+              id={game.id}
               title={game.name}
-              rating={game.rating}
-              criticRating={game.aggregated_rating}
-              totalRating={game.total_rating}
-              firstReleaseD={game.first_release_date}
-              platforms={game.platforms}
-              backgroundImage={game.cover?.image_id}
-              involvedCompanies={game.involved_companies}
-              genres={game.genres}
-              summary={game.summary}
-              storyline={game.storyline}
-              screenshots={game.screenshots}
-              artworks={game.artworks}
-              videos={game.videos}
-              websites={game.websites}
-              popularity={game.popularity}
+              backgroundImage={game.background_image}
             />
           ))}
         </HorizotalSlider>
@@ -88,22 +65,9 @@ export default ({
           {popularIos.map((game) => (
             <Vertical
               key={game.id}
+              id={game.id}
               title={game.name}
-              rating={game.rating}
-              criticRating={game.aggregated_rating}
-              totalRating={game.total_rating}
-              firstReleaseD={game.first_release_date}
-              platforms={game.platforms}
-              backgroundImage={game.cover?.image_id}
-              involvedCompanies={game.involved_companies}
-              genres={game.genres}
-              summary={game.summary}
-              storyline={game.storyline}
-              screenshots={game.screenshots}
-              artworks={game.artworks}
-              videos={game.videos}
-              websites={game.websites}
-              popularity={game.popularity}
+              backgroundImage={game.background_image}
             />
           ))}
         </HorizotalSlider>
@@ -114,22 +78,9 @@ export default ({
           {popularAndroid.map((game) => (
             <Vertical
               key={game.id}
+              id={game.id}
               title={game.name}
-              rating={game.rating}
-              criticRating={game.aggregated_rating}
-              totalRating={game.total_rating}
-              firstReleaseD={game.first_release_date}
-              platforms={game.platforms}
-              backgroundImage={game.cover?.image_id}
-              involvedCompanies={game.involved_companies}
-              genres={game.genres}
-              summary={game.summary}
-              storyline={game.storyline}
-              screenshots={game.screenshots}
-              artworks={game.artworks}
-              videos={game.videos}
-              websites={game.websites}
-              popularity={game.popularity}
+              backgroundImage={game.background_image}
             />
           ))}
         </HorizotalSlider>

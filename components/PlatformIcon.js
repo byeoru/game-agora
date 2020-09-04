@@ -1,15 +1,21 @@
 import React from "react";
 import styled from "styled-components/native";
-import ParentPlatformsObj from "./obj/ParentPlatformsObj";
+import ParentPlatformsObj from "../obj/pPlatformsImgObj";
 
-const Container = styled.View``;
+const Container = styled.View`
+  padding: 1px;
+`;
 const Icon = styled.Image`
-  width: 50px;
-  height: 50px;
+  width: 100%;
+  height: 100%;
 `;
 
 export default ({ number }) => (
   <Container>
-    <Icon source={ParentPlatformsObj[number]()} />
+    <Icon
+      resizeMethod="resize"
+      resizeMode="cover"
+      source={ParentPlatformsObj[number]()}
+    />
   </Container>
 );

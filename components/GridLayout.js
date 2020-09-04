@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components/native";
 import { Dimensions } from "react-native";
 import { getImage } from "../api";
-import imageSizeObj from "../obj/imageSizeObj";
 import { TouchableOpacity } from "react-native";
 import useGameDetail from "./useGameDetail";
 
@@ -58,190 +57,216 @@ const FooterGrid = styled.View`
 const FooterBox = styled.View`
   width: ${WIDTH / 3.2}px;
   height: ${WIDTH / 2}px;
-  margin: 2px 0px;
+`;
+const Box = styled.View`
+  width: 100%;
+  background-color: black;
+  border-radius: 15px;
 `;
 
-export default ({ styles, children }) => {
+export default ({
+  styles,
+  gameFir,
+  gameSec,
+  gameThi,
+  gameFou,
+  gameTheRest,
+}) => {
   const goToDetail = useGameDetail();
   return (
     <Container style={{ ...styles }}>
       <HeaderGrid>
         <LeftColumn>
-          <TouchableOpacity
-            onPress={() =>
-              goToDetail({
-                title: children[0].name,
-                rating: children[0].rating,
-                criticRating: children[0].aggregated_rating,
-                totalRating: children[0].total_rating,
-                firstReleaseD: children[0].first_release_date,
-                platforms: children[0].platforms,
-                backgroundImage: children[0].cover?.image_id,
-                involvedCompanies: children[0].involved_companies,
-                genres: children[0].genres,
-                summary: children[0].summary,
-                storyline: children[0].storyline,
-                screenshots: children[0].screenshots,
-                artworks: children[0].artworks,
-                videos: children[0].videos,
-                websites: children[0].websites,
-                popularity: children[0].popularity,
-              })
-            }
-          >
-            {children[0]?.cover?.image_id ? (
-              <BG
-                resizeMethod="resize"
-                source={{
-                  uri: getImage(
-                    children[0].cover.image_id,
-                    imageSizeObj._720p1280x720
-                  ),
-                }}
-              />
-            ) : null}
-          </TouchableOpacity>
-        </LeftColumn>
-        <RightColumn>
-          <RightTopRow>
+          {gameFir ? (
             <TouchableOpacity
               onPress={() =>
                 goToDetail({
-                  title: children[1].name,
-                  rating: children[1].rating,
-                  criticRating: children[1].aggregated_rating,
-                  totalRating: children[1].total_rating,
-                  firstReleaseD: children[1].first_release_date,
-                  platforms: children[1].platforms,
-                  backgroundImage: children[1].cover?.image_id,
-                  involvedCompanies: children[1].involved_companies,
-                  genres: children[1].genres,
-                  summary: children[1].summary,
-                  storyline: children[1].storyline,
-                  screenshots: children[1].screenshots,
-                  artworks: children[1].artworks,
-                  videos: children[1].videos,
-                  websites: children[1].websites,
-                  popularity: children[1].popularity,
+                  title: gameFir.name,
+                  rating: gameFir.rating,
+                  criticRating: gameFir.aggregated_rating,
+                  totalRating: gameFir.total_rating,
+                  firstReleaseD: gameFir.first_release_date,
+                  platforms: gameFir.platforms,
+                  backgroundImage: gameFir.cover?.image_id,
+                  involvedCompanies: gameFir.involved_companies,
+                  genres: gameFir.genres,
+                  summary: gameFir.summary,
+                  storyline: gameFir.storyline,
+                  screenshots: gameFir.screenshots,
+                  artworks: gameFir.artworks,
+                  videos: gameFir.videos,
+                  websites: gameFir.websites,
+                  popularity: gameFir.popularity,
                 })
               }
             >
-              {children[1]?.cover?.image_id ? (
-                <BG
-                  resizeMethod="resize"
-                  source={{
-                    uri: getImage(
-                      children[1].cover.image_id,
-                      imageSizeObj._720p1280x720
-                    ),
-                  }}
-                />
-              ) : null}
+              <Box style={{ height: "100%" }}>
+                {gameFir.cover?.image_id ? (
+                  <BG
+                    resizeMethod="resize"
+                    source={{
+                      uri: getImage(
+                        gameFir.cover.image_id,
+                        imageSizeObj._720p1280x720
+                      ),
+                    }}
+                  />
+                ) : null}
+              </Box>
             </TouchableOpacity>
+          ) : null}
+        </LeftColumn>
+        <RightColumn>
+          <RightTopRow>
+            {gameSec ? (
+              <TouchableOpacity
+                onPress={() =>
+                  goToDetail({
+                    title: gameSec.name,
+                    rating: gameSec.rating,
+                    criticRating: gameSec.aggregated_rating,
+                    totalRating: gameSec.total_rating,
+                    firstReleaseD: gameSec.first_release_date,
+                    platforms: gameSec.platforms,
+                    backgroundImage: gameSec.cover?.image_id,
+                    involvedCompanies: gameSec.involved_companies,
+                    genres: gameSec.genres,
+                    summary: gameSec.summary,
+                    storyline: gameSec.storyline,
+                    screenshots: gameSec.screenshots,
+                    artworks: gameSec.artworks,
+                    videos: gameSec.videos,
+                    websites: gameSec.websites,
+                    popularity: gameSec.popularity,
+                  })
+                }
+              >
+                <Box style={{ height: "100%" }}>
+                  {gameSec.cover?.image_id ? (
+                    <BG
+                      resizeMethod="resize"
+                      source={{
+                        uri: getImage(
+                          gameSec.cover.image_id,
+                          imageSizeObj._720p1280x720
+                        ),
+                      }}
+                    />
+                  ) : null}
+                </Box>
+              </TouchableOpacity>
+            ) : null}
           </RightTopRow>
           <RightBottomRow>
             <RightBottomRowLeftColumn>
-              <TouchableOpacity
-                onPress={() =>
-                  goToDetail({
-                    title: children[2].name,
-                    rating: children[2].rating,
-                    criticRating: children[2].aggregated_rating,
-                    totalRating: children[2].total_rating,
-                    firstReleaseD: children[2].first_release_date,
-                    platforms: children[2].platforms,
-                    backgroundImage: children[2].cover?.image_id,
-                    involvedCompanies: children[2].involved_companies,
-                    genres: children[2].genres,
-                    summary: children[2].summary,
-                    storyline: children[2].storyline,
-                    screenshots: children[2].screenshots,
-                    artworks: children[2].artworks,
-                    videos: children[2].videos,
-                    websites: children[2].websites,
-                    popularity: children[2].popularity,
-                  })
-                }
-              >
-                {children[2]?.cover?.image_id ? (
-                  <BG
-                    resizeMethod="resize"
-                    source={{
-                      uri: getImage(
-                        children[2].cover.image_id,
-                        imageSizeObj._720p1280x720
-                      ),
-                    }}
-                  />
-                ) : null}
-              </TouchableOpacity>
+              {gameThi ? (
+                <TouchableOpacity
+                  onPress={() =>
+                    goToDetail({
+                      title: gameThi.name,
+                      rating: gameThi.rating,
+                      criticRating: gameThi.aggregated_rating,
+                      totalRating: gameThi.total_rating,
+                      firstReleaseD: gameThi.first_release_date,
+                      platforms: gameThi.platforms,
+                      backgroundImage: gameThi.cover?.image_id,
+                      involvedCompanies: gameThi.involved_companies,
+                      genres: gameThi.genres,
+                      summary: gameThi.summary,
+                      storyline: gameThi.storyline,
+                      screenshots: gameThi.screenshots,
+                      artworks: gameThi.artworks,
+                      videos: gameThi.videos,
+                      websites: gameThi.websites,
+                      popularity: gameThi.popularity,
+                    })
+                  }
+                >
+                  <Box style={{ height: "100%" }}>
+                    {gameThi.cover?.image_id ? (
+                      <BG
+                        resizeMethod="resize"
+                        source={{
+                          uri: getImage(
+                            gameThi.cover.image_id,
+                            imageSizeObj._720p1280x720
+                          ),
+                        }}
+                      />
+                    ) : null}
+                  </Box>
+                </TouchableOpacity>
+              ) : null}
             </RightBottomRowLeftColumn>
             <RightBottomRowRightColumn>
-              <TouchableOpacity
-                onPress={() =>
-                  goToDetail({
-                    title: children[3].name,
-                    rating: children[3].rating,
-                    criticRating: children[3].aggregated_rating,
-                    totalRating: children[3].total_rating,
-                    firstReleaseD: children[3].first_release_date,
-                    platforms: children[3].platforms,
-                    backgroundImage: children[3].cover?.image_id,
-                    involvedCompanies: children[3].involved_companies,
-                    genres: children[3].genres,
-                    summary: children[3].summary,
-                    storyline: children[3].storyline,
-                    screenshots: children[3].screenshots,
-                    artworks: children[3].artworks,
-                    videos: children[3].videos,
-                    websites: children[3].websites,
-                    popularity: children[3].popularity,
-                  })
-                }
-              >
-                {children[3]?.cover?.image_id ? (
-                  <BG
-                    resizeMethod="resize"
-                    source={{
-                      uri: getImage(
-                        children[3].cover.image_id,
-                        imageSizeObj._720p1280x720
-                      ),
-                    }}
-                  />
-                ) : null}
-              </TouchableOpacity>
+              {gameFou ? (
+                <TouchableOpacity
+                  onPress={() =>
+                    goToDetail({
+                      title: gameFou.name,
+                      rating: gameFou.rating,
+                      criticRating: gameFou.aggregated_rating,
+                      totalRating: gameFou.total_rating,
+                      firstReleaseD: gameFou.first_release_date,
+                      platforms: gameFou.platforms,
+                      backgroundImage: gameFou.cover?.image_id,
+                      involvedCompanies: gameFou.involved_companies,
+                      genres: gameFou.genres,
+                      summary: gameFou.summary,
+                      storyline: gameFou.storyline,
+                      screenshots: gameFou.screenshots,
+                      artworks: gameFou.artworks,
+                      videos: gameFou.videos,
+                      websites: gameFou.websites,
+                      popularity: gameFou.popularity,
+                    })
+                  }
+                >
+                  <Box style={{ height: "100%" }}>
+                    {gameFou.cover?.image_id ? (
+                      <BG
+                        resizeMethod="resize"
+                        source={{
+                          uri: getImage(
+                            gameFou.cover.image_id,
+                            imageSizeObj._720p1280x720
+                          ),
+                        }}
+                      />
+                    ) : null}
+                  </Box>
+                </TouchableOpacity>
+              ) : null}
             </RightBottomRowRightColumn>
           </RightBottomRow>
         </RightColumn>
       </HeaderGrid>
       <FooterGrid>
-        {children.map((game, index) => {
-          if (index < 4) return null;
-          return (
-            <TouchableOpacity
-              key={game.id}
-              onPress={() =>
-                goToDetail({
-                  title: game.name,
-                  rating: game.rating,
-                  criticRating: game.aggregated_rating,
-                  totalRating: game.total_rating,
-                  firstReleaseD: game.first_release_date,
-                  platforms: game.platforms,
-                  backgroundImage: game.cover?.image_id,
-                  involvedCompanies: game.involved_companies,
-                  genres: game.genres,
-                  summary: game.summary,
-                  storyline: game.storyline,
-                  screenshots: game.screenshots,
-                  artworks: game.artworks,
-                  videos: game.videos,
-                  websites: game.websites,
-                  popularity: game.popularity,
-                })
-              }
-            >
+        {gameTheRest.map((game) => (
+          <TouchableOpacity
+            key={game.id}
+            onPress={() =>
+              goToDetail({
+                title: game.name,
+                rating: game.rating,
+                criticRating: game.aggregated_rating,
+                totalRating: game.total_rating,
+                firstReleaseD: game.first_release_date,
+                platforms: game.platforms,
+                backgroundImage: game.cover?.image_id,
+                involvedCompanies: game.involved_companies,
+                genres: game.genres,
+                summary: game.summary,
+                storyline: game.storyline,
+                screenshots: game.screenshots,
+                artworks: game.artworks,
+                videos: game.videos,
+                websites: game.websites,
+                popularity: game.popularity,
+              })
+            }
+          >
+            <Box style={{ marginVertical: 2 }}>
               <FooterBox>
                 {game.cover?.image_id ? (
                   <BG
@@ -255,9 +280,9 @@ export default ({ styles, children }) => {
                   />
                 ) : null}
               </FooterBox>
-            </TouchableOpacity>
-          );
-        })}
+            </Box>
+          </TouchableOpacity>
+        ))}
       </FooterGrid>
     </Container>
   );

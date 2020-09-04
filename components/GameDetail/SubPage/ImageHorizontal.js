@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
-import { getImage } from "../../../api";
-import imageSizeObj from "../../../obj/imageSizeObj";
+import { getRawgImg } from "../../../api";
+import rawgImgSizeObj from "../../../obj/rawgImgSizeObj";
 
 const Container = styled.View`
   width: 400px;
@@ -19,7 +19,7 @@ export default ({ imageId }) => (
   <Container>
     <BG
       resizeMethod="resize"
-      source={{ uri: getImage(imageId, imageSizeObj._720p1280x720) }}
+      source={{ uri: getRawgImg(imageId, rawgImgSizeObj.w1280) }}
     />
   </Container>
 );

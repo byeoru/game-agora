@@ -23,11 +23,9 @@ export default ({ styles }) => (
   <Container style={{ ...styles }}>
     <Text>Data based on </Text>
     <TouchableOpacity
-      onPress={() =>
-        WebBrowser.openBrowserAsync("https://www.igdb.com/discover")
-      }
+      onPress={() => WebBrowser.openBrowserAsync("https://rawg.io")}
     >
-      <LinkText>IGDB</LinkText>
+      <LinkText>RAWG</LinkText>
     </TouchableOpacity>
   </Container>
 );
