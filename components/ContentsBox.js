@@ -19,7 +19,7 @@ const ContentsBox = ({ styles, children }) => (
 
 ContentsBox.propTypes = {
   styles: PropTypes.object,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default ContentsBox;

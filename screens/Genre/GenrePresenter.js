@@ -1,4 +1,25 @@
 import React from "react";
-import GenreTopNav from "../../components/Genre/GenreTopNav";
+import ScrollContainer from "../../components/ScrollContainer";
+import GenreButton from "../../components/Genre/GenreButton";
+import OriginNotation from "../../components/OriginNotation";
+import ContentsBox from "../../components/ContentsBox";
 
-export default () => <GenreTopNav />;
+export default ({ loading, listOfGenres }) => {
+  return (
+    <ScrollContainer loading={loading}>
+      <ContentsBox styles={{ paddingTop: 20, marginTop: 10 }}>
+        {listOfGenres?.length > 0
+          ? listOfGenres.map((genre) => (
+              <GenreButton
+                key={genre.id}
+                id={genre.id}
+                title={genre.name}
+                backgroundImage={genre.image_background}
+              />
+            ))
+          : null}
+      </ContentsBox>
+      <OriginNotation />
+    </ScrollContainer>
+  );
+};

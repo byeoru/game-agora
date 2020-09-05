@@ -29,6 +29,7 @@ export default ({
       backgroundImage: detail.background_image,
       rating: detail.rating,
       ratingTop: detail.rating_top,
+      ratings: detail.ratings,
       released: detail.released,
       genres: detail.genres,
       platforms: detail.platforms,
@@ -37,6 +38,7 @@ export default ({
       screenshots,
       developers: detail.developers,
       publishers: detail.publishers,
+      website: detail.website,
     });
   };
   useEffect(() => {

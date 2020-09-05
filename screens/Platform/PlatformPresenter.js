@@ -1,20 +1,28 @@
-import React, { useState } from "react";
-import styled from "styled-components/native";
+import React from "react";
+import ScrollContainer from "../../components/ScrollContainer";
+import PlatformButton from "../../components/Platform/PlatformButton";
+import OriginNotation from "../../components/OriginNotation";
+import ContentsBox from "../../components/ContentsBox";
+import RowBox from "../../components/RowBox";
 
-const Container = styled.View`
-  width: 100%;
-  height: 100%;
-`;
-
-export default () => {
-  const buttons = [
-    "Hello",
-    "World",
-    "Buttons",
-    "Byeoru",
-    "Studio",
-    "GameAgora",
-  ];
-  const [selectedIndex, setSelectedIndex] = useState();
-  return <Container></Container>;
+export default ({ loading, listOfPlatforms }) => {
+  return (
+    <ScrollContainer loading={loading}>
+      <ContentsBox styles={{ paddingTop: 20, marginTop: 10 }}>
+        <RowBox styles={{ flexWrap: "wrap", justifyContent: "space-between" }}>
+          {listOfPlatforms?.length > 0
+            ? listOfPlatforms.map((platform) => (
+                <PlatformButton
+                  key={platform.id}
+                  id={platform.id}
+                  title={platform.name}
+                  backgroundImage={platform.image_background}
+                />
+              ))
+            : null}
+        </RowBox>
+      </ContentsBox>
+      <OriginNotation />
+    </ScrollContainer>
+  );
 };

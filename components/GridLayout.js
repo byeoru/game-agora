@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Dimensions } from "react-native";
-import { getImage } from "../api";
+import { getRawgImg } from "../api";
 import { TouchableOpacity } from "react-native";
+import rawgImgSizeObj from "../obj/rawgImgSizeObj";
 import useGameDetail from "./useGameDetail";
 
 const { width: WIDTH } = Dimensions.get("window");
@@ -81,33 +82,20 @@ export default ({
             <TouchableOpacity
               onPress={() =>
                 goToDetail({
+                  id: gameFir.id,
                   title: gameFir.name,
-                  rating: gameFir.rating,
-                  criticRating: gameFir.aggregated_rating,
-                  totalRating: gameFir.total_rating,
-                  firstReleaseD: gameFir.first_release_date,
-                  platforms: gameFir.platforms,
-                  backgroundImage: gameFir.cover?.image_id,
-                  involvedCompanies: gameFir.involved_companies,
-                  genres: gameFir.genres,
-                  summary: gameFir.summary,
-                  storyline: gameFir.storyline,
-                  screenshots: gameFir.screenshots,
-                  artworks: gameFir.artworks,
-                  videos: gameFir.videos,
-                  websites: gameFir.websites,
-                  popularity: gameFir.popularity,
+                  backgroundImage: gameFir.background_image,
                 })
               }
             >
               <Box style={{ height: "100%" }}>
-                {gameFir.cover?.image_id ? (
+                {gameFir.background_image ? (
                   <BG
                     resizeMethod="resize"
                     source={{
-                      uri: getImage(
-                        gameFir.cover.image_id,
-                        imageSizeObj._720p1280x720
+                      uri: getRawgImg(
+                        gameFir.background_image,
+                        rawgImgSizeObj.w640
                       ),
                     }}
                   />
@@ -122,33 +110,20 @@ export default ({
               <TouchableOpacity
                 onPress={() =>
                   goToDetail({
+                    id: gameSec.id,
                     title: gameSec.name,
-                    rating: gameSec.rating,
-                    criticRating: gameSec.aggregated_rating,
-                    totalRating: gameSec.total_rating,
-                    firstReleaseD: gameSec.first_release_date,
-                    platforms: gameSec.platforms,
-                    backgroundImage: gameSec.cover?.image_id,
-                    involvedCompanies: gameSec.involved_companies,
-                    genres: gameSec.genres,
-                    summary: gameSec.summary,
-                    storyline: gameSec.storyline,
-                    screenshots: gameSec.screenshots,
-                    artworks: gameSec.artworks,
-                    videos: gameSec.videos,
-                    websites: gameSec.websites,
-                    popularity: gameSec.popularity,
+                    backgroundImage: gameSec.background_image,
                   })
                 }
               >
                 <Box style={{ height: "100%" }}>
-                  {gameSec.cover?.image_id ? (
+                  {gameSec.background_image ? (
                     <BG
                       resizeMethod="resize"
                       source={{
-                        uri: getImage(
-                          gameSec.cover.image_id,
-                          imageSizeObj._720p1280x720
+                        uri: getRawgImg(
+                          gameSec.background_image,
+                          rawgImgSizeObj.w640
                         ),
                       }}
                     />
@@ -163,33 +138,20 @@ export default ({
                 <TouchableOpacity
                   onPress={() =>
                     goToDetail({
+                      id: gameThi.id,
                       title: gameThi.name,
-                      rating: gameThi.rating,
-                      criticRating: gameThi.aggregated_rating,
-                      totalRating: gameThi.total_rating,
-                      firstReleaseD: gameThi.first_release_date,
-                      platforms: gameThi.platforms,
-                      backgroundImage: gameThi.cover?.image_id,
-                      involvedCompanies: gameThi.involved_companies,
-                      genres: gameThi.genres,
-                      summary: gameThi.summary,
-                      storyline: gameThi.storyline,
-                      screenshots: gameThi.screenshots,
-                      artworks: gameThi.artworks,
-                      videos: gameThi.videos,
-                      websites: gameThi.websites,
-                      popularity: gameThi.popularity,
+                      backgroundImage: gameThi.background_image,
                     })
                   }
                 >
                   <Box style={{ height: "100%" }}>
-                    {gameThi.cover?.image_id ? (
+                    {gameThi.background_image ? (
                       <BG
                         resizeMethod="resize"
                         source={{
-                          uri: getImage(
-                            gameThi.cover.image_id,
-                            imageSizeObj._720p1280x720
+                          uri: getRawgImg(
+                            gameThi.background_image,
+                            rawgImgSizeObj.w640
                           ),
                         }}
                       />
@@ -203,33 +165,20 @@ export default ({
                 <TouchableOpacity
                   onPress={() =>
                     goToDetail({
+                      id: gameFou.id,
                       title: gameFou.name,
-                      rating: gameFou.rating,
-                      criticRating: gameFou.aggregated_rating,
-                      totalRating: gameFou.total_rating,
-                      firstReleaseD: gameFou.first_release_date,
-                      platforms: gameFou.platforms,
-                      backgroundImage: gameFou.cover?.image_id,
-                      involvedCompanies: gameFou.involved_companies,
-                      genres: gameFou.genres,
-                      summary: gameFou.summary,
-                      storyline: gameFou.storyline,
-                      screenshots: gameFou.screenshots,
-                      artworks: gameFou.artworks,
-                      videos: gameFou.videos,
-                      websites: gameFou.websites,
-                      popularity: gameFou.popularity,
+                      backgroundImage: gameFou.background_image,
                     })
                   }
                 >
                   <Box style={{ height: "100%" }}>
-                    {gameFou.cover?.image_id ? (
+                    {gameFou.background_image ? (
                       <BG
                         resizeMethod="resize"
                         source={{
-                          uri: getImage(
-                            gameFou.cover.image_id,
-                            imageSizeObj._720p1280x720
+                          uri: getRawgImg(
+                            gameFou.background_image,
+                            rawgImgSizeObj.w640
                           ),
                         }}
                       />
@@ -247,34 +196,21 @@ export default ({
             key={game.id}
             onPress={() =>
               goToDetail({
+                id: game.id,
                 title: game.name,
-                rating: game.rating,
-                criticRating: game.aggregated_rating,
-                totalRating: game.total_rating,
-                firstReleaseD: game.first_release_date,
-                platforms: game.platforms,
-                backgroundImage: game.cover?.image_id,
-                involvedCompanies: game.involved_companies,
-                genres: game.genres,
-                summary: game.summary,
-                storyline: game.storyline,
-                screenshots: game.screenshots,
-                artworks: game.artworks,
-                videos: game.videos,
-                websites: game.websites,
-                popularity: game.popularity,
+                backgroundImage: game.background_image,
               })
             }
           >
             <Box style={{ marginVertical: 2 }}>
               <FooterBox>
-                {game.cover?.image_id ? (
+                {game.background_image ? (
                   <BG
                     resizeMethod="resize"
                     source={{
-                      uri: getImage(
-                        game.cover.image_id,
-                        imageSizeObj._720p1280x720
+                      uri: getRawgImg(
+                        game.background_image,
+                        rawgImgSizeObj.w640
                       ),
                     }}
                   />

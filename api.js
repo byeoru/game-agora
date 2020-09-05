@@ -412,10 +412,54 @@ export const rawgApi = {
       ordering: "-added",
       parent_platforms: `${parentPlatform}`,
     }),
+  genreOrderOfRating: (genreId, dates) =>
+    getAnythingRawg(`/games`, {
+      dates,
+      page_size: 10,
+      genres: `${genreId}`,
+      ordering: "-rating",
+    }),
+  genreOrderOfPopularity: (genreId, dates) =>
+    getAnythingRawg(`/games`, {
+      dates,
+      page_size: 10,
+      genres: `${genreId}`,
+      ordering: "-added",
+    }),
+  genreOrderOfDate: (genreId, dates) =>
+    getAnythingRawg(`/games`, {
+      dates,
+      page_size: 10,
+      genres: `${genreId}`,
+      ordering: "-released",
+    }),
+  platformOrderOfRating: (platformId, dates) =>
+    getAnythingRawg(`/games`, {
+      dates,
+      page_size: 10,
+      platforms: `${platformId}`,
+      ordering: "-rating",
+    }),
+  platformOrderOfPopularity: (platformId, dates) =>
+    getAnythingRawg(`/games`, {
+      dates,
+      page_size: 10,
+      platforms: `${platformId}`,
+      ordering: "-addedg",
+    }),
+  platformOrderOfDate: (platformId, dates) =>
+    getAnythingRawg(`/games`, {
+      dates,
+      page_size: 10,
+      platforms: `${platformId}`,
+      ordering: "-released",
+    }),
   screenshots: (id) => getAnythingRawg(`/games/${id}/screenshots`),
   platforms: () => getAnythingRawg("/platforms"),
-  platformsParent: () => getAnythingRawg("/platforms/lists/parents"),
+  listOfPlatformsParent: () => getAnythingRawg("/platforms/lists/parents"),
+  listOfGenres: () => getAnythingRawg("/genres"),
   listOfTags: () => getAnythingRawg("/tags"),
+  listOfPlatforms: () => getAnythingRawg("/platforms"),
   detailsOfTheGame: (id) => getAnythingRawg(`/games/${id}`),
 };
 

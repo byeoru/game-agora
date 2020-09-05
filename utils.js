@@ -136,3 +136,8 @@ export const getMonthAgoAgo = (minusMonth, toMinusMonth) => {
 
   return `${nMonthAgo},${toNMonthAgo}`;
 };
+
+export const getAfterTheFourthTheRest = (array) => {
+  const [, , , , ...theRest] = array;
+  return theRest;
+};

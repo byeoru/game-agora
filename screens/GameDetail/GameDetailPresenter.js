@@ -2,9 +2,7 @@ import React, { useRef, useEffect } from "react";
 import styled from "styled-components/native";
 import BottomSheet from "reanimated-bottom-sheet";
 import { Dimensions, TouchableOpacity, Clipboard } from "react-native";
-import ProgressRingChart from "../../components/GameDetail/ProgressRingChart";
-import { getImage, getRawgImg } from "../../api";
-import { unixTimeToDate, LoweringFThiDecPlace } from "../../utils";
+import { getRawgImg } from "../../api";
 import { AntDesign } from "@expo/vector-icons";
 import CompanyVertical from "../../components/GameDetail/CompanyVertical";
 import BorderText from "../../components/BoderText";
@@ -17,6 +15,7 @@ import WebsiteButton from "../../components/GameDetail/WebsiteButton";
 import RowBox from "../../components/RowBox";
 import rawgImgSizeObj from "../../obj/rawgImgSizeObj";
 import Rating from "../../components/Rating";
+import BarChart from "../../components/GameDetail/BarChart";
 
 export default ({
   navigation,
@@ -25,6 +24,7 @@ export default ({
   backgroundImage,
   rating,
   ratingTop,
+  ratings,
   released,
   genres,
   platforms,
@@ -33,6 +33,7 @@ export default ({
   screenshots,
   developers,
   publishers,
+  website,
 }) => {
   const { height: HEIGHT } = Dimensions.get("window");
   const Container = styled.View`
@@ -127,6 +128,12 @@ export default ({
             <Rating rating={ratingTop} />
           </DataBox>
         </RowBox>
+        {ratings?.length > 0 ? (
+          <DataBox>
+            <DataTitle>평가 분포</DataTitle>
+            <BarChart ratings={ratings} />
+          </DataBox>
+        ) : null}
         {description ? (
           <DataBox>
             <RowBox styles={{ justifyContent: "space-between" }}>
@@ -241,20 +248,12 @@ export default ({
             </RowBox>
           </DataBox>
         ) : null}
-        {/* {websites ? (
+        {website ? (
           <DataBox>
-            <DataTitle>사이트</DataTitle>
-            <RowBox styles={{ flexWrap: "wrap" }}>
-              {websites.map((website) => (
-                <WebsiteButton
-                  key={website.id}
-                  url={website.url}
-                  category={website.category}
-                />
-              ))}
-            </RowBox>
+            <DataTitle>웹사이트</DataTitle>
+            <WebsiteButton url={website} />
           </DataBox>
-        ) : null} */}
+        ) : null}
         <OriginNotation styles={{ paddingBottom: 20 }} />
       </DataContainer>
     </SheetContainer>
@@ -266,7 +265,7 @@ export default ({
     if (!loading) {
       sheetRef.current.snapTo(1);
     }
-  }, [loading]);
+  });
   return (
     <Container>
       <BG
