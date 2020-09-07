@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import Rating from "../Rating";
-import { TouchableOpacity } from "react-native";
 import useGameDetail from "../useGameDetail";
-import { getImage, getRawgImg } from "../../api";
-import imageSize from "../../obj/igdbImgSizeObj";
-import { unixTimeToDate } from "../../utils";
+import { getRawgImg } from "../../api";
 import rawgImgSizeObj from "../../obj/rawgImgSizeObj";
 import PlatformIcon from "../PlatformIcon";
+import pPlatformsImgObj from "../../obj/pPlatformsImgObj";
+import TemporaryAlternatePlatformTitle from "../TemporaryAlternatePlatformTitle";
 
+const TouchableOpacity = styled.TouchableOpacity``;
 const Container = styled.View`
   width: 100%;
   height: 100%;
@@ -92,7 +92,13 @@ const SwiperContents = ({
           <PlatformContainer>
             {parentPlatforms.map((platform) => (
               <Platform key={platform.platform.id}>
-                <PlatformIcon number={platform.platform.id} />
+                {pPlatformsImgObj[platform.platform.id] ? (
+                  <PlatformIcon number={platform.platform.id} />
+                ) : (
+                  <TemporaryAlternatePlatformTitle
+                    title={platform.platform.name}
+                  />
+                )}
               </Platform>
             ))}
           </PlatformContainer>

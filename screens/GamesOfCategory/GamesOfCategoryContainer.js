@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState, useEffect } from "react";
-import MorePresenter from "./MorePresenter";
+import GamesOfCategoryPresenter from "./GamesOfCategoryPresenter";
 import { rawgApi } from "../../api";
-import { getMonthAgoNow } from "../../utils";
+import { getYMDAgoNow } from "../../utils";
 
 export default ({
   navigation,
@@ -9,18 +9,21 @@ export default ({
     params: { id, title, classification },
   },
 }) => {
-  const [more, setMore] = useState({ loading: true, results: {} });
+  const [gamesOfCategory, setGamesOfCategory] = useState({
+    loading: true,
+    results: {},
+  });
   const getGenreData = async () => {
     const [
       [orderOfRating, orderOfRatingError],
       [orderOfPopularity, orderOfPopularityError],
       [orderOfDate, orderOfDateError],
     ] = await Promise.all([
-      rawgApi.genreOrderOfRating(id, getMonthAgoNow(3)),
-      rawgApi.genreOrderOfPopularity(id, getMonthAgoNow(3)),
-      rawgApi.genreOrderOfDate(id, getMonthAgoNow(3)),
+      rawgApi.getGenreOrderOfRating(getYMDAgoNow(100), id, 1),
+      rawgApi.getGenreOrderOfPopularity(getYMDAgoNow(100), id, 1),
+      rawgApi.getGenreOrderOfDate(getYMDAgoNow(100), id, 1),
     ]);
-    setMore({
+    setGamesOfCategory({
       loading: false,
       results: { orderOfRating, orderOfPopularity, orderOfDate },
     });
@@ -31,11 +34,11 @@ export default ({
       [orderOfPopularity, orderOfPopularityError],
       [orderOfDate, orderOfDateError],
     ] = await Promise.all([
-      rawgApi.platformOrderOfRating(id, getMonthAgoNow(6)),
-      rawgApi.platformOrderOfPopularity(id, getMonthAgoNow(6)),
-      rawgApi.platformOrderOfDate(id, getMonthAgoNow(6)),
+      rawgApi.getPlatformOrderOfRating(getYMDAgoNow(100), id, 1),
+      rawgApi.getPlatformOrderOfPopularity(getYMDAgoNow(100), id, 1),
+      rawgApi.getPlatformOrderOfDate(getYMDAgoNow(100), id, 1),
     ]);
-    setMore({
+    setGamesOfCategory({
       loading: false,
       results: { orderOfRating, orderOfPopularity, orderOfDate },
     });
@@ -56,5 +59,5 @@ export default ({
   useLayoutEffect(() => {
     navigation.setOptions({ title });
   });
-  return <MorePresenter {...more} />;
+  return <GamesOfCategoryPresenter {...gamesOfCategory} title={title} />;
 };

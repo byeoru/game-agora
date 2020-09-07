@@ -5,7 +5,7 @@ import { rawgApi } from "../../api";
 export default () => {
   const [genre, setGenre] = useState({ loading: true, listOfGenres: [] });
   const getData = async () => {
-    const [listOfGenres, listOfGenresError] = await rawgApi.listOfGenres();
+    const [listOfGenres, listOfGenresError] = await rawgApi.getListOfGenres();
     setGenre({ loading: false, listOfGenres });
   };
   useEffect(() => {

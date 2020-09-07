@@ -2,9 +2,11 @@ import React from "react";
 import styled from "styled-components/native";
 import { getRawgImg } from "../../api";
 import rawgImgSizeObj from "../../obj/rawgImgSizeObj";
-import { TouchableOpacity } from "react-native";
-import useMore from "../useMore";
+import useGamesOfCategory from "../useGamesOfCategory";
 
+const TouchableOpacity = styled.TouchableOpacity`
+  width: 49%;
+`;
 const Container = styled.View`
   width: 100%;
   height: 200px;
@@ -31,11 +33,10 @@ const Data = styled.Text`
 `;
 
 export default ({ id, title, backgroundImage }) => {
-  const goToMore = useMore();
+  const goToGamesOfCategory = useGamesOfCategory();
   return (
     <TouchableOpacity
-      style={{ width: "49%" }}
-      onPress={() => goToMore({ id, title, classification: "P" })}
+      onPress={() => goToGamesOfCategory({ id, title, classification: "P" })}
     >
       <Container>
         <BG

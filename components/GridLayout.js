@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components/native";
 import { Dimensions } from "react-native";
 import { getRawgImg } from "../api";
-import { TouchableOpacity } from "react-native";
 import rawgImgSizeObj from "../obj/rawgImgSizeObj";
 import useGameDetail from "./useGameDetail";
 
 const { width: WIDTH } = Dimensions.get("window");
 
+const TouchableOpacity = styled.TouchableOpacity``;
 const Container = styled.View`
   width: 100%;
 `;
@@ -21,31 +21,34 @@ const HeaderGrid = styled.View`
   width: 100%;
   height: ${WIDTH / 2}px;
   flex-direction: row;
+  justify-content: space-around;
 `;
 const LeftColumn = styled.View`
-  width: 50%;
+  width: 49%;
   height: 100%;
   border-radius: 5px;
 `;
 const RightColumn = styled.View`
-  width: 50%;
+  width: 49%;
   height: 100%;
+  justify-content: space-between;
 `;
 const RightTopRow = styled.View`
   width: 100%;
-  height: 50%;
+  height: 49%;
 `;
 const RightBottomRow = styled.View`
   width: 100%;
-  height: 50%;
+  height: 49%;
   flex-direction: row;
+  justify-content: space-between;
 `;
 const RightBottomRowLeftColumn = styled.View`
-  width: 50%;
+  width: 49%;
   height: 100%;
 `;
 const RightBottomRowRightColumn = styled.View`
-  width: 50%;
+  width: 49%;
   height: 100%;
 `;
 const FooterGrid = styled.View`
@@ -53,7 +56,7 @@ const FooterGrid = styled.View`
   margin-top: 10px;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 const FooterBox = styled.View`
   width: ${WIDTH / 3.2}px;

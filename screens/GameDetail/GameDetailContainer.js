@@ -20,8 +20,8 @@ export default ({
       [detail, detailError],
       [screenshots, screenshotsError],
     ] = await Promise.all([
-      rawgApi.detailsOfTheGame(id),
-      rawgApi.screenshots(id),
+      rawgApi.getDetailsOfTheGame(id),
+      rawgApi.getScreenshots(id),
     ]);
     setGameDetail({
       loading: false,

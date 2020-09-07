@@ -11,7 +11,7 @@ export default () => {
     const [
       listOfPlatforms,
       listOfPlatformsError,
-    ] = await rawgApi.listOfPlatforms();
+    ] = await rawgApi.getListOfPlatforms();
     setPlatform({ loading: false, listOfPlatforms });
   };
   useEffect(() => {

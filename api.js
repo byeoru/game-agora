@@ -399,68 +399,82 @@ const getAnythingRawg = async (path, params = {}) => {
 };
 
 export const rawgApi = {
-  highRating: (dates) =>
+  getHighRatingGames: (dates) =>
     getAnythingRawg("/games", {
       dates,
       page_size: 15,
       ordering: "-rating",
     }),
-  poNowToThrMonAgo: (dates, parentPlatform) =>
+  getNewWorkGames: (dates, page, pageSize = 15) =>
     getAnythingRawg("/games", {
       dates,
-      page_size: 15,
+      page: `${page}`,
+      page_size: `${pageSize}`,
+      ordering: "-released",
+    }),
+  getPopularGames: (dates, parentPlatform, page, pageSize = 15) =>
+    getAnythingRawg("/games", {
+      dates,
+      page: `${page}`,
+      page_size: `${pageSize}`,
       ordering: "-added",
       parent_platforms: `${parentPlatform}`,
     }),
-  genreOrderOfRating: (genreId, dates) =>
+  getGenreOrderOfRating: (dates, genreId, page, pageSize = 10) =>
     getAnythingRawg(`/games`, {
       dates,
-      page_size: 10,
+      page: `${page}`,
+      page_size: `${pageSize}`,
       genres: `${genreId}`,
       ordering: "-rating",
     }),
-  genreOrderOfPopularity: (genreId, dates) =>
+  getGenreOrderOfPopularity: (dates, genreId, page, pageSize = 10) =>
     getAnythingRawg(`/games`, {
       dates,
-      page_size: 10,
+      page: `${page}`,
+      page_size: `${pageSize}`,
       genres: `${genreId}`,
       ordering: "-added",
     }),
-  genreOrderOfDate: (genreId, dates) =>
+  getGenreOrderOfDate: (dates, genreId, page, pageSize = 10) =>
     getAnythingRawg(`/games`, {
       dates,
-      page_size: 10,
+      page: `${page}`,
+      page_size: `${pageSize}`,
       genres: `${genreId}`,
       ordering: "-released",
     }),
-  platformOrderOfRating: (platformId, dates) =>
+  getPlatformOrderOfRating: (dates, platformId, page, pageSize = 10) =>
     getAnythingRawg(`/games`, {
       dates,
-      page_size: 10,
+      page: `${page}`,
+      page_size: `${pageSize}`,
       platforms: `${platformId}`,
       ordering: "-rating",
     }),
-  platformOrderOfPopularity: (platformId, dates) =>
+  getPlatformOrderOfPopularity: (dates, platformId, page, pageSize = 10) =>
     getAnythingRawg(`/games`, {
       dates,
-      page_size: 10,
+      page: `${page}`,
+      page_size: `${pageSize}`,
       platforms: `${platformId}`,
       ordering: "-addedg",
     }),
-  platformOrderOfDate: (platformId, dates) =>
+  getPlatformOrderOfDate: (dates, platformId, page, pageSize = 10) =>
     getAnythingRawg(`/games`, {
       dates,
-      page_size: 10,
+      page: `${page}`,
+      page_size: `${pageSize}`,
       platforms: `${platformId}`,
       ordering: "-released",
     }),
-  screenshots: (id) => getAnythingRawg(`/games/${id}/screenshots`),
-  platforms: () => getAnythingRawg("/platforms"),
-  listOfPlatformsParent: () => getAnythingRawg("/platforms/lists/parents"),
-  listOfGenres: () => getAnythingRawg("/genres"),
-  listOfTags: () => getAnythingRawg("/tags"),
-  listOfPlatforms: () => getAnythingRawg("/platforms"),
-  detailsOfTheGame: (id) => getAnythingRawg(`/games/${id}`),
+  getScreenshots: (id) => getAnythingRawg(`/games/${id}/screenshots`),
+  getPlatforms: () => getAnythingRawg("/platforms"),
+  getListOfPlatformsParent: () => getAnythingRawg("/platforms/lists/parents"),
+  getListOfGenres: () => getAnythingRawg("/genres"),
+  getListOfTags: () => getAnythingRawg("/tags"),
+  getListOfPlatforms: () => getAnythingRawg("/platforms"),
+  getDetailsOfTheGame: (id) => getAnythingRawg(`/games/${id}`),
 };
 
 export const getIgdbImg = (imageId, size) =>

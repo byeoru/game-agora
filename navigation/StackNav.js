@@ -5,8 +5,9 @@ import {
 } from "@react-navigation/stack";
 import BottomNav from "./BottomNav";
 import GameDetail from "../screens/GameDetail";
-import More from "../screens/More";
+import GamesOfCategory from "../screens/GamesOfCategory";
 import SubPage from "../screens/GameDetail/SubPage";
+import MoreGames from "../screens/MoreGames";
 
 const StackNav = createStackNavigator();
 
@@ -24,8 +25,8 @@ export default () => {
     >
       <StackNav.Screen name="Stack" component={BottomNav} />
       <StackNav.Screen
-        name="More"
-        component={More}
+        name="GamesOfCategory"
+        component={GamesOfCategory}
         options={{
           cardStyleInterpolator:
             CardStyleInterpolators.forRevealFromBottomAndroid,
@@ -36,6 +37,14 @@ export default () => {
         component={GameDetail}
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
+      <StackNav.Screen
+        name="MoreGames"
+        component={MoreGames}
+        options={{
+          cardStyleInterpolator:
+            CardStyleInterpolators.forRevealFromBottomAndroid,
         }}
       />
       <StackNav.Screen

@@ -13,8 +13,11 @@ const Text = styled.Text`
   margin-left: 10px;
 `;
 
-export default ({ title, styles }) => (
-  <Container>
-    <Text style={{ ...styles }}>{title}</Text>
-  </Container>
-);
+export default ({ title, styles, children }) => {
+  return (
+    <Container>
+      <Text style={{ ...styles }}>{title}</Text>
+      {children}
+    </Container>
+  );
+};

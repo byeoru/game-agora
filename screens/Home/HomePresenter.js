@@ -12,17 +12,24 @@ import TopHeader from "../../components/TopHeader";
 import ContentsDescription from "../../components/ContentsDescription";
 import HorizontalContainer from "../../components/HorizontalContainer";
 import OriginNotation from "../../components/OriginNotation";
+import Rowbox from "../../components/RowBox";
+import ContentsMore from "../../components/ContentsMore";
 
-const { height: HEIGHT } = Dimensions.get("window");
+const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 const SwiperContainer = styled.View`
   width: 100%;
   height: ${HEIGHT / 2.2}px;
+`;
+const NewWorkContainer = styled.ScrollView`
+  height: 400px;
+  margin-top: 80px;
 `;
 
 export default ({
   firstLoading,
   loading,
   highRating,
+  newWork,
   popularPc,
   popularIos,
   popularAndroid,
@@ -43,10 +50,40 @@ export default ({
         ))}
       </Swiper>
     </SwiperContainer>
+    <ContentsBox styles={{ height: 500 }}>
+      <TopHeader title="신작" />
+      <ContentsDescription text="지난 7일 사이 출시" />
+      <ContentsMore title="신작" />
+      <NewWorkContainer nestedScrollEnabled={true}>
+        <Rowbox
+          styles={{
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+          }}
+        >
+          {newWork.map((game) => (
+            <Vertical
+              key={game.id}
+              id={game.id}
+              title={game.name}
+              backgroundImage={game.background_image}
+              styles={{
+                width: WIDTH / 3.3,
+                height: WIDTH / 2,
+                marginRight: 0,
+                marginBottom: 10,
+              }}
+            />
+          ))}
+        </Rowbox>
+      </NewWorkContainer>
+    </ContentsBox>
     <ContentsBox>
       <TopHeader title="인기작" />
-      <ContentsDescription text="최근 200일 사이 출시된 게임" />
-      <ContentsHeader title="PC" styles={{ marginTop: 80 }} />
+      <ContentsDescription text="지난 100일 사이 출시" />
+      <ContentsHeader title="PC" styles={{ marginTop: 80 }}>
+        <ContentsMore title="PC 인기작" styles={{ marginTop: 90 }} />
+      </ContentsHeader>
       <HorizontalContainer>
         <HorizotalSlider>
           {popularPc.map((game) => (
@@ -59,7 +96,9 @@ export default ({
           ))}
         </HorizotalSlider>
       </HorizontalContainer>
-      <ContentsHeader title="IOS" />
+      <ContentsHeader title="iOS">
+        <ContentsMore title="iOS 인기작" styles={{ marginTop: 10 }} />
+      </ContentsHeader>
       <HorizontalContainer>
         <HorizotalSlider>
           {popularIos.map((game) => (
@@ -72,7 +111,9 @@ export default ({
           ))}
         </HorizotalSlider>
       </HorizontalContainer>
-      <ContentsHeader title="안드로이드" />
+      <ContentsHeader title="Android">
+        <ContentsMore title="Android 인기작" styles={{ marginTop: 10 }} />
+      </ContentsHeader>
       <HorizontalContainer>
         <HorizotalSlider>
           {popularAndroid.map((game) => (
