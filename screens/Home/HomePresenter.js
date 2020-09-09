@@ -14,6 +14,10 @@ import HorizontalContainer from "../../components/HorizontalContainer";
 import OriginNotation from "../../components/OriginNotation";
 import Rowbox from "../../components/RowBox";
 import ContentsMore from "../../components/ContentsMore";
+import { getYMDAgoNow } from "../../utils";
+import gameGenreObj from "../../obj/gameGenreObj";
+import pPlatformsNumObj from "../../obj/pPlatformsNumObj";
+import orderingObj from "../../obj/orderingObj";
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 const SwiperContainer = styled.View`
@@ -53,7 +57,15 @@ export default ({
     <ContentsBox styles={{ height: 500 }}>
       <TopHeader title="신작" />
       <ContentsDescription text="지난 7일 사이 출시" />
-      <ContentsMore title="신작" />
+      <ContentsMore
+        title="신작"
+        getMoreFnParams={{
+          dates: getYMDAgoNow(7),
+          ordering: "-released",
+          page: 1,
+          page_size: 18,
+        }}
+      />
       <NewWorkContainer nestedScrollEnabled={true}>
         <Rowbox
           styles={{
@@ -82,7 +94,17 @@ export default ({
       <TopHeader title="인기작" />
       <ContentsDescription text="지난 100일 사이 출시" />
       <ContentsHeader title="PC" styles={{ marginTop: 80 }}>
-        <ContentsMore title="PC 인기작" styles={{ marginTop: 90 }} />
+        <ContentsMore
+          title="PC 인기작"
+          getMoreFnParams={{
+            dates: getYMDAgoNow(100),
+            parent_platforms: pPlatformsNumObj.PC,
+            ordering: orderingObj._added,
+            page: 1,
+            page_size: 18,
+          }}
+          styles={{ marginTop: 90 }}
+        />
       </ContentsHeader>
       <HorizontalContainer>
         <HorizotalSlider>
@@ -97,7 +119,17 @@ export default ({
         </HorizotalSlider>
       </HorizontalContainer>
       <ContentsHeader title="iOS">
-        <ContentsMore title="iOS 인기작" styles={{ marginTop: 10 }} />
+        <ContentsMore
+          title="iOS 인기작"
+          getMoreFnParams={{
+            dates: getYMDAgoNow(100),
+            parent_platforms: pPlatformsNumObj.iOS,
+            ordering: orderingObj._added,
+            page: 1,
+            page_size: 18,
+          }}
+          styles={{ marginTop: 10 }}
+        />
       </ContentsHeader>
       <HorizontalContainer>
         <HorizotalSlider>
@@ -112,7 +144,17 @@ export default ({
         </HorizotalSlider>
       </HorizontalContainer>
       <ContentsHeader title="Android">
-        <ContentsMore title="Android 인기작" styles={{ marginTop: 10 }} />
+        <ContentsMore
+          title="Android 인기작"
+          getMoreFnParams={{
+            dates: getYMDAgoNow(100),
+            parent_platforms: pPlatformsNumObj.Android,
+            ordering: orderingObj._added,
+            page: 1,
+            page_size: 18,
+          }}
+          styles={{ marginTop: 10 }}
+        />
       </ContentsHeader>
       <HorizontalContainer>
         <HorizotalSlider>

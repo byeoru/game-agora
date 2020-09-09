@@ -15,11 +15,11 @@ const Text = styled.Text`
   padding: 3px;
 `;
 
-export default ({ title, styles }) => {
+export default ({ title, getMoreFnParams, styles }) => {
   const goToMoreGames = useMoreGames();
   return (
     <TouchableOpacity
-      onPress={() => goToMoreGames({ title })}
+      onPress={() => goToMoreGames({ title, ...getMoreFnParams })}
       style={{ ...styles }}
     >
       <Text>더보기</Text>

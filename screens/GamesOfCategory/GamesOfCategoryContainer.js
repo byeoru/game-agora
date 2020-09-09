@@ -11,6 +11,7 @@ export default ({
 }) => {
   const [gamesOfCategory, setGamesOfCategory] = useState({
     loading: true,
+    genreOrPlatforms: {},
     results: {},
   });
   const getGenreData = async () => {
@@ -19,12 +20,13 @@ export default ({
       [orderOfPopularity, orderOfPopularityError],
       [orderOfDate, orderOfDateError],
     ] = await Promise.all([
-      rawgApi.getGenreOrderOfRating(getYMDAgoNow(100), id, 1),
-      rawgApi.getGenreOrderOfPopularity(getYMDAgoNow(100), id, 1),
-      rawgApi.getGenreOrderOfDate(getYMDAgoNow(100), id, 1),
+      rawgApi.getGenreOrderOfRatingGames(getYMDAgoNow(100), id, 1),
+      rawgApi.getGenreOrderOfPopularityGames(getYMDAgoNow(100), id, 1),
+      rawgApi.getGenreOrderOfDateGames(getYMDAgoNow(100), id, 1),
     ]);
     setGamesOfCategory({
       loading: false,
+      genreOrPlatformParms: { genres: id },
       results: { orderOfRating, orderOfPopularity, orderOfDate },
     });
   };
@@ -34,12 +36,13 @@ export default ({
       [orderOfPopularity, orderOfPopularityError],
       [orderOfDate, orderOfDateError],
     ] = await Promise.all([
-      rawgApi.getPlatformOrderOfRating(getYMDAgoNow(100), id, 1),
-      rawgApi.getPlatformOrderOfPopularity(getYMDAgoNow(100), id, 1),
-      rawgApi.getPlatformOrderOfDate(getYMDAgoNow(100), id, 1),
+      rawgApi.getPlatformOrderOfRatingGames(getYMDAgoNow(100), id, 1),
+      rawgApi.getPlatformOrderOfPopularityGames(getYMDAgoNow(100), id, 1),
+      rawgApi.getPlatformOrderOfDateGames(getYMDAgoNow(100), id, 1),
     ]);
     setGamesOfCategory({
       loading: false,
+      genreOrPlatformParms: { platforms: id },
       results: { orderOfRating, orderOfPopularity, orderOfDate },
     });
   };
