@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useEffect, useState } from "react";
 import MoreGamesPresenter from "./MoreGamesPresenter";
-import { rawgApi } from "../../api";
+import { rawgApi, cancelLoading } from "../../api";
 
 export default ({
   navigation,
@@ -59,6 +59,7 @@ export default ({
   };
   useEffect(() => {
     getData();
+    return () => cancelLoading();
   }, []);
   useLayoutEffect(() => {
     navigation.setOptions({ title });

@@ -8,6 +8,7 @@ import { getAfterTheFourthTheRest, getYMDAgoNow } from "../../utils";
 import ContentsDescription from "../../components/ContentsDescription";
 import ContentsMore from "../../components/ContentsMore";
 import orderingObj from "../../obj/orderingObj";
+import { Button } from "react-native";
 
 export default ({ loading, results, title, genreOrPlatformParms }) => {
   return (

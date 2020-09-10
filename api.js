@@ -3,6 +3,9 @@ import getEnvVars from "./env";
 import { getNowSec } from "./utils";
 import gameGenreObj from "./obj/gameGenreObj";
 const { API_KEY } = getEnvVars();
+const CancelToken = axios.CancelToken;
+
+export let cancelLoading;
 
 const makeRequestIgdb = (path, query) =>
   axios({
@@ -382,6 +385,9 @@ export const igdbApi = {
 
 const makeRequestRawg = (path, params) =>
   axios.get(`https://api.rawg.io/api${path}`, {
+    cancelToken: new CancelToken((c) => {
+      cancelLoading = c;
+    }),
     params: { ...params },
     headers: { appName: "GameAgora", user: "byeoru" },
   });
