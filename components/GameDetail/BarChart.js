@@ -1,7 +1,7 @@
 import React from "react";
 import { BarChart } from "react-native-chart-kit";
-import { Dimensions } from "react-native";
 import styled from "styled-components/native";
+import { WIDTH } from "../../utils";
 
 const Container = styled.View`
   align-items: center;
@@ -24,7 +24,7 @@ export default ({ ratings }) => {
   return (
     <Container>
       <BarChart
-        width={Dimensions.get("window").width / 1.04} // from react-native
+        width={WIDTH / 1.04} // from react-native
         style={{
           borderRadius: 15,
         }}

@@ -31,11 +31,13 @@ const Name = styled.Text`
 
 export default ({ name, backgroundImage }) => (
   <Container>
-    <BG
-      resizeMode="cover"
-      resizeMethod="resize"
-      source={{ uri: getRawgImg(backgroundImage, rawgImgSizeObj.w420) }}
-    />
+    {backgroundImage ? (
+      <BG
+        resizeMode="cover"
+        resizeMethod="resize"
+        source={{ uri: getRawgImg(backgroundImage, rawgImgSizeObj.w420) }}
+      />
+    ) : null}
     <NameBox>
       <Name>{name}</Name>
     </NameBox>

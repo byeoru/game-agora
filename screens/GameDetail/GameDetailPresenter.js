@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components/native";
 import BottomSheet from "reanimated-bottom-sheet";
-import { Dimensions, TouchableOpacity, Clipboard } from "react-native";
+import { TouchableOpacity, Clipboard } from "react-native";
 import { getRawgImg } from "../../api";
 import { AntDesign } from "@expo/vector-icons";
 import CompanyVertical from "../../components/GameDetail/CompanyVertical";
@@ -16,6 +16,7 @@ import RowBox from "../../components/RowBox";
 import rawgImgSizeObj from "../../obj/rawgImgSizeObj";
 import Rating from "../../components/Rating";
 import BarChart from "../../components/GameDetail/BarChart";
+import { HEIGHT } from "../../utils";
 
 export default ({
   navigation,
@@ -35,7 +36,6 @@ export default ({
   publishers,
   website,
 }) => {
-  const { height: HEIGHT } = Dimensions.get("window");
   const Container = styled.View`
     width: 100%;
     height: 100%;
@@ -74,7 +74,6 @@ export default ({
   const DataBox = styled.View`
     margin-top: 30px;
   `;
-  const View = styled.View``;
   const Text = styled.Text``;
 
   const sheetRef = useRef(null);
@@ -219,9 +218,7 @@ export default ({
                 <CompanyVertical
                   key={company.id}
                   name={company.name}
-                  backgroundImage={
-                    company.image_background ? company.image_background : null
-                  }
+                  backgroundImage={company.image_background}
                 />
               ))}
             </RowBox>
@@ -240,9 +237,7 @@ export default ({
                 <CompanyVertical
                   key={company.id}
                   name={company.name}
-                  backgroundImage={
-                    company.image_background ? company.image_background : null
-                  }
+                  backgroundImage={company.image_background}
                 />
               ))}
             </RowBox>

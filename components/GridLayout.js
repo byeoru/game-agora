@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Dimensions } from "react-native";
 import { getRawgImg } from "../api";
 import rawgImgSizeObj from "../obj/rawgImgSizeObj";
 import useGameDetail from "./useGameDetail";
-
-const { width: WIDTH } = Dimensions.get("window");
+import { WIDTH } from "../utils";
 
 const TouchableOpacity = styled.TouchableOpacity``;
 const Container = styled.View`

@@ -2,12 +2,11 @@ import React from "react";
 import styled from "styled-components/native";
 import { getRawgImg } from "../../api";
 import rawgImgSizeObj from "../../obj/rawgImgSizeObj";
-import { Dimensions, Button, Animated } from "react-native";
+import { Animated } from "react-native";
 import orderingObj from "../../obj/orderingObj";
 import useMoreGames from "../useMoreGames";
-import { getYMDAgoNow } from "../../utils";
+import { getYMDAgoNow, WIDTH } from "../../utils";
 
-const { width: WIDTH } = Dimensions.get("window");
 const touchableOpacityWidth = WIDTH / 2.1;
 
 const TouchableOpacity = styled.TouchableOpacity`
@@ -22,16 +21,6 @@ const BG = styled.Image`
   height: 100%;
   border-radius: 15px;
 `;
-const Container = styled.View`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  bottom: 0;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 15px;
-`;
 const ButtonContainer = styled.View`
   width: 100%;
   position: absolute;
@@ -43,6 +32,7 @@ const Title = styled.Text`
   position: absolute;
   top: 10px;
 `;
+const Button = styled.Button``;
 
 export default ({ id, title, backgroundImage }) => {
   const goToMoreGames = useMoreGames();
@@ -89,7 +79,8 @@ export default ({ id, title, backgroundImage }) => {
             title="평점순"
             onPress={() =>
               goToMoreGames({
-                title: `${title} 평점순`,
+                title,
+                contentsBoxTitle: "평점순",
                 dates: getYMDAgoNow(100),
                 platforms: id,
                 ordering: orderingObj._rating,
@@ -102,7 +93,8 @@ export default ({ id, title, backgroundImage }) => {
             title="인기순"
             onPress={() =>
               goToMoreGames({
-                title: `${title} 인기순`,
+                title,
+                contentsBoxTitle: "인기순",
                 dates: getYMDAgoNow(100),
                 platforms: id,
                 ordering: orderingObj._added,
@@ -115,7 +107,8 @@ export default ({ id, title, backgroundImage }) => {
             title="출시일순"
             onPress={() =>
               goToMoreGames({
-                title: `${title} 출시일순`,
+                title,
+                contentsBoxTitle: "출시일순",
                 dates: getYMDAgoNow(100),
                 platforms: id,
                 ordering: orderingObj._released,

@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native";
+
 export const getYMDAgoNow = (minusDay) => {
   const oneDaySec = 86400000;
   const SecToBeSubtracted = oneDaySec * minusDay;
@@ -40,3 +42,5 @@ export const getAfterTheFourthTheRest = (array) => {
 
 export const trimText = (text, limit) =>
   text.length > limit ? `${text.slice(0, limit)}...` : text;
+
+export const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");

@@ -1,42 +1,100 @@
 import React from "react";
 import ScrollContainer from "../../components/ScrollContainer";
-import Vertical from "../../components/Vertical";
-import { Dimensions } from "react-native";
 import RowBox from "../../components/RowBox";
-import { Button } from "react-native";
+import GridLayout from "../../components/GridLayout";
+import { getAfterTheFourthTheRest } from "../../utils";
+import ContentsBox from "../../components/ContentsBox";
+import ContentsDescription from "../../components/ContentsDescription";
+import TopHeader from "../../components/TopHeader";
+import OriginNotation from "../../components/OriginNotation";
+import styled from "styled-components/native";
+import { CirclesLoader } from "react-native-indicator";
+import { AdMobRewarded } from "expo-ads-admob";
 
-export default ({ loading, showMoreBtn, results, getShowMoreData }) => {
-  const { width: WIDTH } = Dimensions.get("window");
+const MoreButton = styled.TouchableOpacity`
+  width: 50%;
+  height: 40px;
+  background-color: rgba(100, 100, 100, 0.4);
+  border-radius: 15px;
+  align-self: center;
+  margin-top: 30px;
+  justify-content: center;
+  align-items: center;
+`;
+const Text = styled.Text`
+  text-align: center;
+  padding: 10px;
+`;
+
+export default ({
+  loading,
+  showMoreBtn,
+  results,
+  getShowMoreData,
+  contentsBoxTitle,
+  moreLoading,
+  setMoreLoading,
+  pageNum,
+}) => {
   return (
     <ScrollContainer loading={loading}>
-      <RowBox
-        styles={{
-          flexWrap: "wrap",
-          justifyContent: "space-around",
-        }}
-      >
-        {results?.length > 0
-          ? results.map((game) => {
-              return (
-                <Vertical
-                  key={game.id}
-                  id={game.id}
-                  title={game.name}
-                  backgroundImage={game.background_image}
-                  styles={{
-                    width: WIDTH / 3.3,
-                    height: WIDTH / 2,
-                    marginRight: 0,
-                    marginBottom: 10,
-                  }}
-                />
-              );
-            })
-          : null}
-      </RowBox>
-      {showMoreBtn ? (
-        <Button title="더보기" onPress={() => getShowMoreData()} />
-      ) : null}
+      <ContentsBox styles={{ marginTop: 10 }}>
+        <TopHeader title={contentsBoxTitle} />
+        <ContentsDescription text="지난 100일 사이 출시" />
+        <RowBox
+          styles={{
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+            marginTop: 80,
+          }}
+        >
+          {
+            <GridLayout
+              gameFir={results[0]}
+              gameSec={results[1]}
+              gameThi={results[2]}
+              gameFou={results[3]}
+              gameTheRest={getAfterTheFourthTheRest(results)}
+            />
+          }
+        </RowBox>
+        {showMoreBtn ? (
+          <MoreButton
+            onPress={async () => {
+              if (pageNum % 2 === 0) {
+                setMoreLoading(true);
+                AdMobRewarded.addEventListener(
+                  "rewardedVideoDidRewardUser",
+                  () => getShowMoreData()
+                );
+                AdMobRewarded.addEventListener(
+                  "rewardedVideoWillLeaveApplication",
+                  () => console.log("leave")
+                );
+                AdMobRewarded.addEventListener(
+                  "rewardedVideoDidFailToLoad",
+                  () => console.log("fail")
+                );
+                await AdMobRewarded.setAdUnitID(
+                  "ca-app-pub-3940256099942544/5224354917"
+                );
+                await AdMobRewarded.requestAdAsync();
+                await AdMobRewarded.showAdAsync();
+              } else {
+                setMoreLoading(true);
+                getShowMoreData();
+              }
+            }}
+          >
+            {moreLoading ? (
+              <CirclesLoader size={20} color="black" dotRadius={2} />
+            ) : (
+              <Text>더보기</Text>
+            )}
+          </MoreButton>
+        ) : null}
+      </ContentsBox>
+      <OriginNotation styles={{ paddingBottom: 20 }} />
     </ScrollContainer>
   );
 };

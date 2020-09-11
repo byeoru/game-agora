@@ -411,14 +411,14 @@ export const rawgApi = {
       page_size: 15,
       ordering: "-rating",
     }),
-  getNewWorkGames: (dates, page, page_size = 15) =>
+  getNewWorkGames: (dates, page, page_size = 12) =>
     getAnythingRawg("/games", {
       dates,
       page,
       page_size,
       ordering: "-released",
     }),
-  getPopularGames: (dates, parent_platforms, page, page_size = 15) =>
+  getPopularGames: (dates, parent_platforms, page, page_size = 12) =>
     getAnythingRawg("/games", {
       dates,
       page,

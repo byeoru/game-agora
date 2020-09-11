@@ -5,7 +5,6 @@ import {
 } from "@react-navigation/stack";
 import BottomNav from "./BottomNav";
 import GameDetail from "../screens/GameDetail";
-import GamesOfCategory from "../screens/GamesOfCategory";
 import SubPage from "../screens/GameDetail/SubPage";
 import MoreGames from "../screens/MoreGames";
 
@@ -24,14 +23,6 @@ export default () => {
       }}
     >
       <StackNav.Screen name="Stack" component={BottomNav} />
-      <StackNav.Screen
-        name="GamesOfCategory"
-        component={GamesOfCategory}
-        options={{
-          cardStyleInterpolator:
-            CardStyleInterpolators.forRevealFromBottomAndroid,
-        }}
-      />
       <StackNav.Screen
         name="GameDetail"
         component={GameDetail}

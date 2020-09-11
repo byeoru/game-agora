@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components/native";
-import { TouchableOpacity, Dimensions } from "react-native";
+import { TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 import useMore from "../useMore";
-
-const { height: HEIGHT } = Dimensions.get("window");
+import { HEIGHT } from "../../utils";
 
 const Container = styled.View`
   width: 100%;

@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Genre from "../screens/Genre";
 import Platform from "../screens/Platform";
+import Info from "../screens/Info";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const BottomNav = createBottomTabNavigator();
@@ -40,6 +41,9 @@ export default ({ navigation, route }) => {
             case "플랫폼":
               iconName = "sword-cross";
               break;
+            case "정보":
+              iconName = "settings";
+              break;
           }
           return (
             <MaterialCommunityIcons
@@ -54,6 +58,7 @@ export default ({ navigation, route }) => {
       <BottomNav.Screen name="홈" component={Home} />
       <BottomNav.Screen name="장르" component={Genre} />
       <BottomNav.Screen name="플랫폼" component={Platform} />
+      <BottomNav.Screen name="정보" component={Info} />
     </BottomNav.Navigator>
   );
 };

@@ -1,12 +1,14 @@
 import React, { useLayoutEffect, useEffect, useState } from "react";
 import MoreGamesPresenter from "./MoreGamesPresenter";
 import { rawgApi, cancelLoading } from "../../api";
+import { AdMobRewarded } from "expo-ads-admob";
 
 export default ({
   navigation,
   route: {
     params: {
       title,
+      contentsBoxTitle,
       dates,
       genres,
       parent_platforms,
@@ -21,6 +23,7 @@ export default ({
     loading: true,
     results: [],
   });
+  const [moreLoading, setMoreLoading] = useState(false);
   const [pageNum, setPageNum] = useState(page);
   const getShowMoreData = async () => {
     const [showMoreData, showMoreDataError] = await rawgApi.getMoreGames(
@@ -32,8 +35,8 @@ export default ({
       pageNum,
       page_size
     );
+    setMoreLoading(false);
     setmoreGames({
-      loading: false,
       showMoreBtn:
         !showMoreData || showMoreData.length < page_size ? false : true,
       results: moreGames.results.concat(showMoreData),
@@ -59,12 +62,22 @@ export default ({
   };
   useEffect(() => {
     getData();
-    return () => cancelLoading();
+    return () => {
+      AdMobRewarded.removeAllListeners();
+      cancelLoading();
+    };
   }, []);
   useLayoutEffect(() => {
     navigation.setOptions({ title });
   }, []);
   return (
-    <MoreGamesPresenter {...moreGames} getShowMoreData={getShowMoreData} />
+    <MoreGamesPresenter
+      {...moreGames}
+      getShowMoreData={getShowMoreData}
+      contentsBoxTitle={contentsBoxTitle}
+      moreLoading={moreLoading}
+      setMoreLoading={setMoreLoading}
+      pageNum={pageNum}
+    />
   );
 };

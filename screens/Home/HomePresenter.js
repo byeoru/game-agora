@@ -1,6 +1,5 @@
 import React from "react";
 import ScrollContainer from "../../components/ScrollContainer";
-import { Dimensions } from "react-native";
 import Swiper from "react-native-swiper";
 import SwiperContents from "../../components/Home/SwiperContents";
 import ContentsBox from "../../components/ContentsBox";
@@ -14,12 +13,10 @@ import HorizontalContainer from "../../components/HorizontalContainer";
 import OriginNotation from "../../components/OriginNotation";
 import Rowbox from "../../components/RowBox";
 import ContentsMore from "../../components/ContentsMore";
-import { getYMDAgoNow } from "../../utils";
-import gameGenreObj from "../../obj/gameGenreObj";
+import { getYMDAgoNow, HEIGHT, WIDTH } from "../../utils";
 import pPlatformsNumObj from "../../obj/pPlatformsNumObj";
 import orderingObj from "../../obj/orderingObj";
 
-const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 const SwiperContainer = styled.View`
   width: 100%;
   height: ${HEIGHT / 2.2}px;
@@ -60,10 +57,11 @@ export default ({
       <ContentsMore
         title="신작"
         getMoreFnParams={{
+          contentsBoxTitle: "출시일순",
           dates: getYMDAgoNow(7),
           ordering: "-released",
           page: 1,
-          page_size: 18,
+          page_size: 13,
         }}
       />
       <NewWorkContainer nestedScrollEnabled={true}>
@@ -95,13 +93,14 @@ export default ({
       <ContentsDescription text="지난 100일 사이 출시" />
       <ContentsHeader title="PC" styles={{ marginTop: 80 }}>
         <ContentsMore
-          title="PC 인기작"
+          title="PC"
           getMoreFnParams={{
+            contentsBoxTitle: "인기순",
             dates: getYMDAgoNow(100),
             parent_platforms: pPlatformsNumObj.PC,
             ordering: orderingObj._added,
             page: 1,
-            page_size: 18,
+            page_size: 13,
           }}
           styles={{ marginTop: 90 }}
         />
@@ -120,13 +119,14 @@ export default ({
       </HorizontalContainer>
       <ContentsHeader title="iOS">
         <ContentsMore
-          title="iOS 인기작"
+          title="iOS"
           getMoreFnParams={{
+            contentsBoxTitle: "인기순",
             dates: getYMDAgoNow(100),
             parent_platforms: pPlatformsNumObj.iOS,
             ordering: orderingObj._added,
             page: 1,
-            page_size: 18,
+            page_size: 13,
           }}
           styles={{ marginTop: 10 }}
         />
@@ -145,13 +145,14 @@ export default ({
       </HorizontalContainer>
       <ContentsHeader title="Android">
         <ContentsMore
-          title="Android 인기작"
+          title="Android"
           getMoreFnParams={{
+            contentsBoxTitle: "인기순",
             dates: getYMDAgoNow(100),
             parent_platforms: pPlatformsNumObj.Android,
             ordering: orderingObj._added,
             page: 1,
-            page_size: 18,
+            page_size: 13,
           }}
           styles={{ marginTop: 10 }}
         />
