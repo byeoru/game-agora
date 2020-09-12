@@ -5,11 +5,12 @@ import Genre from "../screens/Genre";
 import Platform from "../screens/Platform";
 import Info from "../screens/Info";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import i18n from "i18n-js";
 
 const BottomNav = createBottomTabNavigator();
 
 const getHeaderName = (route) => {
-  return route?.state?.routeNames[route.state.index] || "홈";
+  return route?.state?.routeNames[route.state.index] || i18n.t("home");
 };
 
 export default ({ navigation, route }) => {
@@ -32,16 +33,16 @@ export default ({ navigation, route }) => {
         tabBarIcon: ({ focused }) => {
           let iconName;
           switch (route.name) {
-            case "홈":
+            case i18n.t("home"):
               iconName = "gamepad-variant";
               break;
-            case "장르":
+            case i18n.t("genres"):
               iconName = "chess-bishop";
               break;
-            case "플랫폼":
+            case i18n.t("platforms"):
               iconName = "sword-cross";
               break;
-            case "정보":
+            case i18n.t("info"):
               iconName = "settings";
               break;
           }
@@ -55,10 +56,10 @@ export default ({ navigation, route }) => {
         },
       })}
     >
-      <BottomNav.Screen name="홈" component={Home} />
-      <BottomNav.Screen name="장르" component={Genre} />
-      <BottomNav.Screen name="플랫폼" component={Platform} />
-      <BottomNav.Screen name="정보" component={Info} />
+      <BottomNav.Screen name={i18n.t("home")} component={Home} />
+      <BottomNav.Screen name={i18n.t("genres")} component={Genre} />
+      <BottomNav.Screen name={i18n.t("platforms")} component={Platform} />
+      <BottomNav.Screen name={i18n.t("info")} component={Info} />
     </BottomNav.Navigator>
   );
 };

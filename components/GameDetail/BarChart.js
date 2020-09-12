@@ -1,23 +1,25 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { BarChart } from "react-native-chart-kit";
 import styled from "styled-components/native";
 import { WIDTH } from "../../utils";
+import i18n from "i18n-js";
 
 const Container = styled.View`
   align-items: center;
 `;
 
-export default ({ ratings }) => {
+const BarCharts = ({ ratings }) => {
   const labels = ratings.map((rating) => {
     switch (rating.title) {
       case "exceptional":
-        return `매우 만족: ${rating.count}명`;
+        return `${i18n.t("exceptional")}`;
       case "recommended":
-        return `만족: ${rating.count}명`;
+        return `${i18n.t("recommended")}`;
       case "meh":
-        return `관심 없음: ${rating.count}명`;
+        return `${i18n.t("meh")}`;
       case "skip":
-        return `스킵: ${rating.count}명`;
+        return `${i18n.t("skip")}`;
     }
   });
   const data = ratings.map((rating) => rating.percent);
@@ -50,3 +52,9 @@ export default ({ ratings }) => {
     </Container>
   );
 };
+
+BarChart.propTypes = {
+  ratings: PropTypes.array,
+};
+
+export default BarCharts;

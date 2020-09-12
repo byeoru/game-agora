@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 
 const Text = styled.Text`
-  font-size: 35px;
+  font-size: 33px;
   background-color: white;
   position: absolute;
   padding: 7px 12px;

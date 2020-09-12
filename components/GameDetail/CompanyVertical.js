@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { getRawgImg } from "../../api";
 import rawgImgSizeObj from "../../obj/rawgImgSizeObj";
@@ -29,7 +30,7 @@ const Name = styled.Text`
   text-align: center;
 `;
 
-export default ({ name, backgroundImage }) => (
+const CompanyVertical = ({ name, backgroundImage }) => (
   <Container>
     {backgroundImage ? (
       <BG
@@ -43,3 +44,10 @@ export default ({ name, backgroundImage }) => (
     </NameBox>
   </Container>
 );
+
+CompanyVertical.propTypes = {
+  name: PropTypes.string.isRequired,
+  backgroundImage: PropTypes.string,
+};
+
+export default CompanyVertical;

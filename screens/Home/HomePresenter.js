@@ -16,6 +16,7 @@ import ContentsMore from "../../components/ContentsMore";
 import { getYMDAgoNow, HEIGHT, WIDTH } from "../../utils";
 import pPlatformsNumObj from "../../obj/pPlatformsNumObj";
 import orderingObj from "../../obj/orderingObj";
+import i18n from "i18n-js";
 
 const SwiperContainer = styled.View`
   width: 100%;
@@ -52,12 +53,13 @@ export default ({
       </Swiper>
     </SwiperContainer>
     <ContentsBox styles={{ height: 500 }}>
-      <TopHeader title="신작" />
-      <ContentsDescription text="지난 7일 사이 출시" />
+      <TopHeader title={i18n.t("newWork")} />
+      <ContentsDescription text={i18n.t("_7days")} />
       <ContentsMore
-        title="신작"
+        title={i18n.t("newWork")}
         getMoreFnParams={{
-          contentsBoxTitle: "출시일순",
+          contentsBoxTitle: `${i18n.t("orderByReleaseDate")}`,
+          contentsDescription: `${i18n.t("_7days")}`,
           dates: getYMDAgoNow(7),
           ordering: "-released",
           page: 1,
@@ -89,13 +91,14 @@ export default ({
       </NewWorkContainer>
     </ContentsBox>
     <ContentsBox>
-      <TopHeader title="인기작" />
-      <ContentsDescription text="지난 100일 사이 출시" />
+      <TopHeader title={i18n.t("popular")} />
+      <ContentsDescription text={i18n.t("_100days")} />
       <ContentsHeader title="PC" styles={{ marginTop: 80 }}>
         <ContentsMore
           title="PC"
           getMoreFnParams={{
-            contentsBoxTitle: "인기순",
+            contentsBoxTitle: `${i18n.t("orderByPopularity")}`,
+            contentsDescription: `${i18n.t("_100days")}`,
             dates: getYMDAgoNow(100),
             parent_platforms: pPlatformsNumObj.PC,
             ordering: orderingObj._added,
@@ -121,7 +124,8 @@ export default ({
         <ContentsMore
           title="iOS"
           getMoreFnParams={{
-            contentsBoxTitle: "인기순",
+            contentsBoxTitle: `${i18n.t("orderByPopularity")}`,
+            contentsDescription: `${i18n.t("_100days")}`,
             dates: getYMDAgoNow(100),
             parent_platforms: pPlatformsNumObj.iOS,
             ordering: orderingObj._added,
@@ -147,7 +151,8 @@ export default ({
         <ContentsMore
           title="Android"
           getMoreFnParams={{
-            contentsBoxTitle: "인기순",
+            contentsBoxTitle: `${i18n.t("orderByPopularity")}`,
+            contentsDescription: `${i18n.t("_100days")}`,
             dates: getYMDAgoNow(100),
             parent_platforms: pPlatformsNumObj.Android,
             ordering: orderingObj._added,

@@ -10,6 +10,7 @@ import OriginNotation from "../../components/OriginNotation";
 import styled from "styled-components/native";
 import { CirclesLoader } from "react-native-indicator";
 import { AdMobRewarded } from "expo-ads-admob";
+import i18n from "i18n-js";
 
 const MoreButton = styled.TouchableOpacity`
   width: 50%;
@@ -32,6 +33,7 @@ export default ({
   results,
   getShowMoreData,
   contentsBoxTitle,
+  contentsDescription,
   moreLoading,
   setMoreLoading,
   pageNum,
@@ -40,7 +42,7 @@ export default ({
     <ScrollContainer loading={loading}>
       <ContentsBox styles={{ marginTop: 10 }}>
         <TopHeader title={contentsBoxTitle} />
-        <ContentsDescription text="지난 100일 사이 출시" />
+        <ContentsDescription text={contentsDescription} />
         <RowBox
           styles={{
             flexWrap: "wrap",
@@ -67,14 +69,6 @@ export default ({
                   "rewardedVideoDidRewardUser",
                   () => getShowMoreData()
                 );
-                AdMobRewarded.addEventListener(
-                  "rewardedVideoWillLeaveApplication",
-                  () => console.log("leave")
-                );
-                AdMobRewarded.addEventListener(
-                  "rewardedVideoDidFailToLoad",
-                  () => console.log("fail")
-                );
                 await AdMobRewarded.setAdUnitID(
                   "ca-app-pub-3940256099942544/5224354917"
                 );
@@ -89,7 +83,7 @@ export default ({
             {moreLoading ? (
               <CirclesLoader size={20} color="black" dotRadius={2} />
             ) : (
-              <Text>더보기</Text>
+              <Text>{i18n.t("more")}</Text>
             )}
           </MoreButton>
         ) : null}

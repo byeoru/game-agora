@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components/native";
 
 const Container = styled.View`
-  width: 70%;
+  width: 100%;
   position: absolute;
-  right: 0px;
+  top: 40px;
   justify-content: center;
 `;
 
@@ -12,8 +12,7 @@ const Text = styled.Text`
   font-size: 18px;
   z-index: -1;
   text-align: center;
-  padding: 10px 0px;
-  margin-right: 20px;
+  padding: 5px 0px;
 `;
 
 export default ({ text, styles }) => (

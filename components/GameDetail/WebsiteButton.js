@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import * as WebBrowser from "expo-web-browser";
 import { TouchableOpacity } from "react-native";
@@ -17,10 +18,16 @@ const LinkText = styled.Text`
   color: chocolate;
 `;
 
-export default ({ url }) => (
+const WebsiteButton = ({ url }) => (
   <Container>
     <TouchableOpacity onPress={() => WebBrowser.openBrowserAsync(url)}>
       <LinkText>official</LinkText>
     </TouchableOpacity>
   </Container>
 );
+
+WebsiteButton.propTypes = {
+  url: PropTypes.string.isRequired,
+};
+
+export default WebsiteButton;

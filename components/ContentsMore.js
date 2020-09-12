@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import useMoreGames from "./useMoreGames";
+import i18n from "i18n-js";
 
 const TouchableOpacity = styled.TouchableOpacity`
   position: absolute;
@@ -22,7 +23,7 @@ export default ({ title, getMoreFnParams, styles }) => {
       onPress={() => goToMoreGames({ title, ...getMoreFnParams })}
       style={{ ...styles }}
     >
-      <Text>더보기</Text>
+      <Text>{i18n.t("more")}</Text>
     </TouchableOpacity>
   );
 };

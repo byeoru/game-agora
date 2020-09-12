@@ -28,7 +28,6 @@ export default ({
       title: detail.name,
       backgroundImage: detail.background_image,
       rating: detail.rating,
-      ratingTop: detail.rating_top,
       ratings: detail.ratings,
       released: detail.released,
       genres: detail.genres,

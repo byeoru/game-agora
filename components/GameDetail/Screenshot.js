@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { getRawgImg } from "../../api";
 import rawgImgSizeObj from "../../obj/rawgImgSizeObj";
@@ -16,7 +17,7 @@ const BG = styled.Image`
   border-radius: 15px;
 `;
 
-export default ({ imageId }) => (
+const Screenshots = ({ imageId }) => (
   <Container>
     <BG
       resizeMode="cover"
@@ -25,3 +26,9 @@ export default ({ imageId }) => (
     />
   </Container>
 );
+
+Screenshots.propTypes = {
+  imageId: PropTypes.string.isRequired,
+};
+
+export default Screenshots;

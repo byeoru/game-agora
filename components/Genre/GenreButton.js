@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { getRawgImg } from "../../api";
 import rawgImgSizeObj from "../../obj/rawgImgSizeObj";
@@ -6,6 +7,7 @@ import { Animated } from "react-native";
 import useMoreGames from "../useMoreGames";
 import { getYMDAgoNow, WIDTH } from "../../utils";
 import orderingObj from "../../obj/orderingObj";
+import i18n from "i18n-js";
 
 const touchableOpacityHeight = WIDTH / 2;
 
@@ -32,7 +34,7 @@ const Title = styled.Text`
 `;
 const Button = styled.Button``;
 
-export default ({ id, title, backgroundImage }) => {
+const GenreButton = ({ id, title, backgroundImage }) => {
   const goToMoreGames = useMoreGames();
   const buttonBoxinitlocation = touchableOpacityHeight / -1.3;
   let up = false;
@@ -58,7 +60,11 @@ export default ({ id, title, backgroundImage }) => {
   };
   return (
     <TouchableOpacity onPress={() => moveContainer()}>
-      <BG source={{ uri: getRawgImg(backgroundImage, rawgImgSizeObj.w640) }} />
+      {backgroundImage ? (
+        <BG
+          source={{ uri: getRawgImg(backgroundImage, rawgImgSizeObj.w640) }}
+        />
+      ) : null}
       <Animated.View
         style={{
           width: "100%",
@@ -73,11 +79,12 @@ export default ({ id, title, backgroundImage }) => {
         <Title>{title}</Title>
         <ButtonContainer>
           <Button
-            title="평점순"
+            title={i18n.t("orderByRating")}
             onPress={() =>
               goToMoreGames({
                 title,
-                contentsBoxTitle: "평점순",
+                contentsBoxTitle: `${i18n.t("orderByRating")}`,
+                contentsDescription: `${i18n.t("_100days")}`,
                 dates: getYMDAgoNow(100),
                 genres: id,
                 ordering: orderingObj._rating,
@@ -87,11 +94,12 @@ export default ({ id, title, backgroundImage }) => {
             }
           />
           <Button
-            title="인기순"
+            title={i18n.t("orderByPopularity")}
             onPress={() =>
               goToMoreGames({
                 title,
-                contentsBoxTitle: "인기순",
+                contentsBoxTitle: `${i18n.t("orderByPopularity")}`,
+                contentsDescription: `${i18n.t("_100days")}`,
                 dates: getYMDAgoNow(100),
                 genres: id,
                 ordering: orderingObj._added,
@@ -101,11 +109,12 @@ export default ({ id, title, backgroundImage }) => {
             }
           />
           <Button
-            title="출시일순"
+            title={i18n.t("orderByReleaseDate")}
             onPress={() =>
               goToMoreGames({
                 title,
-                contentsBoxTitle: "출시일순",
+                contentsBoxTitle: `${i18n.t("orderByReleaseDate")}`,
+                contentsDescription: `${i18n.t("_100days")}`,
                 dates: getYMDAgoNow(100),
                 genres: id,
                 ordering: orderingObj._released,
@@ -119,3 +128,11 @@ export default ({ id, title, backgroundImage }) => {
     </TouchableOpacity>
   );
 };
+
+GenreButton.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  backgroundImage: PropTypes.string,
+};
+
+export default GenreButton;

@@ -9,6 +9,7 @@ export default ({
     params: {
       title,
       contentsBoxTitle,
+      contentsDescription,
       dates,
       genres,
       parent_platforms,
@@ -75,6 +76,7 @@ export default ({
       {...moreGames}
       getShowMoreData={getShowMoreData}
       contentsBoxTitle={contentsBoxTitle}
+      contentsDescription={contentsDescription}
       moreLoading={moreLoading}
       setMoreLoading={setMoreLoading}
       pageNum={pageNum}

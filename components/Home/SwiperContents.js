@@ -8,6 +8,7 @@ import rawgImgSizeObj from "../../obj/rawgImgSizeObj";
 import PlatformIcon from "../PlatformIcon";
 import pPlatformsImgObj from "../../obj/pPlatformsImgObj";
 import TemporaryAlternatePlatformTitle from "../TemporaryAlternatePlatformTitle";
+import i18n from "i18n-js";
 
 const TouchableOpacity = styled.TouchableOpacity``;
 const Container = styled.View`
@@ -86,21 +87,23 @@ const SwiperContents = ({
             <Title>{name}</Title>
             <BottomData>
               <Rating rating={rating} styles={{ color: "white" }} />
-              <Released>{released} 출시</Released>
+              <Released>{`${released} ${i18n.t("released")}`}</Released>
             </BottomData>
           </Data>
           <PlatformContainer>
-            {parentPlatforms.map((platform) => (
-              <Platform key={platform.platform.id}>
-                {pPlatformsImgObj[platform.platform.id] ? (
-                  <PlatformIcon number={platform.platform.id} />
-                ) : (
-                  <TemporaryAlternatePlatformTitle
-                    title={platform.platform.name}
-                  />
-                )}
-              </Platform>
-            ))}
+            {parentPlatforms.length > 0
+              ? parentPlatforms.map((platform) => (
+                  <Platform key={platform.platform.id}>
+                    {pPlatformsImgObj[platform.platform.id] ? (
+                      <PlatformIcon number={platform.platform.id} />
+                    ) : (
+                      <TemporaryAlternatePlatformTitle
+                        title={platform.platform.name}
+                      />
+                    )}
+                  </Platform>
+                ))
+              : null}
           </PlatformContainer>
         </DataContainer>
       </Container>
@@ -109,8 +112,11 @@ const SwiperContents = ({
 };
 
 SwiperContents.propTypes = {
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
+  released: PropTypes.string,
+  parentPlatforms: PropTypes.array,
   backgroundImage: PropTypes.string,
 };
 

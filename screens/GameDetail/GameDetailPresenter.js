@@ -16,7 +16,9 @@ import RowBox from "../../components/RowBox";
 import rawgImgSizeObj from "../../obj/rawgImgSizeObj";
 import Rating from "../../components/Rating";
 import BarChart from "../../components/GameDetail/BarChart";
-import { HEIGHT } from "../../utils";
+import { HEIGHT, WIDTH } from "../../utils";
+import i18n from "i18n-js";
+import { DotsLoader } from "react-native-indicator";
 
 export default ({
   navigation,
@@ -24,7 +26,6 @@ export default ({
   title,
   backgroundImage,
   rating,
-  ratingTop,
   ratings,
   released,
   genres,
@@ -36,13 +37,14 @@ export default ({
   publishers,
   website,
 }) => {
+  const BGwidth = WIDTH / 1.1;
   const Container = styled.View`
     width: 100%;
     height: 100%;
     align-items: center;
   `;
   const BG = styled.Image`
-    width: 90%;
+    width: ${BGwidth}px;
     height: ${HEIGHT / 2.2}px;
     border-radius: 15px;
     margin-top: 20px;
@@ -75,6 +77,10 @@ export default ({
     margin-top: 30px;
   `;
   const Text = styled.Text``;
+  const LoaderContainer = styled.View`
+    position: absolute;
+    bottom: 130px;
+  `;
 
   const sheetRef = useRef(null);
   const goToSubPage = useSubPage();
@@ -86,11 +92,11 @@ export default ({
       <DataContainer>
         <RowBox>
           <DataBox style={{ flex: 1 }}>
-            <DataTitle>출시일</DataTitle>
+            <DataTitle>{i18n.t("releaseDate")}</DataTitle>
             <Text>{released}</Text>
           </DataBox>
           <DataBox style={{ flex: 2, marginLeft: 10 }}>
-            <DataTitle>장르</DataTitle>
+            <DataTitle>{i18n.t("genres")}</DataTitle>
             <RowBox
               styles={{
                 flexWrap: "wrap",
@@ -105,7 +111,7 @@ export default ({
           </DataBox>
         </RowBox>
         <DataBox>
-          <DataTitle>플랫폼</DataTitle>
+          <DataTitle>{i18n.t("platforms")}</DataTitle>
           <RowBox styles={{ flexWrap: "wrap" }}>
             {platforms?.length > 0
               ? platforms.map((platform) => (
@@ -117,69 +123,65 @@ export default ({
               : null}
           </RowBox>
         </DataBox>
-        <RowBox>
-          <DataBox style={{ flex: 1 }}>
-            <DataTitle>평점</DataTitle>
-            <Rating rating={rating} />
-          </DataBox>
-          <DataBox style={{ flex: 2, marginLeft: 10 }}>
-            <DataTitle>최고점</DataTitle>
-            <Rating rating={ratingTop} />
-          </DataBox>
-        </RowBox>
+        <DataBox>
+          <DataTitle>{i18n.t("rating")}</DataTitle>
+          <Rating rating={rating} />
+        </DataBox>
         {ratings?.length > 0 ? (
           <DataBox>
-            <DataTitle>평가 분포</DataTitle>
+            <DataTitle>{i18n.t("ratings")}</DataTitle>
             <BarChart ratings={ratings} />
           </DataBox>
         ) : null}
         {description ? (
           <DataBox>
             <RowBox styles={{ justifyContent: "space-between" }}>
-              <DataTitle>설명</DataTitle>
-              <TouchableOpacity
-                onPress={() => {
-                  Clipboard.setString(description);
-                  Toast.show({
-                    position: "bottom",
-                    text1: "텍스트를 복사했습니다",
-                    text2: "그대로 붙여넣기 하세요",
-                  });
-                  goToSubPage({
-                    title: "번역",
-                    classification: "P", // Sub page initial
-                    textToInsert: description,
-                  });
-                }}
-              >
-                <RowBox styles={{ alignItems: "center" }}>
-                  <Text>파파고</Text>
-                  <AntDesign
-                    name="right"
-                    size={17}
-                    color="black"
-                    style={{ paddingLeft: 10 }}
-                  />
-                </RowBox>
-              </TouchableOpacity>
+              <DataTitle>{i18n.t("description")}</DataTitle>
+              {i18n.locale === "ko-KR" ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    Clipboard.setString(description);
+                    Toast.show({
+                      position: "bottom",
+                      text1: "텍스트를 복사했습니다",
+                      text2: "그대로 붙여넣기 하세요",
+                    });
+                    goToSubPage({
+                      title: "번역",
+                      classification: "P", // Sub page initial
+                      textToInsert: description,
+                    });
+                  }}
+                >
+                  <RowBox styles={{ alignItems: "center" }}>
+                    <Text>파파고</Text>
+                    <AntDesign
+                      name="right"
+                      size={17}
+                      color="black"
+                      style={{ paddingLeft: 10 }}
+                    />
+                  </RowBox>
+                </TouchableOpacity>
+              ) : null}
             </RowBox>
             <Text>{description}</Text>
           </DataBox>
         ) : null}
         {video ? (
           <DataBox>
-            <DataTitle>동영상</DataTitle>
+            <DataTitle>{i18n.t("video")}</DataTitle>
             <VideoHorizontal videoId={video} height={200} />
           </DataBox>
         ) : null}
         {screenshots?.length > 0 ? (
           <DataBox>
             <RowBox styles={{ justifyContent: "space-between" }}>
-              <DataTitle>스크린샷</DataTitle>
+              <DataTitle>{i18n.t("screenshots")}</DataTitle>
               <TouchableOpacity
                 onPress={() =>
                   goToSubPage({
-                    title: "스크린샷",
+                    title: `${i18n.t("screenshots")}`,
                     classification: "I", // Sub page initial
                     contents: screenshots,
                   })
@@ -207,7 +209,7 @@ export default ({
         ) : null}
         {developers?.length > 0 ? (
           <DataBox>
-            <DataTitle>개발</DataTitle>
+            <DataTitle>{i18n.t("developers")}</DataTitle>
             <RowBox
               styles={{
                 flexWrap: "wrap",
@@ -226,7 +228,7 @@ export default ({
         ) : null}
         {publishers?.length > 0 ? (
           <DataBox>
-            <DataTitle>퍼블리셔</DataTitle>
+            <DataTitle>{i18n.t("publishers")}</DataTitle>
             <RowBox
               styles={{
                 flexWrap: "wrap",
@@ -245,7 +247,7 @@ export default ({
         ) : null}
         {website ? (
           <DataBox>
-            <DataTitle>웹사이트</DataTitle>
+            <DataTitle>{i18n.t("website")}</DataTitle>
             <WebsiteButton url={website} />
           </DataBox>
         ) : null}
@@ -260,7 +262,7 @@ export default ({
     if (!loading) {
       sheetRef.current.snapTo(1);
     }
-  });
+  }, [loading]);
   return (
     <Container>
       <BG
@@ -269,14 +271,20 @@ export default ({
           uri: getRawgImg(backgroundImage, rawgImgSizeObj.w640),
         }}
       />
-      <BottomSheet
-        ref={sheetRef}
-        snapPoints={["0%", "43%", "100%"]}
-        borderRadius={20}
-        renderContent={renderContent}
-        onCloseEnd={onCloseEnd}
-        enabledContentTapInteraction={false}
-      />
+      {loading ? (
+        <LoaderContainer>
+          <DotsLoader size={9} color="rgba(100,100,100,0.3)" betweenSpace={7} />
+        </LoaderContainer>
+      ) : (
+        <BottomSheet
+          ref={sheetRef}
+          snapPoints={["0%", WIDTH / 1.2, "100%"]}
+          borderRadius={20}
+          renderContent={renderContent}
+          onCloseEnd={onCloseEnd}
+          enabledContentTapInteraction={false}
+        />
+      )}
     </Container>
   );
 };
