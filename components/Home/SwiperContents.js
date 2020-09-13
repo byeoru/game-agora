@@ -91,19 +91,17 @@ const SwiperContents = ({
             </BottomData>
           </Data>
           <PlatformContainer>
-            {parentPlatforms.length > 0
-              ? parentPlatforms.map((platform) => (
-                  <Platform key={platform.platform.id}>
-                    {pPlatformsImgObj[platform.platform.id] ? (
-                      <PlatformIcon number={platform.platform.id} />
-                    ) : (
-                      <TemporaryAlternatePlatformTitle
-                        title={platform.platform.name}
-                      />
-                    )}
-                  </Platform>
-                ))
-              : null}
+            {parentPlatforms.map((platform) => (
+              <Platform key={platform.platform.id}>
+                {pPlatformsImgObj[platform.platform.id] ? (
+                  <PlatformIcon number={platform.platform.id} />
+                ) : (
+                  <TemporaryAlternatePlatformTitle
+                    title={platform.platform.name}
+                  />
+                )}
+              </Platform>
+            ))}
           </PlatformContainer>
         </DataContainer>
       </Container>

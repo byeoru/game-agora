@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components/native";
 import PropTypes from "prop-types";
+import styled from "styled-components/native";
 
 const Container = styled.View`
   width: 97%;
@@ -19,7 +19,7 @@ const ContentsBox = ({ styles, children }) => (
 
 ContentsBox.propTypes = {
   styles: PropTypes.object,
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
 
 export default ContentsBox;

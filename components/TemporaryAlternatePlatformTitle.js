@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
 const Container = styled.View`
@@ -16,11 +17,14 @@ const Title = styled.Text`
   text-align: center;
 `;
 
-export default ({ title }) => {
-  console.log(title);
-  return (
-    <Container>
-      <Title>{title}</Title>
-    </Container>
-  );
+const TemporaryAlternatePlatformTitle = ({ title }) => (
+  <Container>
+    <Title>{title}</Title>
+  </Container>
+);
+
+TemporaryAlternatePlatformTitle.propTypes = {
+  title: PropTypes.string.isRequired,
 };
+
+export default TemporaryAlternatePlatformTitle;

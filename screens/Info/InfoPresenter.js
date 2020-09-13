@@ -4,6 +4,7 @@ import Constants from "expo-constants";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
 import { TouchableOpacity, Animated } from "react-native";
 import { HEIGHT, WIDTH } from "../../utils";
+import i18n from "i18n-js";
 
 const boxHeight = HEIGHT - 410;
 
@@ -112,19 +113,19 @@ export default () => {
         <List>
           <ItemContainer>
             <Item>
-              <Title>앱 이름</Title>
-              <Text>게임아고라</Text>
+              <Title>{i18n.t("appName")}</Title>
+              <Text>{i18n.t("gameAgora")}</Text>
             </Item>
             <Item>
-              <Title>앱 버전</Title>
+              <Title>{i18n.t("appVersion")}</Title>
               <Text>{Constants.manifest.version}</Text>
             </Item>
             <Item>
-              <Title>개발자</Title>
-              <Text>벼루</Text>
+              <Title>{i18n.t("developer")}</Title>
+              <Text>{i18n.t("byeoru")}</Text>
             </Item>
             <Item>
-              <Title>소스 출처</Title>
+              <Title>{i18n.t("source")}</Title>
               <TouchableOpacity onPress={() => moveContainer()}>
                 <Feather name="arrow-right-circle" size={27} color="black" />
               </TouchableOpacity>
@@ -143,7 +144,7 @@ export default () => {
               <Feather name="arrow-left-circle" size={35} color="black" />
             </TouchableOpacity>
             <Title style={{ marginLeft: 50, fontWeight: "bold" }}>
-              소스 출처
+              {i18n.t("source")}
             </Title>
           </SubHeader>
           <SubMain>

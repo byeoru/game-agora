@@ -10,7 +10,6 @@ import * as Localization from "expo-localization";
 import i18n from "i18n-js";
 import { ko, en } from "./obj/Localization";
 
-Localization.locale = "ja";
 const locale = Localization.locale;
 
 i18n.translations = { ko, en };

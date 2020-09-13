@@ -3,7 +3,7 @@ import ScrollContainer from "../../../components/ScrollContainer";
 import ImageHorizontal from "../../../components/GameDetail/SubPage/ImageHorizontal";
 import Papago from "../../../components/GameDetail/SubPage/Papago";
 
-export default ({ classification, contents, textToInsert }) => {
+export default ({ classification, contents }) => {
   let categorizedContents;
   switch (classification) {
     case "I":
@@ -13,7 +13,7 @@ export default ({ classification, contents, textToInsert }) => {
         ));
       break;
     case "P":
-      categorizedContents = () => <Papago textToInsert={textToInsert} />;
+      categorizedContents = () => <Papago />;
       break;
   }
   return classification === "P" ? (

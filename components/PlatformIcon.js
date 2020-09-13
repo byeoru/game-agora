@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import ParentPlatformsObj from "../obj/pPlatformsImgObj";
 
@@ -10,7 +11,7 @@ const Icon = styled.Image`
   height: 100%;
 `;
 
-export default ({ number }) => (
+const PlatformIcon = ({ number }) => (
   <Container>
     <Icon
       resizeMethod="resize"
@@ -19,3 +20,9 @@ export default ({ number }) => (
     />
   </Container>
 );
+
+PlatformIcon.propTypes = {
+  number: PropTypes.number.isRequired,
+};
+
+export default PlatformIcon;

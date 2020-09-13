@@ -62,7 +62,11 @@ const PlatformButton = ({ id, title, backgroundImage }) => {
   };
   return (
     <TouchableOpacity onPress={() => moveContainer()}>
-      <BG source={{ uri: getRawgImg(backgroundImage, rawgImgSizeObj.w640) }} />
+      {backgroundImage ? (
+        <BG
+          source={{ uri: getRawgImg(backgroundImage, rawgImgSizeObj.w640) }}
+        />
+      ) : null}
       <Animated.View
         style={{
           width: "100%",
@@ -126,6 +130,12 @@ const PlatformButton = ({ id, title, backgroundImage }) => {
       </Animated.View>
     </TouchableOpacity>
   );
+};
+
+PlatformButton.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  backgroundImage: PropTypes.string,
 };
 
 export default PlatformButton;

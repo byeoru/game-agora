@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
 const Container = styled.View`
@@ -6,6 +7,13 @@ const Container = styled.View`
   flex-direction: row;
 `;
 
-export default ({ styles, children }) => (
+const RowBox = ({ styles, children }) => (
   <Container style={{ ...styles }}>{children}</Container>
 );
+
+RowBox.propTypes = {
+  styles: PropTypes.object,
+  children: PropTypes.node,
+};
+
+export default RowBox;

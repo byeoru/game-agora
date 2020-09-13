@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
 const Text = styled.Text`
@@ -12,4 +13,10 @@ const Text = styled.Text`
   font-weight: 600;
 `;
 
-export default ({ title }) => <Text>{title}</Text>;
+const TopHeader = ({ title }) => <Text>{title}</Text>;
+
+TopHeader.propTypes = {
+  title: PropTypes.string.isRequired,
+};
+
+export default TopHeader;

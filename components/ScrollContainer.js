@@ -1,9 +1,15 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ScrollView, ActivityIndicator } from "react-native";
 import { Overlay } from "react-native-elements";
 import SplashScreen from "../screens/SplashScreen";
 
-export default ({ firstLoading, loading, children, contentContainerStyle }) => (
+const ScrollContainer = ({
+  firstLoading,
+  loading,
+  children,
+  contentContainerStyle,
+}) => (
   <ScrollView
     showsVerticalScrollIndicator={false}
     contentContainerStyle={{
@@ -26,3 +32,12 @@ export default ({ firstLoading, loading, children, contentContainerStyle }) => (
     )}
   </ScrollView>
 );
+
+ScrollContainer.propTypes = {
+  firstLoading: PropTypes.bool,
+  loading: PropTypes.bool,
+  children: PropTypes.node.isRequired,
+  contentContainerStyle: PropTypes.object,
+};
+
+export default ScrollContainer;

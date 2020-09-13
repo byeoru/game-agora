@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { getRawgImg } from "../api";
 import rawgImgSizeObj from "../obj/rawgImgSizeObj";
@@ -66,7 +67,7 @@ const Box = styled.View`
   border-radius: 15px;
 `;
 
-export default ({
+const GridLayout = ({
   styles,
   gameFir,
   gameSec,
@@ -224,3 +225,14 @@ export default ({
     </Container>
   );
 };
+
+GridLayout.propTypes = {
+  styles: PropTypes.object,
+  gameFir: PropTypes.object,
+  gameSec: PropTypes.object,
+  gameThi: PropTypes.object,
+  gameFou: PropTypes.object,
+  gameTheRest: PropTypes.array,
+};
+
+export default GridLayout;

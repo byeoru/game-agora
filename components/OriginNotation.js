@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import * as WebBrowser from "expo-web-browser";
 import { TouchableOpacity } from "react-native";
@@ -19,7 +20,7 @@ const LinkText = styled.Text`
   color: orange;
 `;
 
-export default ({ styles }) => (
+const OriginNotation = ({ styles }) => (
   <Container style={{ ...styles }}>
     <Text>Data based on </Text>
     <TouchableOpacity
@@ -29,3 +30,9 @@ export default ({ styles }) => (
     </TouchableOpacity>
   </Container>
 );
+
+OriginNotation.propTypes = {
+  styles: PropTypes.object,
+};
+
+export default OriginNotation;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import useGameDetail from "./useGameDetail";
 import { getRawgImg } from "../api";
@@ -37,7 +38,7 @@ const Title = styled.Text`
   font-weight: 700;
 `;
 
-export default ({ id, title, backgroundImage, styles }) => {
+const Vertical = ({ id, title, backgroundImage, styles }) => {
   const goToDetail = useGameDetail();
   return (
     <TouchableOpacity
@@ -60,3 +61,12 @@ export default ({ id, title, backgroundImage, styles }) => {
     </TouchableOpacity>
   );
 };
+
+Vertical.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  backgroundImage: PropTypes.string,
+  styles: PropTypes.object,
+};
+
+export default Vertical;

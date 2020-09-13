@@ -25,6 +25,12 @@ export const ko = {
   recommended: "만족",
   meh: "관심 없음",
   skip: "스킵",
+  appName: "앱 이름",
+  appVersion: "앱 버전",
+  developer: "개발자",
+  source: "출처",
+  gameAgora: "게임아고라",
+  byeoru: "벼루",
 };
 
 export const en = {
@@ -54,4 +60,10 @@ export const en = {
   recommended: "recommended",
   meh: "meh",
   skip: "skip",
+  appName: "App Name",
+  appVersion: "App Version",
+  developer: "Developer",
+  source: "Source",
+  gameAgora: "Game Agora",
+  byeoru: "Byeoru",
 };

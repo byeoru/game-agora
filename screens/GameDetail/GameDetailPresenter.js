@@ -265,12 +265,14 @@ export default ({
   }, [loading]);
   return (
     <Container>
-      <BG
-        resizeMethod="resize"
-        source={{
-          uri: getRawgImg(backgroundImage, rawgImgSizeObj.w640),
-        }}
-      />
+      {backgroundImage ? (
+        <BG
+          resizeMethod="resize"
+          source={{
+            uri: getRawgImg(backgroundImage, rawgImgSizeObj.w640),
+          }}
+        />
+      ) : null}
       {loading ? (
         <LoaderContainer>
           <DotsLoader size={9} color="rgba(100,100,100,0.3)" betweenSpace={7} />

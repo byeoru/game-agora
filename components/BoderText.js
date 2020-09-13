@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
 const View = styled.View`
@@ -10,8 +11,14 @@ const Text = styled.Text`
   border-radius: 11px;
 `;
 
-export default ({ text }) => (
+const BorderText = ({ text }) => (
   <View>
     <Text>{text}</Text>
   </View>
 );
+
+BorderText.propTypes = {
+  text: PropTypes.string.isRequired,
+};
+
+export default BorderText;

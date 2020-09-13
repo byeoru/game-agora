@@ -8,16 +8,14 @@ export default ({ loading, listOfGenres }) => {
   return (
     <ScrollContainer loading={loading}>
       <ContentsBox styles={{ paddingTop: 20, marginTop: 10 }}>
-        {listOfGenres?.length > 0
-          ? listOfGenres.map((genre) => (
-              <GenreButton
-                key={genre.id}
-                id={genre.id}
-                title={genre.name}
-                backgroundImage={genre.image_background}
-              />
-            ))
-          : null}
+        {listOfGenres.map((genre) => (
+          <GenreButton
+            key={genre.id}
+            id={genre.id}
+            title={genre.name}
+            backgroundImage={genre.image_background}
+          />
+        ))}
       </ContentsBox>
       <OriginNotation />
     </ScrollContainer>

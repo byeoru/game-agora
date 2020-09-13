@@ -1,3 +1,3 @@
 # GameAgora
 
-Game Community Application
+Game Database Application

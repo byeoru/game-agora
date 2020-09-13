@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
 const Container = styled.View`
@@ -15,8 +16,15 @@ const Text = styled.Text`
   padding: 5px 0px;
 `;
 
-export default ({ text, styles }) => (
+const ContentsDescription = ({ text, styles }) => (
   <Container>
     <Text style={{ ...styles }}>{text}</Text>
   </Container>
 );
+
+ContentsDescription.propTypes = {
+  text: PropTypes.string.isRequired,
+  styles: PropTypes.object,
+};
+
+export default ContentsDescription;
