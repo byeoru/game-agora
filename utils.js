@@ -1,4 +1,6 @@
 import { Dimensions } from "react-native";
+import getEnvVars from "./env";
+export const { ADMOB_AD_ID } = getEnvVars();
 
 export const getYMDAgoNow = (minusDay) => {
   const oneDaySec = 86400000;

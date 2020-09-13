@@ -2,7 +2,7 @@ import React from "react";
 import ScrollContainer from "../../components/ScrollContainer";
 import RowBox from "../../components/RowBox";
 import GridLayout from "../../components/GridLayout";
-import { getAfterTheFourthTheRest } from "../../utils";
+import { ADMOB_AD_ID, getAfterTheFourthTheRest } from "../../utils";
 import ContentsBox from "../../components/ContentsBox";
 import ContentsDescription from "../../components/ContentsDescription";
 import TopHeader from "../../components/TopHeader";
@@ -63,15 +63,13 @@ export default ({
         {showMoreBtn ? (
           <MoreButton
             onPress={async () => {
-              if (pageNum % 2 === 0) {
+              if (pageNum % 3 === 0) {
                 setMoreLoading(true);
                 AdMobRewarded.addEventListener(
                   "rewardedVideoDidRewardUser",
                   () => getShowMoreData()
                 );
-                await AdMobRewarded.setAdUnitID(
-                  "ca-app-pub-3940256099942544/5224354917"
-                );
+                await AdMobRewarded.setAdUnitID(ADMOB_AD_ID);
                 await AdMobRewarded.requestAdAsync();
                 await AdMobRewarded.showAdAsync();
               } else {

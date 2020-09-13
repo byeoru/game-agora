@@ -3,13 +3,11 @@
     "name": "GameAgora",
     "slug": "GameAgora",
     "version": "1.0.0",
+    "platforms": ["android", "ios"],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    "primaryColor": "#FFFFFF",
+    "backgroundColor": "#FFFFFF",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -17,16 +15,17 @@
     "android": {
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-6283813776166899~1464570460"
-      }
+      },
+      "package": "com.byeorustudio.gameagora",
+      "versionCode": 1
     },
     "ios": {
       "supportsTablet": true,
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-6283813776166899~1464570460"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      },
+      "bundleIdentifier": "com.byeorustudio.gameagora",
+      "buildNumber": "1.0.0"
     }
   }
 }

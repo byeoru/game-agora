@@ -1,8 +1,6 @@
 import axios from "axios";
-import getEnvVars from "./env";
 import { getNowSec } from "./utils";
 import gameGenreObj from "./obj/gameGenreObj";
-const { API_KEY } = getEnvVars();
 const CancelToken = axios.CancelToken;
 
 export let cancelLoading;
