@@ -9,6 +9,7 @@ import PlatformIcon from "../PlatformIcon";
 import pPlatformsImgObj from "../../obj/pPlatformsImgObj";
 import TemporaryAlternatePlatformTitle from "../TemporaryAlternatePlatformTitle";
 import i18n from "i18n-js";
+import { WIDTH } from "../../utils";
 
 const TouchableOpacity = styled.TouchableOpacity``;
 const Container = styled.View`
@@ -23,7 +24,7 @@ const BG = styled.Image`
 `;
 const DataContainer = styled.View`
   width: 100%;
-  height: 35%;
+  height: ${WIDTH * 0.35}px;
   flex-direction: row;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;

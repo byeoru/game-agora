@@ -45,7 +45,7 @@ export default ({
   `;
   const BG = styled.Image`
     width: ${BGwidth}px;
-    height: ${HEIGHT / 2.2}px;
+    height: ${BGwidth}px;
     border-radius: 15px;
     margin-top: 20px;
   `;
@@ -262,7 +262,7 @@ export default ({
     if (!loading) {
       sheetRef.current.snapTo(1);
     }
-  }, [loading]);
+  });
   return (
     <Container>
       {backgroundImage ? (
@@ -280,7 +280,7 @@ export default ({
       ) : (
         <BottomSheet
           ref={sheetRef}
-          snapPoints={["0%", WIDTH / 1.2, "100%"]}
+          snapPoints={["0%", HEIGHT - (WIDTH + HEIGHT * 0.1), "100%"]}
           borderRadius={20}
           renderContent={renderContent}
           onCloseEnd={onCloseEnd}

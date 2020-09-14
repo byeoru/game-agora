@@ -1,19 +1,11 @@
 import React from "react";
 import styled from "styled-components/native";
 import Constants from "expo-constants";
+import ScrollContainer from "../../components/ScrollContainer";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
 import { TouchableOpacity, Animated } from "react-native";
 import { HEIGHT, WIDTH } from "../../utils";
 import i18n from "i18n-js";
-
-const boxHeight = HEIGHT - 410;
-
-const Container = styled.View`
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  background-color: white;
-`;
 
 const Logo = styled.Image`
   width: 300px;
@@ -21,10 +13,6 @@ const Logo = styled.Image`
 `;
 const List = styled.View`
   width: 100%;
-  height: ${boxHeight}px;
-  position: absolute;
-  top: 0px;
-  bottom: 55px;
   padding: 30px 2px 20px 22px;
   border-radius: 20px;
   background-color: rgba(10, 10, 20, 0.1);
@@ -36,15 +24,12 @@ const Footer = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
 `;
 const SubPage = styled.View`
   width: 100%;
-  height: ${boxHeight}px;
-  position: absolute;
-  top: 0px;
-  bottom: 55px;
   padding: 10px 32px 30px 10px;
-  margin-left: ${WIDTH + 20}px;
+  margin-left: 20px;
   border-radius: 20px;
   background-color: rgba(10, 10, 20, 0.1); ;
 `;
@@ -104,12 +89,19 @@ export default () => {
     }
   };
   return (
-    <Container>
+    <ScrollContainer contentContainerStyle={{ minHeight: "100%" }}>
       <Logo
         resizeMode="contain"
         source={require("../../assets/gameAgoraLogo.png")}
       />
-      <Animated.View style={{ width: "100%", height: "100%", right: value }}>
+      <Animated.View
+        style={{
+          width: "100%",
+          flexDirection: "row",
+          paddingBottom: 60,
+          right: value,
+        }}
+      >
         <List>
           <ItemContainer>
             <Item>
@@ -161,6 +153,6 @@ export default () => {
           </SubMain>
         </SubPage>
       </Animated.View>
-    </Container>
+    </ScrollContainer>
   );
 };
