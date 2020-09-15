@@ -82,11 +82,11 @@ const PlatformButton = ({ id, title, backgroundImage }) => {
         <Title>{title}</Title>
         <ButtonContainer>
           <Button
-            title={i18n.t("orderByRating")}
+            title={i18n.t("sortByRating")}
             onPress={() =>
               goToMoreGames({
                 title,
-                contentsBoxTitle: `${i18n.t("orderByRating")}`,
+                contentsBoxTitle: `${i18n.t("sortByRating")}`,
                 contentsDescription: `${i18n.t("_100days")}`,
                 dates: getYMDAgoNow(100),
                 platforms: id,
@@ -97,11 +97,11 @@ const PlatformButton = ({ id, title, backgroundImage }) => {
             }
           />
           <Button
-            title={i18n.t("orderByPopularity")}
+            title={i18n.t("sortByPopularity")}
             onPress={() =>
               goToMoreGames({
                 title,
-                contentsBoxTitle: `${i18n.t("orderByPopularity")}`,
+                contentsBoxTitle: `${i18n.t("sortByPopularity")}`,
                 contentsDescription: `${i18n.t("_100days")}`,
                 dates: getYMDAgoNow(100),
                 platforms: id,
@@ -112,11 +112,11 @@ const PlatformButton = ({ id, title, backgroundImage }) => {
             }
           />
           <Button
-            title={i18n.t("orderByReleaseDate")}
+            title={i18n.t("sortByReleaseDate")}
             onPress={() =>
               goToMoreGames({
                 title,
-                contentsBoxTitle: `${i18n.t("orderByReleaseDate")}`,
+                contentsBoxTitle: `${i18n.t("sortByReleaseDate")}`,
                 contentsDescription: `${i18n.t("_100days")}`,
                 dates: getYMDAgoNow(100),
                 platforms: id,

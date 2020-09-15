@@ -58,7 +58,7 @@ export default ({
       <ContentsMore
         title={i18n.t("newWork")}
         getMoreFnParams={{
-          contentsBoxTitle: `${i18n.t("orderByReleaseDate")}`,
+          contentsBoxTitle: `${i18n.t("sortByReleaseDate")}`,
           contentsDescription: `${i18n.t("_7days")}`,
           dates: getYMDAgoNow(7),
           ordering: "-released",
@@ -97,7 +97,7 @@ export default ({
         <ContentsMore
           title="PC"
           getMoreFnParams={{
-            contentsBoxTitle: `${i18n.t("orderByPopularity")}`,
+            contentsBoxTitle: `${i18n.t("sortByPopularity")}`,
             contentsDescription: `${i18n.t("_100days")}`,
             dates: getYMDAgoNow(100),
             parent_platforms: pPlatformsNumObj.PC,
@@ -124,7 +124,7 @@ export default ({
         <ContentsMore
           title="iOS"
           getMoreFnParams={{
-            contentsBoxTitle: `${i18n.t("orderByPopularity")}`,
+            contentsBoxTitle: `${i18n.t("sortByPopularity")}`,
             contentsDescription: `${i18n.t("_100days")}`,
             dates: getYMDAgoNow(100),
             parent_platforms: pPlatformsNumObj.iOS,
@@ -151,7 +151,7 @@ export default ({
         <ContentsMore
           title="Android"
           getMoreFnParams={{
-            contentsBoxTitle: `${i18n.t("orderByPopularity")}`,
+            contentsBoxTitle: `${i18n.t("sortByPopularity")}`,
             contentsDescription: `${i18n.t("_100days")}`,
             dates: getYMDAgoNow(100),
             parent_platforms: pPlatformsNumObj.Android,

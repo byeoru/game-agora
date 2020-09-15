@@ -6,7 +6,8 @@
     "ios": "expo start --ios --release-channel prod",
     "web": "expo start --web --release-channel prod",
     "eject": "expo eject",
-    "buildAndroid": "expo build:android --release-channel prod"
+    "buildAndroid": "expo build:android --release-channel prod",
+    "publish": "expo publish --release-channel prod"
   },
   "dependencies": {
     "@react-native-community/art": "^1.2.0",

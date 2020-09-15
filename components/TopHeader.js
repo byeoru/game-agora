@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
 const Text = styled.Text`
-  font-size: 33px;
+  font-size: 31px;
   background-color: white;
   position: absolute;
   padding: 7px 12px;
